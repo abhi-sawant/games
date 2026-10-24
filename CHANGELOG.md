@@ -1,5 +1,28 @@
 # Changelog
 
+## 3.0.1 — 2026-10-25
+
+Three new games join Free Games: 2048, tic-tac-toe and dots and boxes, each with its own ink, history and stats, and
+all of them playable offline.
+
+### Added
+
+- 2048: swipe or use the arrow keys to slide the tiles and merge equal ones. One-step undo, a "keep going" option after
+  you reach 2048, a score, history and stats, and auto-saved progress. 2048 is printed in lilac.
+- Tic-tac-toe: play the computer on Easy, Medium or Hard, or a friend on one screen. Hard never loses, but picks among
+  equally good moves so games vary. You swap marks each round so you take turns going first, and a running tally
+  counts wins, draws and losses. Undo, per-level stats and a history of rounds. Tic-tac-toe is printed in mint.
+- Dots and boxes: a 4×4 board against the computer or a friend. Closing a box claims it and keeps your turn. Easy plays
+  loosely, Medium never gives a box away when it has a choice, and Hard plans the endgame. Undo, alternating first
+  move, per-level stats and history. Dots and boxes is printed in berry.
+- The home page shows which of the new games you have in progress.
+- The Android app now checks for a new version when it opens and shows you what's changed, with Update now, Not now
+  and Skip this version.
+
+### Fixed
+
+- Opening a page no longer flashes unstyled content or a large black triangle before the design loads.
+
 ## 3.0.0 — 2026-10-24
 
 Free Games has a whole new look. The home page and every game now share one style, printed in soft risograph inks on
