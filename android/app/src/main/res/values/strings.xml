@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Free Games</string>
-    <string name="title_activity_main">Free Games</string>
+    <string name="app_name">Games</string>
+    <string name="title_activity_main">Games</string>
     <string name="package_name">com.slowatcoding.games</string>
     <string name="custom_url_scheme">com.slowatcoding.games</string>
 </resources>

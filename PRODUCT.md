@@ -8,7 +8,7 @@ web (installable PWA, also wrapped for Android with Capacitor; the design langua
 
 ## Product
 
-Free Games (games.slowatcoding.com): a small suite of offline puzzle games with no ads, no accounts and no tracking. A home page lists the games; each game is its own page with a menu, a history/stats screen and the game itself. Current games: Sudoku (four levels, notes, undo, hints, mistake highlighting, pausable timer, best times), Minesweeper (Beginner, Intermediate, Expert; safe first click, flags by long-press, right-click or flag mode, chording, timer) and 2248 (drag a path through matching numbers to merge them; score, best tile).
+Games (games.slowatcoding.com): a small suite of offline puzzle games with no ads, no accounts and no tracking. A home page lists the games; each game is its own page with a menu, a history/stats screen and the game itself. Current games: Sudoku (four levels, notes, undo, hints, mistake highlighting, pausable timer, best times), Minesweeper (Beginner, Intermediate, Expert; safe first click, flags by long-press, right-click or flag mode, chording, timer) and 2248 (drag a path through matching numbers to merge them; score, best tile).
 
 ## Users
 
@@ -24,7 +24,7 @@ The design language is shared by every game in this suite, current and future. E
 
 ## Brand commitments
 
-- Name: Free Games. Tagline: "Free. Offline. No ads."
+- Name: Games (it was Free Games until 3.1.0). Tagline: "Free. Offline. No ads."
 - Confirmed visual constraints from the owner: colourful but not too vibrant, friendly, soft rounded corners. Light and dark themes both required.
 
 ## Constraints

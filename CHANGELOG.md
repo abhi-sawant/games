@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.1.1 — 2026-10-25
+
+Free Games is now just **Games**: still free, offline and ad-free, with a new icon.
+
+### Changed
+
+- The app is called Games, on the home page, in the browser tab and under the icon on your phone.
+- A new icon for the web app, the browser tab and the Android app: a tile and a counter printed in two soft inks on
+  navy that turn pale pink where they overlap. Opening the Android app now shows it on a light paper background
+  instead of the default splash.
+
 ## 3.1.0 — 2026-10-25
 
 Seventeen new games join Free Games, and the home page now groups every game into five families: number puzzles,

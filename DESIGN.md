@@ -1,6 +1,6 @@
 # Design: Riso
 
-Free Games looks like a risograph print: a few soft inks on cool paper. It is colourful without being loud, friendly, and soft-cornered. Every game in the suite, current and future, uses this one language. A category of games is told apart only by its **ink**.
+Games looks like a risograph print: a few soft inks on cool paper. It is colourful without being loud, friendly, and soft-cornered. Every game in the suite, current and future, uses this one language. A category of games is told apart only by its **ink**.
 
 All tokens and shared components live in [`src/base.css`](src/base.css). Game stylesheets import it and add only what their board needs.
 
@@ -51,7 +51,11 @@ Light inks are dark enough for white text (4.5:1); dark-mode inks are light enou
 1. **Fields, not borders.** A game's surfaces are its ink tinted onto paper (`--tint`: 15% in light, 20% in dark). Cards, level buttons, tool tiles and the back button are tints, not outlined boxes. Home cards also carry a fine paper grain (`.grain`).
 2. **Solid ink means action or state.** Primary buttons, the timer, a switched-on tool and the selected cell are full-strength ink with `--on-ink` text. Everything else is a tint.
 3. **Overprint.** Highlights are translucent ink layers with `mix-blend-mode: var(--blend)` (multiply on paper, screen at night), so where two cross they darken into a third tone instead of stacking grey boxes. Sudoku's row, column and box highlight is the reference. Sunflower overprinted on dark paper goes olive, so at night the highlighter is the game's own ink.
-4. **Misregistration belongs to the wordmark only.** The home "Free Games" has a coral pass printed a hair out of register under the blue. Boards and text are always in register.
+4. **Misregistration belongs to the wordmark only.** The home "Games" wordmark has a coral pass printed a hair out of register under the blue. Boards and text are always in register.
+
+## App icon
+
+The app icon is the night overprint: a `--blue` tile and a `--coral` counter in the dark-theme inks on `--ink` navy, screened where they cross (`#f8d4f5`). It stands for the suite, not one game, so it carries no category ink of its own. `public/icon.svg` is the source; every PNG (PWA, favicon, apple-touch, Android launcher and splash) is drawn from the same geometry. The Android adaptive background is `#1e2741` and the splash ground is `--paper`.
 
 ## Type
 

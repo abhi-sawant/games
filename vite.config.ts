@@ -76,7 +76,7 @@ export default defineConfig({
       filename: 'sw.ts',
       includeAssets: ['favicon.ico', 'icon.svg', 'apple-touch-icon-180x180.png'],
       manifest: {
-        name: 'Free Games',
+        name: 'Games',
         short_name: 'Games',
         description: 'Free offline puzzle, board and card games.',
         theme_color: '#eef0f3',

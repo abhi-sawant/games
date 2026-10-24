@@ -1,4 +1,4 @@
-# Free Games
+# Games
 
 Read README.md for the project layout and DESIGN.md before touching any UI.
 
