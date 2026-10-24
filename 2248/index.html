@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Free offline 2248: connect matching numbers to merge them." />
+    <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#16181d" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <title>2248</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Home -->
+      <section id="home" class="screen">
+        <div class="home-inner">
+          <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <span>All games</span>
+          </a>
+          <h1 class="logo">2248</h1>
+          <p class="tagline">Drag through matching numbers to merge them.</p>
+
+          <button id="continue-btn" class="btn btn-primary continue" hidden>
+            <span>Continue</span>
+            <small id="continue-meta"></small>
+          </button>
+
+          <h2 class="section-label">New game</h2>
+          <button id="new-btn" class="btn new-game">
+            <span>Classic</span>
+            <small>5×8</small>
+          </button>
+
+          <button id="history-btn" class="btn history-link">
+            <span>History &amp; stats</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen" hidden>
+        <header class="topbar">
+          <button id="history-back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <h1 class="topbar-title">History</h1>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <table class="summary">
+          <thead>
+            <tr><th scope="col">Played</th><th scope="col">Best tile</th><th scope="col">Best score</th><th scope="col">Avg score</th></tr>
+          </thead>
+          <tbody id="history-summary"></tbody>
+        </table>
+
+        <h2 class="section-label">Recent games</h2>
+        <p id="history-empty" class="history-empty">No finished games yet. Start a board and it will show up here when you finish or start another.</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+
+      <!-- Game -->
+      <section id="game" class="screen" hidden>
+        <header class="topbar">
+          <button id="back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <div class="meta"><span id="score"></span></div>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <div class="stats-panel">
+          <div class="stat-box">
+            <div class="stat-label">Current</div>
+            <div id="current-block" class="preview-tile"></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Target</div>
+            <div id="target-block" class="preview-tile"></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Best</div>
+            <div id="best-block" class="preview-tile"></div>
+          </div>
+        </div>
+
+        <div class="board-wrap" id="board-wrap">
+          <div class="board-frame">
+            <!-- The grid is the one coordinate space for background cells, the path line and the tiles. -->
+            <div id="grid" class="grid" role="application" aria-label="2248 board: drag across matching tiles to merge them">
+              <svg id="line-canvas" class="line-canvas" aria-hidden="true"><polyline id="path-line" points="" /></svg>
+            </div>
+          </div>
+          <div id="path-sum" class="path-sum" aria-live="polite"></div>
+        </div>
+
+        <div class="tools">
+          <button class="tool" id="restart-btn" aria-label="New board">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7" /><path d="M4 4v4h4" /></svg>
+            <span>New board</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Game-over dialog -->
+      <dialog id="end-dialog" class="dialog">
+        <h2>Out of moves</h2>
+        <p id="end-summary"></p>
+        <div class="dialog-actions">
+          <button id="end-menu" class="btn">Menu</button>
+          <button id="end-again" class="btn btn-primary">New game</button>
+        </div>
+      </dialog>
+    </div>
+    <script type="module" src="/src/2248/main.ts"></script>
+  </body>
+</html>
