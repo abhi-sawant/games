@@ -29,6 +29,10 @@ function renderStatus() {
   // A Minesweeper board only counts as started once its mines are placed, on the first reveal.
   const mines = readSave('minesweeper.current') as { status?: string; board?: { mines?: unknown[] } } | null;
   showStatus('minesweeper-status', mines?.status === 'playing' && !!mines.board?.mines?.length);
+
+  // A 2248 board counts as started from its first merge.
+  const merge = readSave('2248.current');
+  showStatus('2248-status', !!merge && merge.status === 'playing' && !!merge.startedAt);
 }
 
 renderStatus();

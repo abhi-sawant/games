@@ -7,6 +7,9 @@ Offline puzzle games: a PWA that also ships as an Android app through Capacitor.
   Notes, undo, hints, mistake highlighting, a pausable timer, best times per level, and auto-saved progress.
 - **Minesweeper**: Beginner, Intermediate and Expert boards with a safe first click, flags (long-press, right-click
   or flag mode), chording, a pausable timer, history and stats per level, and auto-saved progress.
+- **2248**: drag a path through matching numbers (or each one step higher) to merge them; the sum rounds up to
+  the next power of two. Ported from [Parth2500/2248-Merge](https://github.com/Parth2500/2248-Merge), with score,
+  game over detection, history and stats per game, and auto-saved progress.
 - After the first visit, the service worker caches every page and puzzle file, so it works with no connection.
 
 ## Layout
@@ -15,9 +18,10 @@ Each game is its own page with its own folder of code; the root page is the game
 
 ```
 index.html, src/main.ts, src/style.css   home page
-src/base.css                             shared colours, buttons and dialogs (home page and Minesweeper)
+src/base.css                             shared colours, buttons and dialogs (home page, Minesweeper, 2248)
 sudoku/index.html, src/sudoku/           Sudoku
 minesweeper/index.html, src/minesweeper/ Minesweeper
+2248/index.html, src/2248/               2248
 ```
 
 To add a game, create `<game>/index.html` and `src/<game>/`, add the page to `build.rolldownOptions.input` in

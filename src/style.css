@@ -68,6 +68,12 @@
   border-bottom: 4px solid transparent;
 }
 
+.game-icon-2248 { gap: 2px; padding: 2px; background: var(--line); }
+.game-icon-2248 i { border: 0 !important; border-radius: 3px; font-size: 0.65rem; color: var(--ink); background: var(--surface); }
+.game-icon-2248 [data-exp='2'] { background: color-mix(in srgb, var(--accent) 15%, var(--surface)); }
+.game-icon-2248 [data-exp='3'] { background: color-mix(in srgb, var(--accent) 35%, var(--surface)); }
+.game-icon-2248 [data-exp='4'] { background: color-mix(in srgb, var(--accent) 60%, var(--surface)); }
+
 .game-text {
   flex: 1;
   min-width: 0;
