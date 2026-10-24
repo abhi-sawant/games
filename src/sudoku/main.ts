@@ -1,4 +1,3 @@
-import './style.css';
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { registerSW } from 'virtual:pwa-register';

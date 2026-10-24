@@ -1,6 +1,5 @@
 // Home page: lists the games and shows which ones have a game in progress.
 
-import './style.css';
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { registerSW } from 'virtual:pwa-register';
