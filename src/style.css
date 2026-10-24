@@ -162,6 +162,12 @@
 .game-icon-2048 [data-exp='3'] { background: var(--lilac); color: var(--on-ink); }
 .game-icon-2048 [data-exp='4'] { background: var(--ink); color: var(--paper); }
 
+/* Tic-tac-toe: played cells sink into the sheet, open ones are a mint field, X in mint and O in coral. */
+.game-icon-ttt i { background: color-mix(in srgb, var(--mint) 18%, var(--sheet)); font-size: 0.8rem; font-weight: 900; }
+.game-icon-ttt i.x, .game-icon-ttt i.o { background: var(--sunk); }
+.game-icon-ttt i.x { color: var(--mint); }
+.game-icon-ttt i.o { color: var(--coral); }
+
 .home-foot { margin-top: 28px; padding: 0 4px; font-size: 0.8rem; color: var(--ink-2); }
 
 /* Update dialog (Android only): a changelog that scrolls, with the actions stacked under it. */

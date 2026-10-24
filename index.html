@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Free offline puzzle games: Sudoku, Minesweeper, 2248 and 2048." />
+    <meta name="description" content="Free offline games: Sudoku, Minesweeper, 2248, 2048 and tic-tac-toe." />
     <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -21,7 +21,7 @@
         </header>
 
         <!-- Links name index.html explicitly: the Android app's local server sends extensionless paths to the root page. -->
-        <!-- Each card sets its game's ink with a class: ink-blue, ink-teal, ink-coral, ink-lilac (ink-mint is free). -->
+        <!-- Each card sets its game's ink with a class: ink-blue, ink-teal, ink-coral, ink-lilac, ink-mint. -->
         <nav class="games" aria-label="Games">
           <a class="game-card ink-blue grain" href="/sudoku/index.html">
             <span class="game-icon game-icon-sudoku" aria-hidden="true">
@@ -66,6 +66,17 @@
               <span class="game-name">2048</span>
               <span class="game-desc">Slide the tiles and merge them to reach 2048.</span>
               <span class="game-status" id="2048-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-mint grain" href="/tictactoe/index.html">
+            <span class="game-icon game-icon-ttt" aria-hidden="true">
+              <i class="x">X</i><i class="o">O</i><i></i><i></i><i class="x">X</i><i class="o">O</i><i></i><i></i><i class="x">X</i>
+            </span>
+            <span class="game-text">
+              <span class="game-name">Tic-tac-toe</span>
+              <span class="game-desc">Three in a row, against the computer or a friend.</span>
+              <span class="game-status" id="tictactoe-status" hidden></span>
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
