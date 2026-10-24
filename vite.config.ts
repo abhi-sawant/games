@@ -2,6 +2,15 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  build: {
+    rolldownOptions: {
+      // One page per game, plus the home page that links to them.
+      input: {
+        home: 'index.html',
+        sudoku: 'sudoku/index.html',
+      },
+    },
+  },
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',

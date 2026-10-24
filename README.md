@@ -1,11 +1,25 @@
 # Free Sudoku
 
-An offline Sudoku game: a PWA that also ships as an Android app through Capacitor.
+Offline puzzle games: a PWA that also ships as an Android app through Capacitor. A home page links to each game.
 
-- 20,000 bundled puzzles (5,000 each for Easy, Medium, Hard, Expert) from the public-domain
+- **Sudoku**: 20,000 bundled puzzles (5,000 each for Easy, Medium, Hard, Expert) from the public-domain
   [Sudoku Exchange Puzzle Bank](https://github.com/grantm/sudoku-exchange-puzzle-bank).
-- After the first visit, the service worker caches the app and every puzzle file, so it works with no connection.
-- Notes, undo, hints, mistake highlighting, a pausable timer, best times per level, and auto-saved progress.
+  Notes, undo, hints, mistake highlighting, a pausable timer, best times per level, and auto-saved progress.
+- After the first visit, the service worker caches every page and puzzle file, so it works with no connection.
+
+## Layout
+
+Each game is its own page with its own folder of code; the root page is the game picker.
+
+```
+index.html, src/main.ts, src/style.css   home page
+src/base.css                             shared colours, buttons and dialogs for new pages
+sudoku/index.html, src/sudoku/           Sudoku
+```
+
+To add a game, create `<game>/index.html` and `src/<game>/`, add the page to `build.rolldownOptions.input` in
+`vite.config.ts`, and add a card to `index.html`. Link to pages as `/<game>/index.html`, not `/<game>/`: the Android
+app's local server answers extensionless paths with the root page. Keep saved data under a `<game>.` localStorage prefix.
 
 ## Web (PWA)
 
