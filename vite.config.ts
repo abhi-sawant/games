@@ -1,7 +1,10 @@
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import pkg from './package.json' with { type: 'json' };
 
 export default defineConfig({
+  // The installed version, which the Android app compares against the latest GitHub release.
+  define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   build: {
     rolldownOptions: {
       // One page per game, plus the home page that links to them.

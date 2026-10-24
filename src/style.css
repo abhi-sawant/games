@@ -156,3 +156,24 @@
 .game-icon-2248 [data-exp='5'] { background: var(--teal); color: var(--on-ink); }
 
 .home-foot { margin-top: 28px; padding: 0 4px; font-size: 0.8rem; color: var(--ink-2); }
+
+/* Update dialog (Android only): a changelog that scrolls, with the actions stacked under it. */
+.update-dialog { text-align: left; max-height: min(640px, calc(100dvh - 48px)); display: none; }
+.update-dialog[open] { display: flex; flex-direction: column; }
+.update-dialog .update-version { margin-bottom: 16px; }
+.update-notes {
+  overflow-y: auto;
+  min-height: 0;
+  margin: 0 -24px 20px;
+  padding: 0 24px;
+  border-block: 1px solid var(--rule);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.update-notes h3 { font-size: 0.95rem; margin: 16px 0 6px; }
+.update-notes p { color: var(--ink); margin: 12px 0; }
+.update-notes ul { margin: 0 0 12px; padding-left: 20px; }
+.update-notes li + li { margin-top: 4px; }
+.update-notes code { font-size: 0.85em; background: var(--sunk); padding: 1px 5px; border-radius: 5px; }
+.update-notes a { color: var(--c); }
+.update-actions { display: grid; gap: 8px; }

@@ -4,6 +4,7 @@ import './style.css';
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { registerSW } from 'virtual:pwa-register';
+import { checkForUpdate } from './update';
 
 if (!Capacitor.isNativePlatform()) registerSW({ immediate: true });
 
@@ -41,4 +42,10 @@ window.addEventListener('pageshow', renderStatus);
 
 if (Capacitor.isNativePlatform()) {
   CapApp.addListener('backButton', () => CapApp.exitApp());
+  // The web version updates itself through its service worker; the Android app has to be reinstalled from GitHub.
+  checkForUpdate(__APP_VERSION__);
+} else if (import.meta.env.DEV) {
+  // Preview the update dialog in the browser: ?update-check=1.0.0 pretends that version is installed.
+  const pretend = new URLSearchParams(location.search).get('update-check');
+  if (pretend) checkForUpdate(pretend, { force: true });
 }
