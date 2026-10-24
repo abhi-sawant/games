@@ -1,5 +1,22 @@
 # Changelog
 
+## 3.0.0 — 2026-10-24
+
+Free Games has a whole new look. The home page and every game now share one style, printed in soft risograph inks on
+cool paper, in light and dark. Your saved games, history and stats carry over.
+
+### Changed
+
+- A fresh design for the home page and all three games: each game has its own ink (Sudoku blue, Minesweeper teal,
+  2248 coral), with friendlier menus, buttons, timers and history screens.
+- In Sudoku, the selected cell's row, column and box are shaded as overlapping layers of ink, so it's easier to see
+  where they cross.
+- The app's new typeface is built in, so it still looks right when you're offline.
+
+### Fixed
+
+- The screen no longer flashes when moving between the home page and a game; pages now fade smoothly into each other.
+
 ## 2.0.0 — 2026-10-24
 
 Free Sudoku is now **Free Games**: still free, offline and ad-free, with two new games alongside Sudoku. Play in the

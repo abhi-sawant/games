@@ -24,8 +24,8 @@ export default defineConfig({
         name: 'Free Games',
         short_name: 'Games',
         description: 'Free offline puzzle games: Sudoku, Minesweeper and 2248.',
-        theme_color: '#f6f4ef',
-        background_color: '#f6f4ef',
+        theme_color: '#eef0f3',
+        background_color: '#eef0f3',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',
@@ -38,7 +38,7 @@ export default defineConfig({
       },
       workbox: {
         // Precache the app shell and every puzzle file so the game works offline after the first load.
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,txt}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,txt,woff2}'],
       },
     }),
   ],

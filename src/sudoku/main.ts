@@ -75,6 +75,14 @@ for (let i = 0; i < 81; i++) {
   cells.push(cell);
 }
 
+// The selected cell's row, column and box are printed as translucent ink layers under the digits,
+// so where they cross the inks overprint into a darker tone (see DESIGN.md).
+const overprint = document.createElement('div');
+overprint.className = 'overprint';
+overprint.setAttribute('aria-hidden', 'true');
+overprint.innerHTML = '<i class="op-box"></i><i class="op-row"></i><i class="op-col"></i>';
+boardEl.prepend(overprint);
+
 const padButtons: HTMLButtonElement[] = [];
 for (let d = 1; d <= 9; d++) {
   const btn = document.createElement('button');
@@ -249,6 +257,14 @@ function render() {
       cell.textContent = '';
     }
     cell.setAttribute('aria-label', `Row ${ROW(i) + 1}, column ${COL(i) + 1}, ${v || 'empty'}`);
+  }
+
+  overprint.hidden = selected < 0;
+  if (selected >= 0) {
+    overprint.style.setProperty('--row', String(ROW(selected)));
+    overprint.style.setProperty('--col', String(COL(selected)));
+    overprint.style.setProperty('--box-row', String(Math.floor(ROW(selected) / 3)));
+    overprint.style.setProperty('--box-col', String(Math.floor(COL(selected) / 3)));
   }
 
   padButtons.forEach((btn, k) => {
