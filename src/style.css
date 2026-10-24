@@ -52,6 +52,7 @@
 .ink-coral { --c: var(--coral); }
 .ink-lilac { --c: var(--lilac); }
 .ink-mint { --c: var(--mint); }
+.ink-berry { --c: var(--berry); }
 
 .game-card {
   --tint: color-mix(in srgb, var(--c) var(--field), var(--paper));
@@ -167,6 +168,15 @@
 .game-icon-ttt i.x, .game-icon-ttt i.o { background: var(--sunk); }
 .game-icon-ttt i.x { color: var(--mint); }
 .game-icon-ttt i.o { color: var(--coral); }
+
+/* Dots and Boxes: a corner of the board, with your lines and box in berry and the computer's lines in blue. */
+.game-icon-dots { display: block; padding: 4px; }
+.game-icon-dots svg { width: 100%; height: 100%; }
+.game-icon-dots path { stroke-width: 4; stroke-linecap: round; }
+.game-icon-dots .p0 { stroke: var(--berry); }
+.game-icon-dots .p1 { stroke: var(--blue); }
+.game-icon-dots .own { fill: var(--berry); stroke: none; opacity: 0.32; }
+.game-icon-dots .dots { fill: var(--ink); stroke: none; }
 
 .home-foot { margin-top: 28px; padding: 0 4px; font-size: 0.8rem; color: var(--ink-2); }
 

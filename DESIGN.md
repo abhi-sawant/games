@@ -26,6 +26,7 @@ The inks. Each game owns one; the rest of the set is shared.
 | `--yellow` | `#efbf45` | `#e8c062` | Shared highlighter, never a game's ink |
 | `--lilac` | `#6c5aa8` | `#a897e6` | 2048 |
 | `--mint` | `#2f7a5f` | `#86d1b4` | Tic-tac-toe (X; O prints in coral) |
+| `--berry` | `#a3376f` | `#f19ac5` | Dots and Boxes (you; the computer prints in blue) |
 
 Light inks are dark enough for white text (4.5:1); dark-mode inks are light enough for `--on-ink` navy text. A new ink must meet the same contrast in both themes.
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Free offline games: Sudoku, Minesweeper, 2248, 2048 and tic-tac-toe." />
+    <meta name="description" content="Free offline games: Sudoku, Minesweeper, 2248, 2048, tic-tac-toe and dots and boxes." />
     <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -21,7 +21,7 @@
         </header>
 
         <!-- Links name index.html explicitly: the Android app's local server sends extensionless paths to the root page. -->
-        <!-- Each card sets its game's ink with a class: ink-blue, ink-teal, ink-coral, ink-lilac, ink-mint. -->
+        <!-- Each card sets its game's ink with a class: ink-blue, ink-teal, ink-coral, ink-lilac, ink-mint, ink-berry. -->
         <nav class="games" aria-label="Games">
           <a class="game-card ink-blue grain" href="/sudoku/index.html">
             <span class="game-icon game-icon-sudoku" aria-hidden="true">
@@ -77,6 +77,22 @@
               <span class="game-name">Tic-tac-toe</span>
               <span class="game-desc">Three in a row, against the computer or a friend.</span>
               <span class="game-status" id="tictactoe-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-berry grain" href="/dots/index.html">
+            <span class="game-icon game-icon-dots" aria-hidden="true">
+              <svg viewBox="0 0 60 60">
+                <rect class="own" x="12" y="12" width="16" height="16" rx="3" />
+                <path class="p0" d="M10 10h20M10 10v20M10 30h20" />
+                <path class="p1" d="M30 10v20M30 10h20M50 10v20M30 50h20" />
+                <g class="dots"><circle cx="10" cy="10" r="3" /><circle cx="30" cy="10" r="3" /><circle cx="50" cy="10" r="3" /><circle cx="10" cy="30" r="3" /><circle cx="30" cy="30" r="3" /><circle cx="50" cy="30" r="3" /><circle cx="10" cy="50" r="3" /><circle cx="30" cy="50" r="3" /><circle cx="50" cy="50" r="3" /></g>
+              </svg>
+            </span>
+            <span class="game-text">
+              <span class="game-name">Dots and Boxes</span>
+              <span class="game-desc">Draw lines, close boxes, and outscore the other side.</span>
+              <span class="game-status" id="dots-status" hidden></span>
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
