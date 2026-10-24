@@ -6,7 +6,7 @@ Offline puzzle games: a PWA that also ships as an Android app through Capacitor.
   [Sudoku Exchange Puzzle Bank](https://github.com/grantm/sudoku-exchange-puzzle-bank).
   Notes, undo, hints, mistake highlighting, a pausable timer, best times per level, and auto-saved progress.
 - **Minesweeper**: Beginner, Intermediate and Expert boards with a safe first click, flags (long-press, right-click
-  or flag mode), chording, a pausable timer, best times per level, and auto-saved progress.
+  or flag mode), chording, a pausable timer, history and stats per level, and auto-saved progress.
 - After the first visit, the service worker caches every page and puzzle file, so it works with no connection.
 
 ## Layout

@@ -61,6 +61,21 @@
 }
 .level small { color: var(--muted); font-weight: 500; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
 
+/* ---------- History ---------- */
+
+.history-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  color: var(--muted);
+}
+.history-link svg { width: 20px; height: 20px; }
+
+#history { padding-bottom: 24px; }
+
+.topbar-title { font-size: 1.1rem; font-weight: 700; margin: 0; }
+
 .summary {
   width: 100%;
   border-collapse: collapse;
@@ -69,14 +84,44 @@
   border-radius: var(--radius);
   overflow: hidden;
   font-variant-numeric: tabular-nums;
+  margin-top: 8px;
 }
-.summary th, .summary td { padding: 12px 10px; text-align: right; }
+/* Tighter than Sudoku's table: "Intermediate" plus four columns has to fit a 320px-wide phone. */
+.summary th, .summary td { padding: 12px 6px; text-align: right; }
 .summary th:first-child { text-align: left; padding-left: 16px; }
 .summary td:last-child, .summary thead th:last-child { padding-right: 16px; }
 .summary thead th { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
 .summary tbody tr { border-top: 1px solid var(--line); }
 .summary tbody th { font-weight: 600; }
+@media (max-width: 360px) {
+  .summary { font-size: 0.8rem; }
+  .summary th, .summary td { padding: 10px 4px; }
+  .summary th:first-child { padding-left: 10px; }
+  .summary td:last-child, .summary thead th:last-child { padding-right: 10px; }
+}
 .muted { color: var(--muted); }
+
+.history-empty { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+.history-list { list-style: none; margin: 0; padding: 0; }
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.history-row:last-child { border-bottom: 0; }
+.history-level { font-weight: 600; }
+.history-date { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+.history-result { text-align: right; flex-shrink: 0; }
+.history-time { font-weight: 600; font-variant-numeric: tabular-nums; }
+.history-status { font-size: 0.75rem; font-weight: 600; margin-top: 2px; }
+.is-won .history-status { color: var(--accent); }
+.is-lost .history-status { color: var(--wrong); }
+.is-unfinished .history-status { color: var(--muted); }
 
 /* ---------- Game ---------- */
 

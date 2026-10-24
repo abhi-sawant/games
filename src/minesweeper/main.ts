@@ -7,6 +7,7 @@ import {
   adjacentMines, chord, createBoard, flagCount, isCleared, isStarted, reveal, toggleFlag,
 } from './board';
 import { loadStats, recordStart, recordWin } from './stats';
+import { addHistory, averageWinTime, loadHistory } from './history';
 
 if (!Capacitor.isNativePlatform()) registerSW({ immediate: true });
 
@@ -17,6 +18,7 @@ interface Game {
   board: Board;
   elapsed: number; // ms
   status: 'playing' | 'won' | 'lost';
+  startedAt?: number; // epoch ms of the first reveal
 }
 
 const SAVE_KEY = 'minesweeper.current';
@@ -35,6 +37,7 @@ let timerId = 0;
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const homeEl = $('home');
 const gameEl = $('game');
+const historyEl = $('history');
 const boardEl = $('board');
 const timerEl = $('timer');
 const pausedEl = $('paused');
@@ -75,6 +78,8 @@ for (const level of LEVELS) {
 
 $('continue-btn').addEventListener('click', () => game && showGame());
 $('back-btn').addEventListener('click', showHome);
+$('history-btn').addEventListener('click', showHistory);
+$('history-back-btn').addEventListener('click', showHome);
 $('flag-btn').addEventListener('click', toggleFlagMode);
 $('restart-btn').addEventListener('click', () => game && newGame(game.level));
 timerEl.addEventListener('click', () => setPaused(!paused));
@@ -88,6 +93,7 @@ function showHome() {
   stopTimer();
   saveGame();
   gameEl.hidden = true;
+  historyEl.hidden = true;
   homeEl.hidden = false;
   renderHome();
 }
@@ -104,6 +110,8 @@ function showGame() {
 
 function newGame(level: Level) {
   stopTimer();
+  // A started game being replaced goes into the history as unfinished.
+  if (game && game.status === 'playing' && isStarted(game.board)) logGame(game, 'unfinished');
   game = { level, board: createBoard(level), elapsed: 0, status: 'playing' };
   cursor = -1;
   flagMode = false;
@@ -119,17 +127,51 @@ function renderHome() {
   } else {
     cont.hidden = true;
   }
+}
 
+function showHistory() {
+  homeEl.hidden = true;
+  historyEl.hidden = false;
+  window.scrollTo(0, 0);
+  renderHistory();
+}
+
+const dateFormat = new Intl.DateTimeFormat(undefined, {
+  month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
+});
+
+const RESULT_LABELS = { won: 'Won', lost: 'Lost', unfinished: 'Unfinished' };
+
+function renderHistory() {
   const stats = loadStats();
+  const list = loadHistory();
   const dash = '<span class="muted">–</span>';
-  $('stats').innerHTML = LEVELS.map((l) => {
+
+  $('history-summary').innerHTML = LEVELS.map((l) => {
     const s = stats[l];
+    const avg = averageWinTime(list, l);
     return `<tr>
       <th scope="row">${LEVEL_INFO[l].label}</th>
       <td>${s?.played || dash}</td>
       <td>${s?.won || dash}</td>
       <td>${s?.bestTime != null ? formatTime(s.bestTime) : dash}</td>
+      <td>${avg != null ? formatTime(avg) : dash}</td>
     </tr>`;
+  }).join('');
+
+  $('history-empty').hidden = list.length > 0;
+  $('history-list').innerHTML = list.map((e) => {
+    const extras = e.result === 'won' ? '' : ` · ${e.cleared}% cleared`;
+    return `<li class="history-row is-${e.result}">
+      <div>
+        <div class="history-level">${LEVEL_INFO[e.level]?.label ?? e.level}</div>
+        <div class="history-date">${dateFormat.format(e.endedAt)}${extras}</div>
+      </div>
+      <div class="history-result">
+        <div class="history-time">${formatTime(e.elapsed)}</div>
+        <div class="history-status">${RESULT_LABELS[e.result]}</div>
+      </div>
+    </li>`;
   }).join('');
 }
 
@@ -309,6 +351,7 @@ function act(move: () => RevealResult) {
   const result = move();
   if (result === 'none') return;
   if (!wasStarted) {
+    game.startedAt = Date.now();
     recordStart(game.level);
     startTimer();
   }
@@ -332,6 +375,7 @@ function win() {
   const b = game.board;
   b.state = b.state.map((s, i) => (b.mines[i] ? FLAGGED : s));
   const isBest = recordWin(game.level, game.elapsed);
+  logGame(game, 'won');
   showEnd('Cleared!', `${LEVEL_INFO[game.level].label} in ${formatTime(game.elapsed)}${isBest ? ' (new best)' : ''}.`, 600);
 }
 
@@ -339,6 +383,7 @@ function lose() {
   if (!game) return;
   stopTimer();
   game.status = 'lost';
+  logGame(game, 'lost');
   showEnd('Boom!', `You hit a mine after ${formatTime(game.elapsed)}. The board shows where the rest were.`, 900);
 }
 
@@ -353,6 +398,7 @@ function showEnd(title: string, summary: string, delay: number) {
 // ---------- Keyboard ----------
 
 document.addEventListener('keydown', (e) => {
+  if (!historyEl.hidden && e.key === 'Escape') { showHome(); return; }
   if (gameEl.hidden || endDialog.open || e.metaKey || e.altKey || e.ctrlKey || !game) return;
   const k = e.key;
   const b = game.board;
@@ -381,7 +427,7 @@ document.addEventListener('keydown', (e) => {
 if (Capacitor.isNativePlatform()) {
   CapApp.addListener('backButton', () => {
     if (endDialog.open) endDialog.close();
-    else if (!gameEl.hidden) showHome();
+    else if (!gameEl.hidden || !historyEl.hidden) showHome();
     else location.href = '/';
   });
   CapApp.addListener('pause', () => { stopTimer(); saveGame(); });
@@ -405,6 +451,20 @@ function loadGame(): Game | null {
   } catch {
     return null;
   }
+}
+
+function logGame(g: Game, result: 'won' | 'lost' | 'unfinished') {
+  const b = g.board;
+  const safe = b.state.length - b.mineCount;
+  const opened = b.state.filter((s, i) => s === OPEN && !b.mines[i]).length;
+  addHistory({
+    level: g.level,
+    startedAt: g.startedAt ?? null,
+    endedAt: Date.now(),
+    elapsed: g.elapsed,
+    result,
+    cleared: Math.floor((opened / safe) * 100),
+  });
 }
 
 // ---------- Start ----------

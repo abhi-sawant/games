@@ -31,14 +31,33 @@
           <h2 class="section-label">New game</h2>
           <div class="levels" id="levels"></div>
 
-          <h2 class="section-label">Stats</h2>
-          <table class="summary">
-            <thead>
-              <tr><th></th><th scope="col">Played</th><th scope="col">Won</th><th scope="col">Best</th></tr>
-            </thead>
-            <tbody id="stats"></tbody>
-          </table>
+          <button id="history-btn" class="btn history-link">
+            <span>History &amp; stats</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
         </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen" hidden>
+        <header class="topbar">
+          <button id="history-back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <h1 class="topbar-title">History</h1>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <table class="summary">
+          <thead>
+            <tr><th></th><th scope="col">Played</th><th scope="col">Won</th><th scope="col">Best</th><th scope="col">Avg</th></tr>
+          </thead>
+          <tbody id="history-summary"></tbody>
+        </table>
+
+        <h2 class="section-label">Recent games</h2>
+        <p id="history-empty" class="history-empty">No finished games yet. Clear a board and it will show up here.</p>
+        <ul id="history-list" class="history-list"></ul>
       </section>
 
       <!-- Game -->
