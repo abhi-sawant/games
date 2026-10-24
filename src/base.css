@@ -67,6 +67,10 @@
 
 * { box-sizing: border-box; }
 
+/* Every game is its own page. Keep the old page up until the next one is ready, then crossfade, so moving
+   between the home page and a game doesn't flash. */
+@view-transition { navigation: auto; }
+
 html, body {
   margin: 0;
   min-height: 100%;
@@ -422,4 +426,5 @@ span.icon-btn { background: none; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+  @view-transition { navigation: none; }
 }
