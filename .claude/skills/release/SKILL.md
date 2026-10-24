@@ -39,7 +39,7 @@ cd android && export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Co
 
 Then check the web build is fit for hosting at the domain root:
 
-- `dist/` contains `index.html`, `manifest.webmanifest`, `sw.js`, `workbox-*.js` and `puzzles/*.txt`.
+- `dist/` contains `index.html`, `sudoku/index.html`, `minesweeper/index.html`, `manifest.webmanifest`, `sw.js`, `workbox-*.js` and `puzzles/*.txt`, and `sw.js` precaches all three pages.
 - `manifest.webmanifest` has `"start_url":"/"`, and asset URLs in `dist/index.html` are root-relative (`/assets/...`), not prefixed with a sub-path.
 
 Check the APK: `~/Library/Android/sdk/build-tools/<latest>/aapt2 dump badging <apk> | head -1` must show `versionName='X.Y.Z'` and the expected `versionCode`.
