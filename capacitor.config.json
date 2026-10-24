@@ -1,8 +1,8 @@
 {
   "appId": "com.slowatcoding.games",
-  "appName": "Free Games",
+  "appName": "Games",
   "webDir": "dist",
   "android": {
-    "backgroundColor": "#f6f4ef"
+    "backgroundColor": "#eef0f3"
   }
 }

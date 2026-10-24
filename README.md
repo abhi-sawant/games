@@ -1,4 +1,4 @@
-# Free Games
+# Games
 
 Offline puzzle, board and card games: a PWA that also ships as an Android app through Capacitor. A home page links to each game.
 
