@@ -15,10 +15,10 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.freesudoku.app"
+    namespace = "com.slowatcoding.games"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.freesudoku.app"
+        applicationId "com.slowatcoding.games"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode major * 10000 + minor * 100 + patch

@@ -4,4 +4,5 @@ dist
 releases
 android/keystore.properties
 *.jks
+android/keystore/
 *.keystore

@@ -1,4 +1,4 @@
-package com.freesudoku.app;
+package com.slowatcoding.games;
 
 import com.getcapacitor.BridgeActivity;
 

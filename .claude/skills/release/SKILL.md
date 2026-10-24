@@ -1,11 +1,11 @@
 ---
 name: release
-description: Build a Free Sudoku release folder (PWA zip for sudoku.slowatcoding.com, signed APK, checksums, release notes) for a given version.
+description: Build a Free Games release folder (PWA zip for games.slowatcoding.com, signed APK, checksums, release notes) for a given version.
 disable-model-invocation: true
 argument-hint: <version, e.g. 1.0.1>
 ---
 
-Create the release `$ARGUMENTS` for Free Sudoku. Work from the repo root. The PWA is hosted at the root of `https://sudoku.slowatcoding.com`; the APK is the Capacitor Android wrapper of the same build.
+Create the release `$ARGUMENTS` for Free Games. Work from the repo root. The PWA is hosted at the root of `https://games.slowatcoding.com`; the APK is the Capacitor Android wrapper of the same build.
 
 The version lives only in `package.json`. `android/app/build.gradle` reads it: `versionName` is `X.Y.Z` and `versionCode` is `X*10000 + Y*100 + Z`.
 
@@ -16,7 +16,7 @@ The version lives only in `package.json`. `android/app/build.gradle` reads it: `
 - Confirm `android/keystore.properties` exists (keys `storeFile`, `storePassword`, `keyAlias`, `keyPassword`; `storeFile` is relative to `android/`), otherwise the APK would be unsigned: stop and tell the user. If they have no keystore yet, give them this to run themselves, and remind them to back up the keystore and passwords outside the repo (losing it means the app can never be updated):
 
   ```bash
-  keytool -genkeypair -v -keystore android/keystore/free-sudoku.jks -alias free-sudoku -keyalg RSA -keysize 4096 -validity 10000
+  keytool -genkeypair -v -keystore android/keystore/games.jks -alias games -keyalg RSA -keysize 4096 -validity 10000
   ```
 
 ## 1. Work out what changed
@@ -46,11 +46,11 @@ Check the APK: `~/Library/Android/sdk/build-tools/<latest>/aapt2 dump badging <a
 
 ## 4. Assemble `releases/vX.Y.Z/` (gitignored)
 
-- `free-sudoku-X.Y.Z.apk`: copy `android/app/build/outputs/apk/release/app-release.apk`.
-- `free-sudoku-web-X.Y.Z.zip`: zip the *contents* of `dist/` (files at the zip root, no `.DS_Store`): `cd dist && zip -qr ../releases/vX.Y.Z/free-sudoku-web-X.Y.Z.zip . -x '*.DS_Store'`.
+- `games-X.Y.Z.apk`: copy `android/app/build/outputs/apk/release/app-release.apk`.
+- `games-web-X.Y.Z.zip`: zip the *contents* of `dist/` (files at the zip root, no `.DS_Store`): `cd dist && zip -qr ../releases/vX.Y.Z/games-web-X.Y.Z.zip . -x '*.DS_Store'`.
 - `SHA256SUMS.txt`: `shasum -a 256` of the two files, run inside the folder, two-space separator, bare filenames.
-- `RELEASE_NOTES.md`: model it on the previous `releases/v*/RELEASE_NOTES.md` if there is one. Title `# Free Sudoku X.Y.Z — <headline>`, plain-language sections for what's new, a Downloads table (file, size, what it's for), a "Hosting" note (unzip into the web root of `sudoku.slowatcoding.com` over HTTPS, replacing the old files; serve `sw.js`, `index.html` and `manifest.webmanifest` with `Cache-Control: no-cache` so installed copies pick up the update; `assets/` is content-hashed and can be cached long), and the APK signing certificate line. Read the cert with `~/Library/Android/sdk/build-tools/<latest>/apksigner verify --print-certs <apk>` (needs `JAVA_HOME` as above) and format the SHA-256 digest as colon-separated lowercase hex. It must equal the previous release's cert; if not, warn loudly because Android will refuse the update. For the first release, say so and note the cert is now the reference.
+- `RELEASE_NOTES.md`: model it on the previous `releases/v*/RELEASE_NOTES.md` if there is one. Title `# Free Games X.Y.Z — <headline>`, plain-language sections for what's new, a Downloads table (file, size, what it's for), a "Hosting" note (unzip into the web root of `games.slowatcoding.com` over HTTPS, replacing the old files; serve `sw.js`, `index.html` and `manifest.webmanifest` with `Cache-Control: no-cache` so installed copies pick up the update; `assets/` is content-hashed and can be cached long), and the APK signing certificate line. Read the cert with `~/Library/Android/sdk/build-tools/<latest>/apksigner verify --print-certs <apk>` (needs `JAVA_HOME` as above) and format the SHA-256 digest as colon-separated lowercase hex. It must equal the previous release's cert; if not, warn loudly because Android will refuse the update. For the first release, say so and note the cert is now the reference.
 
 ## 5. Report
 
-Summarise: version and versionCode, folder contents with sizes, the cert check, and the changelog entry. Do NOT commit, tag, push, upload to the server, or create a GitHub release; remind the user of the remaining steps (commit the version bump and changelog, merge to `main`, tag `vX.Y.Z`, upload the zip's contents to `sudoku.slowatcoding.com`, attach the APK and zip to a GitHub Release using the CHANGELOG section as notes).
+Summarise: version and versionCode, folder contents with sizes, the cert check, and the changelog entry. Do NOT commit, tag, push, upload to the server, or create a GitHub release; remind the user of the remaining steps (commit the version bump and changelog, merge to `main`, tag `vX.Y.Z`, upload the zip's contents to `games.slowatcoding.com`, attach the APK and zip to a GitHub Release using the CHANGELOG section as notes).

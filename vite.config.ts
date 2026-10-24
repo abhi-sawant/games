@@ -18,9 +18,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'icon.svg', 'apple-touch-icon-180x180.png'],
       manifest: {
-        name: 'Free Sudoku',
-        short_name: 'Sudoku',
-        description: 'Free offline Sudoku with four difficulty levels.',
+        name: 'Free Games',
+        short_name: 'Games',
+        description: 'Free offline puzzle games: Sudoku, Minesweeper and 2248.',
         theme_color: '#f6f4ef',
         background_color: '#f6f4ef',
         display: 'standalone',

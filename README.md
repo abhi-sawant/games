@@ -1,4 +1,4 @@
-# Free Sudoku
+# Free Games
 
 Offline puzzle games: a PWA that also ships as an Android app through Capacitor. A home page links to each game.
 
@@ -59,14 +59,14 @@ The version lives only in `package.json`; the Android build derives `versionName
 (`X*10000 + Y*100 + Z`) from it. Release builds are signed from `android/keystore.properties` (gitignored):
 
 ```properties
-storeFile=keystore/free-sudoku.jks
+storeFile=keystore/games.jks
 storePassword=...
-keyAlias=free-sudoku
+keyAlias=games
 keyPassword=...
 ```
 
 In Claude Code, `/release X.Y.Z` bumps the version, updates `CHANGELOG.md`, builds, and assembles
-`releases/vX.Y.Z/` with the signed APK, the PWA zip for `https://sudoku.slowatcoding.com`, checksums and release notes.
+`releases/vX.Y.Z/` with the signed APK, the PWA zip for `https://games.slowatcoding.com`, checksums and release notes.
 
 ## Puzzles
 
