@@ -23,9 +23,9 @@ interface Game {
 }
 
 const SAVE_KEY = '2248.current';
-const GAP = 8;
+const GAP = 3; // matches the grid lines of the Minesweeper board
 const MIN_TILE = 36;
-const MAX_TILE = 76;
+const MAX_TILE = 64;
 const MERGE_MS = 200;
 
 let game: Game | null = loadGame();
@@ -146,15 +146,17 @@ function renderHistory() {
 // ---------- Layout ----------
 
 /**
- * Sizes tiles to fit the space below the stats panel. Pixel positions all come from
+ * Sizes tiles to fit the space between the top bar and the tools. Pixel positions all come from
  * tileSize and GAP, mirrored into CSS variables, so tiles, cells and the path line agree.
  */
 function layout() {
   const frame = gridEl.parentElement!;
   const framePad = frame.offsetWidth - frame.clientWidth + parseFloat(getComputedStyle(frame).paddingLeft) * 2;
   const width = boardWrap.clientWidth - framePad;
+  // Measure from the top bar, not the board: the board is centred, so its own position depends on its size.
+  const above = gameEl.querySelector('.topbar')!.getBoundingClientRect().bottom + 12;
   const below = $('restart-btn').parentElement!.offsetHeight + pathSum.offsetHeight + 32; // + path-sum margin and screen padding
-  const height = window.innerHeight - boardWrap.getBoundingClientRect().top - framePad - below;
+  const height = window.innerHeight - above - framePad - below;
   const fromWidth = Math.floor((width - (COLS - 1) * GAP) / COLS);
   const fromHeight = Math.floor((height - (ROWS - 1) * GAP) / ROWS);
   tileSize = Math.max(MIN_TILE, Math.min(fromWidth, fromHeight, MAX_TILE));
@@ -177,16 +179,16 @@ function place(el: HTMLElement, r: number, c: number) {
 
 // ---------- Rendering ----------
 
-function fontSize(label: string, preview = false) {
-  const base = (preview ? 15 : 17) * (preview ? 1 : tileSize / 56);
+function fontSize(label: string) {
+  const base = tileSize * 0.36;
   const size = label.length === 4 ? base - 3 : label.length > 4 ? base - 6 : base;
   return `${Math.max(9, size).toFixed(1)}px`;
 }
 
-function styleTile(el: HTMLElement, exp: number, preview = false) {
+function styleTile(el: HTMLElement, exp: number) {
   const label = formatExp(exp);
   el.textContent = label;
-  el.style.fontSize = fontSize(label, preview);
+  el.style.fontSize = fontSize(label);
   el.dataset.exp = String(((exp - 1) % 12) + 1); // colours repeat every 12 steps
 }
 
@@ -232,10 +234,9 @@ function renderLine() {
 function render() {
   if (!game) return;
   const best = Math.max(loadStats().bestExp, game.maxExp);
-  styleTile($('current-block'), game.maxExp, true);
-  styleTile($('target-block'), game.maxExp + 1, true);
-  styleTile($('best-block'), best, true);
-  $('score').textContent = `Score ${numberFormat.format(game.score)}`;
+  $('target').textContent = `Target ${formatExp(game.maxExp + 1)}`;
+  $('best').textContent = `Best ${formatExp(best)}`;
+  $('score').textContent = numberFormat.format(game.score);
   renderLine();
 }
 

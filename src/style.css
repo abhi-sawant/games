@@ -68,12 +68,11 @@
   border-bottom: 4px solid transparent;
 }
 
-.game-icon-2248 { gap: 2px; padding: 2px; background: var(--surface); }
-.game-icon-2248 i { border: 0 !important; border-radius: 4px; font-size: 0.65rem; }
-.game-icon-2248 [data-exp='1'] { background: #ffdad6; color: #410002; }
-.game-icon-2248 [data-exp='2'] { background: #ffddb7; color: #2a1700; }
-.game-icon-2248 [data-exp='3'] { background: #fef3a1; color: #221b00; }
-.game-icon-2248 [data-exp='4'] { background: #ccebc4; color: #002204; }
+.game-icon-2248 { gap: 2px; padding: 2px; background: var(--line); }
+.game-icon-2248 i { border: 0 !important; border-radius: 3px; font-size: 0.65rem; color: var(--ink); background: var(--surface); }
+.game-icon-2248 [data-exp='2'] { background: color-mix(in srgb, var(--accent) 15%, var(--surface)); }
+.game-icon-2248 [data-exp='3'] { background: color-mix(in srgb, var(--accent) 35%, var(--surface)); }
+.game-icon-2248 [data-exp='4'] { background: color-mix(in srgb, var(--accent) 60%, var(--surface)); }
 
 .game-text {
   flex: 1;

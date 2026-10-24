@@ -69,24 +69,14 @@
           <button id="back-btn" class="icon-btn" aria-label="Back to menu">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
           </button>
-          <div class="meta"><span id="score"></span></div>
-          <span class="icon-btn" aria-hidden="true"></span>
+          <div class="meta">
+            <span id="target"></span>
+            <span class="dot">·</span>
+            <span id="best"></span>
+          </div>
+          <span id="score" class="score" aria-label="Score"></span>
         </header>
 
-        <div class="stats-panel">
-          <div class="stat-box">
-            <div class="stat-label">Current</div>
-            <div id="current-block" class="preview-tile"></div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Target</div>
-            <div id="target-block" class="preview-tile"></div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Best</div>
-            <div id="best-block" class="preview-tile"></div>
-          </div>
-        </div>
 
         <div class="board-wrap" id="board-wrap">
           <div class="board-frame">

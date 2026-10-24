@@ -1,14 +1,15 @@
 @import '../base.css';
 
+/* Same board colours as Minesweeper's hidden cells. */
 :root {
-  --cell: #e7e4dc;
-  --path: #1d2230;
+  --cell: #e3e0d7;
+  --cell-edge: #cdc9be;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --cell: #262a33;
-    --path: #ffffff;
+    --cell: #2e323c;
+    --cell-edge: #3b404c;
   }
 }
 
@@ -103,65 +104,38 @@
   padding-bottom: 16px;
 }
 
-.meta { color: var(--muted); font-size: 0.95rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.meta { color: var(--muted); font-size: 0.9rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.meta .dot { margin: 0 6px; }
 
-.stats-panel {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.stat-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 10px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--surface);
-}
-
-.stat-label {
-  font-size: 0.7rem;
+/* Sits where the timer is in the other games. */
+.score {
+  font-variant-numeric: tabular-nums;
   font-weight: 600;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.preview-tile {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  line-height: 1;
+  min-width: 64px;
+  text-align: right;
 }
 
 .board-wrap {
-  margin-top: 16px;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .board-frame {
-  padding: 8px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--surface);
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--line);
 }
 
 .grid {
   --tile: 56px;
-  --gap: 8px;
+  --gap: 3px;
   position: relative;
   width: calc(5 * var(--tile) + 4 * var(--gap));
   height: calc(8 * var(--tile) + 7 * var(--gap));
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 5px;
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -174,7 +148,7 @@
   left: 0;
   width: var(--tile);
   height: var(--tile);
-  border-radius: 12px;
+  border-radius: 4px;
 }
 
 .cell-bg { background: var(--cell); }
@@ -185,39 +159,40 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 3;
+  z-index: 5;
 }
 .line-canvas polyline {
   fill: none;
-  stroke: var(--path);
-  stroke-width: 5;
+  stroke: var(--accent);
+  stroke-width: 6;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.8;
+  opacity: 0.4; /* drawn over the tiles, so keep the numbers readable through it */
 }
 
 .tile {
   display: grid;
   place-items: center;
-  font-weight: 700;
+  font-weight: 650;
   line-height: 1;
   z-index: 2;
   cursor: pointer;
+  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.08);
   transition: translate 0.22s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease, scale 0.2s ease;
 }
 /* Inset ring rather than an outline, which the grid's overflow would clip on edge tiles. */
-.tile.selected { z-index: 4; box-shadow: inset 0 0 0 3px var(--path); }
+.tile.selected { z-index: 4; box-shadow: inset 0 0 0 3px var(--accent); }
 .tile.pop { animation: pop 0.2s ease-out; }
 
 @keyframes pop {
   0% { scale: 0.85; }
-  50% { scale: 1.12; }
+  50% { scale: 1.08; }
   100% { scale: 1; }
 }
 
 .path-sum {
   min-height: 1.5em;
-  margin-top: 10px;
+  margin: 10px 0 auto;
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--accent);
@@ -226,7 +201,6 @@
 .path-sum.muted { color: var(--muted); font-weight: 500; }
 
 .tools {
-  margin-top: auto;
   display: flex;
   justify-content: center;
 }
@@ -247,24 +221,22 @@
 .tool:active { background: var(--press); }
 .tool svg { width: 26px; height: 26px; color: var(--ink); }
 
-/* Short screens: a slimmer stats panel leaves more room for the board. */
+/* Short screens: keep the board as large as possible. */
 @media (max-height: 700px) {
-  .stat-box { flex-direction: row; justify-content: center; padding: 6px; }
-  .preview-tile { width: 34px; height: 34px; }
-  .board-wrap { margin-top: 10px; }
   .tool span { display: none; }
 }
 
-/* Tile colours from the original 2248: Material 3 pastels, repeating every 12 steps. */
-[data-exp='1'] { background: #ffdad6; color: #410002; }
-[data-exp='2'] { background: #ffddb7; color: #2a1700; }
-[data-exp='3'] { background: #fef3a1; color: #221b00; }
-[data-exp='4'] { background: #ccebc4; color: #002204; }
-[data-exp='5'] { background: #baf2e8; color: #00201c; }
-[data-exp='6'] { background: #c2e7ff; color: #001d33; }
-[data-exp='7'] { background: #e0e0ff; color: #00006e; }
-[data-exp='8'] { background: #f3daff; color: #25005a; }
-[data-exp='9'] { background: #ffd7f3; color: #36002c; }
-[data-exp='10'] { background: #e8def8; color: #1d192b; }
-[data-exp='11'] { background: #d0bcff; color: #381e72; }
-[data-exp='12'] { background: #f2b8b5; color: #601410; }
+/* Tiles step from plain surface to the full accent, then deepen towards ink, in the app's own colours.
+   They repeat every 12 steps. Text flips to accent-ink once the background gets dark enough. */
+[data-exp='1'] { background: var(--surface); color: var(--ink); }
+[data-exp='2'] { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); color: var(--ink); }
+[data-exp='3'] { background: color-mix(in srgb, var(--accent) 28%, var(--surface)); color: var(--ink); }
+[data-exp='4'] { background: color-mix(in srgb, var(--accent) 40%, var(--surface)); color: var(--ink); }
+[data-exp='5'] { background: color-mix(in srgb, var(--accent) 50%, var(--surface)); color: var(--ink); }
+[data-exp='6'] { background: color-mix(in srgb, var(--accent) 60%, var(--surface)); color: var(--ink); }
+[data-exp='7'] { background: color-mix(in srgb, var(--accent) 68%, var(--surface)); color: var(--ink); }
+[data-exp='8'] { background: color-mix(in srgb, var(--accent) 82%, var(--surface)); color: var(--accent-ink); }
+[data-exp='9'] { background: var(--accent); color: var(--accent-ink); }
+[data-exp='10'] { background: color-mix(in srgb, var(--accent) 85%, var(--ink)); color: var(--accent-ink); }
+[data-exp='11'] { background: color-mix(in srgb, var(--accent) 70%, var(--ink)); color: var(--accent-ink); }
+[data-exp='12'] { background: color-mix(in srgb, var(--accent) 55%, var(--ink)); color: var(--accent-ink); }
