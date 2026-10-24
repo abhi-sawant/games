@@ -8,6 +8,7 @@ export default defineConfig({
       input: {
         home: 'index.html',
         sudoku: 'sudoku/index.html',
+        minesweeper: 'minesweeper/index.html',
       },
     },
   },

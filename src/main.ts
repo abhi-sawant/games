@@ -25,6 +25,10 @@ function showStatus(id: string, inProgress: boolean) {
 function renderStatus() {
   const sudoku = readSave('sudoku.current');
   showStatus('sudoku-status', !!sudoku && !sudoku.done);
+
+  // A Minesweeper board only counts as started once its mines are placed, on the first reveal.
+  const mines = readSave('minesweeper.current') as { status?: string; board?: { mines?: unknown[] } } | null;
+  showStatus('minesweeper-status', mines?.status === 'playing' && !!mines.board?.mines?.length);
 }
 
 renderStatus();

@@ -5,6 +5,8 @@ Offline puzzle games: a PWA that also ships as an Android app through Capacitor.
 - **Sudoku**: 20,000 bundled puzzles (5,000 each for Easy, Medium, Hard, Expert) from the public-domain
   [Sudoku Exchange Puzzle Bank](https://github.com/grantm/sudoku-exchange-puzzle-bank).
   Notes, undo, hints, mistake highlighting, a pausable timer, best times per level, and auto-saved progress.
+- **Minesweeper**: Beginner, Intermediate and Expert boards with a safe first click, flags (long-press, right-click
+  or flag mode), chording, a pausable timer, best times per level, and auto-saved progress.
 - After the first visit, the service worker caches every page and puzzle file, so it works with no connection.
 
 ## Layout
@@ -13,8 +15,9 @@ Each game is its own page with its own folder of code; the root page is the game
 
 ```
 index.html, src/main.ts, src/style.css   home page
-src/base.css                             shared colours, buttons and dialogs for new pages
+src/base.css                             shared colours, buttons and dialogs (home page and Minesweeper)
 sudoku/index.html, src/sudoku/           Sudoku
+minesweeper/index.html, src/minesweeper/ Minesweeper
 ```
 
 To add a game, create `<game>/index.html` and `src/<game>/`, add the page to `build.rolldownOptions.input` in
