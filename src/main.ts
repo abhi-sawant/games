@@ -2,10 +2,8 @@
 
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
-import { registerSW } from 'virtual:pwa-register';
+import './pwa';
 import { checkForUpdate } from './update';
-
-if (!Capacitor.isNativePlatform()) registerSW({ immediate: true });
 
 type Save = Record<string, any> | null;
 

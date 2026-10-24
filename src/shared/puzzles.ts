@@ -1,4 +1,4 @@
-// Loads a game's bundled puzzle files (public/puzzles/<game>/<level>.txt, precached by the service
+// Loads a game's bundled puzzle files (public/puzzles/<game>/<level>.txt, cached by the service
 // worker) and picks ones the player hasn't started yet.
 
 const cache = new Map<string, string[]>();

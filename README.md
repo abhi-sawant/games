@@ -27,7 +27,8 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
   Web Worker) or a friend on one screen, with tally, undo, history and stats.
 - **Klondike** (draw 1 or 3) and **FreeCell** (numbered Microsoft-compatible deals): drag or tap to move, undo, timer,
   history and stats.
-- After the first visit, the service worker caches every page and puzzle file, so it works with no connection.
+- Works with no connection: the service worker installs with just the home page, caches each game when it's opened,
+  then fetches the rest in the background, the open game first (see `src/sw.ts`).
 
 ## Layout
 
@@ -35,6 +36,7 @@ Each game is its own page with its own folder of code; the root page is the game
 
 ```
 index.html, src/main.ts, src/style.css   home page
+src/sw.ts, src/pwa.ts                    the service worker, and the registration every page imports
 src/base.css                             the shared Riso design: inks, type, buttons, top bar, tools, dialogs
 src/fonts/                               Recursive, self-hosted so the app works offline
 sudoku/index.html, src/sudoku/           Sudoku
@@ -56,8 +58,8 @@ src/tiles.css                            the number-tile colour scale shared by 
 
 Every page follows the Riso design language in [DESIGN.md](DESIGN.md): every game belongs to a category (a home page
 section), prints in that category's ink, and reuses the shared components in `src/base.css`. To add a game, follow "Adding a new game" in DESIGN.md (pick its category, or add one, a
-stylesheet that imports `base.css`, the page, and a home card), then add the page to `build.rolldownOptions.input`
-in `vite.config.ts`. Link to pages as `/<game>/index.html`, not `/<game>/`: the Android
+stylesheet that imports `base.css`, the page, and a home card), then add its folder name to `games`
+in `vite.config.ts`, in home page order; the service worker learns its files from the build. Link to pages as `/<game>/index.html`, not `/<game>/`: the Android
 app's local server answers extensionless paths with the root page. Keep saved data under a `<game>.` localStorage prefix.
 
 ## Web (PWA)
