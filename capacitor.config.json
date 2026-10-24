@@ -1,6 +1,6 @@
 {
-  "appId": "com.freesudoku.app",
-  "appName": "Free Sudoku",
+  "appId": "com.slowatcoding.games",
+  "appName": "Free Games",
   "webDir": "dist",
   "android": {
     "backgroundColor": "#f6f4ef"
