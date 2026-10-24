@@ -25,7 +25,7 @@ The inks. Each game owns one; the rest of the set is shared.
 | `--coral` | `#bc4c37` | `#f08f78` | 2248 (also errors and flags) |
 | `--yellow` | `#efbf45` | `#e8c062` | Shared highlighter, never a game's ink |
 | `--lilac` | `#6c5aa8` | `#a897e6` | 2048 |
-| `--mint` | `#2f7a5f` | `#86d1b4` | **Free: next game** |
+| `--mint` | `#2f7a5f` | `#86d1b4` | Tic-tac-toe (X; O prints in coral) |
 
 Light inks are dark enough for white text (4.5:1); dark-mode inks are light enough for `--on-ink` navy text. A new ink must meet the same contrast in both themes.
 
@@ -82,7 +82,7 @@ Quick and physical: presses scale to 0.98 in 80ms, merged tiles pop, a solved bo
 
 ## Adding a new game
 
-1. **Pick an ink.** Take the next free one (`--mint`) and mark it as taken in the inks table above. If the set runs out, add a new ink to `:root` and the dark block in `base.css`, with white-text contrast of 4.5:1 or more in light and navy-text contrast of 4.5:1 or more in dark.
+1. **Pick an ink.** Every ink in the set is taken, so add a new ink to `:root` and the dark block in `base.css`, with white-text contrast of 4.5:1 or more in light and navy-text contrast of 4.5:1 or more in dark, and list it in the inks table above.
 2. **Stylesheet.** Create `src/<game>/style.css` that starts with `@import '../base.css';` and `:root { --c: var(--<ink>); }`. Add only the board's own styles. Don't redefine colours, buttons, top bars, tools, tables or dialogs.
 3. **Page.** Copy an existing game page (`minesweeper/index.html` is the simplest) so the menu, history and game screens use the shared components above. Keep the `theme-color` metas (`#eef0f3` light, `#141927` dark).
 4. **Home card.** In `index.html`, copy a `.game-card` and give it `ink-<name>` and `grain`. Draw its `.game-icon` as a tiny 3×3 version of the board on `--sheet`, in the game's ink, and add the icon's styles to `src/style.css`. Add its `<game>-status` element and a line in `renderStatus()` in `src/main.ts`.

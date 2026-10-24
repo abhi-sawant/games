@@ -38,6 +38,10 @@ function renderStatus() {
   // So does a 2048 board, from its first move.
   const slide = readSave('2048.current');
   showStatus('2048-status', !!slide && slide.status === 'playing' && !!slide.startedAt);
+
+  // A tic-tac-toe round counts once someone has played.
+  const ttt = readSave('tictactoe.current') as { status?: string; moves?: unknown[] } | null;
+  showStatus('tictactoe-status', ttt?.status === 'playing' && !!ttt.moves?.length);
 }
 
 renderStatus();

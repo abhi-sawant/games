@@ -1,0 +1,114 @@
+@import '../base.css';
+
+/* Tic-tac-toe prints in mint. X is the game's ink and O is coral, so the two sides never look alike. */
+:root { --c: var(--mint); --x: var(--mint); --o: var(--coral); }
+
+.is-lost .history-status { color: var(--wrong); }
+.is-drawn .history-status { color: var(--ink-2); }
+
+/* Tighter history table: a level name plus four columns has to fit a 320px-wide phone. */
+.summary th, .summary td { padding: 12px 6px; }
+@media (max-width: 360px) {
+  .summary { font-size: 0.8rem; }
+  .summary th, .summary td { padding: 10px 4px; }
+  .summary th:first-child { padding-left: 10px; }
+  .summary td:last-child, .summary thead th:last-child { padding-right: 10px; }
+}
+
+/* ---------- Game ---------- */
+
+/* The round tally sits where the timer is in the other games. */
+.score { text-align: right; line-height: 1.05; min-width: 64px; }
+.score b { display: block; font-size: 1.5rem; font-weight: 850; color: var(--c); }
+.score span { font-size: 0.72rem; font-weight: 700; color: var(--ink-2); font-variation-settings: 'CASL' 0.35, 'MONO' 0; }
+
+.tools { grid-template-columns: repeat(2, 88px); justify-content: center; margin-bottom: 0; }
+.tool:disabled { opacity: 0.4; cursor: default; }
+
+.board-wrap {
+  margin: auto 0;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-frame {
+  width: min(100%, 400px, calc(100dvh - 330px));
+  min-width: 240px;
+  padding: 10px;
+  border-radius: var(--r-board);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Empty cells you can play are an ink field; played cells sink into the paper. */
+.cell {
+  border: 0;
+  padding: 0;
+  border-radius: 18px;
+  background: var(--tint);
+  display: grid;
+  place-items: center;
+  transition: background 0.15s ease, opacity 0.2s ease;
+}
+.cell:not(:disabled):active { filter: brightness(0.94); }
+.cell:disabled { cursor: default; }
+.cell.filled { background: var(--sunk); }
+/* Once someone has won, the marks off the line step back. */
+.grid.decided .cell:not(.in-line) svg { opacity: 0.3; }
+
+.cell svg {
+  width: 62%;
+  height: 62%;
+  stroke-width: 3.4;
+  transition: opacity 0.2s ease;
+}
+.cell .mark-x { color: var(--x); }
+.cell .mark-o { color: var(--o); }
+/* Marks are drawn on, a stroke at a time. */
+.cell svg path, .cell svg circle { stroke-dasharray: 1; stroke-dashoffset: 0; animation: draw 0.22s ease-out backwards; }
+.cell svg path + path { animation-delay: 0.1s; }
+
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+}
+
+/* The winning line is navy ink overprinted across the board. */
+.win-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mix-blend-mode: var(--blend);
+}
+.win-line line {
+  stroke: var(--ink);
+  stroke-width: 0.16;
+  stroke-linecap: round;
+  opacity: 0.45;
+  stroke-dasharray: 1;
+  animation: draw 0.3s ease-out 0.1s backwards;
+}
+
+.status {
+  min-height: 1.5em;
+  margin: 18px 0 0;
+  font-size: 1.05rem;
+  font-weight: 750;
+  font-variation-settings: 'CASL' 1;
+  color: var(--ink);
+}
+.status .turn-x { color: var(--x); }
+.status .turn-o { color: var(--o); }
+
+.next { margin-top: 14px; min-width: 180px; }
