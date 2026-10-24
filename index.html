@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content="Free offline puzzle games: Sudoku, Minesweeper and 2248." />
-    <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#16181d" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
@@ -14,12 +14,15 @@
   <body>
     <div id="app">
       <main class="screen home">
-        <h1 class="logo">Free Games</h1>
-        <p class="tagline">Free. Offline. No ads.</p>
+        <header class="mast">
+          <h1 class="wordmark">Free<br />Games<span class="reg" aria-hidden="true">Free<br />Games</span></h1>
+          <p class="stamps"><span>Free</span><span>Offline</span><span>No ads</span></p>
+        </header>
 
         <!-- Links name index.html explicitly: the Android app's local server sends extensionless paths to the root page. -->
+        <!-- Each card sets its game's ink with a class: ink-blue, ink-teal, ink-coral (ink-lilac, ink-mint are free). -->
         <nav class="games" aria-label="Games">
-          <a class="game-card" href="/sudoku/index.html">
+          <a class="game-card ink-blue grain" href="/sudoku/index.html">
             <span class="game-icon game-icon-sudoku" aria-hidden="true">
               <i>5</i><i></i><i>3</i><i></i><i>7</i><i></i><i>1</i><i></i><i>9</i>
             </span>
@@ -31,9 +34,9 @@
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
 
-          <a class="game-card" href="/minesweeper/index.html">
+          <a class="game-card ink-teal grain" href="/minesweeper/index.html">
             <span class="game-icon game-icon-mines" aria-hidden="true">
-              <i>1</i><i></i><i class="m-flag"></i><i>2</i><i></i><i>1</i><i></i><i>1</i><i></i>
+              <i class="o">1</i><i></i><i class="m-flag"><svg viewBox="0 0 24 24"><path d="M7 21V4" /><path class="fill" d="M7 4h10l-3 4 3 4H7z" /></svg></i><i class="o">2</i><i class="o"></i><i></i><i class="o">1</i><i class="o">1</i><i></i>
             </span>
             <span class="game-text">
               <span class="game-name">Minesweeper</span>
@@ -43,9 +46,9 @@
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
 
-          <a class="game-card" href="/2248/index.html">
+          <a class="game-card ink-coral grain" href="/2248/index.html">
             <span class="game-icon game-icon-2248" aria-hidden="true">
-              <i data-exp="1">2</i><i data-exp="1">2</i><i data-exp="3">8</i><i data-exp="2">4</i><i data-exp="2">4</i><i data-exp="1">2</i><i data-exp="4">16</i><i data-exp="3">8</i><i data-exp="2">4</i>
+              <i data-exp="1">2</i><i data-exp="1">2</i><i data-exp="3">8</i><i data-exp="2">4</i><i data-exp="2">4</i><i data-exp="1">2</i><i data-exp="4">16</i><i data-exp="3">8</i><i data-exp="5">32</i>
             </span>
             <span class="game-text">
               <span class="game-name">2248</span>
@@ -55,6 +58,8 @@
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
         </nav>
+
+        <footer class="home-foot">Works offline after the first visit</footer>
       </main>
     </div>
     <script type="module" src="/src/main.ts"></script>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content="Free offline Sudoku with four difficulty levels." />
-    <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#16181d" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
@@ -16,7 +16,7 @@
       <!-- Home -->
       <section id="home" class="screen">
         <div class="home-inner">
-          <a href="/" class="games-link">
+          <a href="/" class="back-link">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
             <span>All games</span>
           </a>
@@ -67,9 +67,8 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
           </button>
           <div class="meta">
-            <span id="level-label"></span>
-            <span class="dot">·</span>
-            <span id="mistakes"></span>
+            <b id="level-label"></b>
+            <span>Sudoku · <span id="mistakes"></span></span>
           </div>
           <button id="timer" class="timer" aria-label="Pause"></button>
         </header>

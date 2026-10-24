@@ -1,34 +1,66 @@
-/* Shared look for the home page and every game except Sudoku, which still carries its own copy in sudoku/style.css. */
+/* Riso: the shared look for the home page and every game. Risograph inks on cool paper.
+   Each game owns one ink (--c) and uses it for its menu, buttons, timer and board accents.
+   Highlights are translucent ink layers that overprint where they cross. See DESIGN.md. */
+
+@font-face {
+  font-family: 'Recursive';
+  font-style: oblique 0deg 15deg;
+  font-weight: 300 1000;
+  font-display: swap;
+  src: url('./fonts/recursive-latin-full.woff2') format('woff2-variations');
+}
 
 :root {
-  --bg: #f6f4ef;
-  --surface: #ffffff;
-  --ink: #1d2230;
-  --muted: #6b7180;
-  --line: #d9d5cc;
-  --line-strong: #1d2230;
-  --accent: #3559e0;
-  --accent-ink: #ffffff;
-  --wrong: #d23c3c;
-  --wrong-bg: #fbe6e6;
-  --press: #e7e4dc;
-  --radius: 14px;
+  --paper: #eef0f3;
+  --sheet: #f9fafb;
+  --sunk: #e1e5ec;
+  --ink: #1e2741;
+  --ink-2: #4b5472;
+  --rule: #c9cfdb;
+  --on-ink: #f9fafb;
+
+  /* The ink set. Sudoku blue, Minesweeper teal, 2248 coral; lilac and mint are free for the next games. */
+  --blue: #3f5fb0;
+  --teal: #1f6d66;
+  --coral: #bc4c37;
+  --yellow: #efbf45;
+  --lilac: #6c5aa8;
+  --mint: #2f7a5f;
+
+  --c: var(--blue);
+  --field: 15%;
+  --tint: color-mix(in srgb, var(--c) var(--field), var(--paper));
+  --blend: multiply;
+  --grain-op: 0.22;
+  --shadow: 0 0.6em 1.4em -0.8em rgb(20 25 50 / 0.35);
+  --wrong: var(--coral);
+
+  --r-card: 24px;
+  --r-board: 20px;
+  --r-tile: 16px;
+  --r-key: 13px;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #16181d;
-    --surface: #1f2229;
-    --ink: #e7e9ee;
-    --muted: #8d93a1;
-    --line: #343844;
-    --line-strong: #8d93a1;
-    --accent: #7d98ff;
-    --accent-ink: #10131a;
-    --wrong: #ff7676;
-    --wrong-bg: #3b2226;
-    --press: #2a2e38;
+    --paper: #141927;
+    --sheet: #1b2132;
+    --sunk: #0f131e;
+    --ink: #e9ecf4;
+    --ink-2: #a7aec3;
+    --rule: #2d3549;
+    --on-ink: #141927;
+    --blue: #7f9cec;
+    --teal: #5cc0b5;
+    --coral: #f08f78;
+    --yellow: #e8c062;
+    --lilac: #a897e6;
+    --mint: #86d1b4;
+    --field: 20%;
+    --blend: screen;
+    --grain-op: 0.1;
+    --shadow: 0 0.6em 1.4em -0.8em rgb(0 0 0 / 0.6);
     color-scheme: dark;
   }
 }
@@ -38,12 +70,15 @@
 html, body {
   margin: 0;
   min-height: 100%;
-  background: var(--bg);
+  background: var(--paper);
   color: var(--ink);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Recursive', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-variation-settings: 'CASL' 0.35, 'MONO' 0;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior: none;
 }
+
+::selection { background: color-mix(in srgb, var(--yellow) 60%, transparent); color: var(--ink); }
 
 button {
   font: inherit;
@@ -51,6 +86,8 @@ button {
   cursor: pointer;
   touch-action: manipulation;
 }
+
+:focus-visible { outline: 2.5px solid var(--c); outline-offset: 2px; }
 
 [hidden] { display: none !important; }
 
@@ -76,93 +113,311 @@ svg {
   stroke-linejoin: round;
 }
 
+/* Timers, counts, scores and tables: Recursive's mono axis, tabular figures. */
+.mono, .timer, .score, .summary, .pad-left, .continue small, .history-time {
+  font-variation-settings: 'CASL' 0, 'MONO' 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Paper tooth: fine noise printed over an ink field. */
+.grain { position: relative; isolation: isolate; }
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--grain-op);
+  mix-blend-mode: var(--blend);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.4 -.5'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px;
+}
+
+/* ---------- Game menus ---------- */
+
+.home-inner {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 0;
+}
+
 .logo {
-  font-size: clamp(2.6rem, 11vw, 3.4rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.6rem, 12vw, 3.6rem);
+  font-weight: 900;
+  font-variation-settings: 'CASL' 1, 'MONO' 0;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  color: var(--c);
   margin: 0;
 }
 
 .tagline {
-  color: var(--muted);
-  margin: 4px 0 32px;
+  color: var(--ink-2);
+  margin: 10px 0 32px;
+  font-weight: 550;
 }
 
 .section-label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 800;
+  font-variation-settings: 'CASL' 1;
+  color: var(--ink);
   margin: 28px 0 10px;
 }
-
-.btn {
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 14px 18px;
-  font-weight: 600;
-  transition: transform 0.08s ease, background 0.15s ease;
-}
-
-.btn:active { transform: scale(0.98); background: var(--press); }
-
-.btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-ink);
-}
-
-.btn-primary:active { background: var(--accent); filter: brightness(0.92); }
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-}
-
-.icon-btn {
-  width: 44px;
-  height: 44px;
-  margin-left: -10px;
-  border: 0;
-  background: none;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-}
-.icon-btn:active { background: var(--press); }
 
 .back-link {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  margin: 0 0 20px -6px;
-  padding: 6px 10px 6px 4px;
-  border-radius: 10px;
-  color: var(--muted);
-  font-weight: 600;
+  gap: 4px;
+  margin: 0 0 24px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--c);
+  font-weight: 700;
   font-size: 0.9rem;
   text-decoration: none;
 }
-.back-link svg { width: 20px; height: 20px; }
-.back-link:active { background: var(--press); }
+.back-link svg { width: 20px; height: 20px; stroke-width: 2.4; }
+.back-link:active { filter: brightness(0.95); }
+
+.btn {
+  border: 0;
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 2px var(--rule);
+  border-radius: 999px;
+  padding: 14px 20px;
+  font-weight: 700;
+  transition: transform 0.08s ease, filter 0.15s ease;
+}
+.btn:active { transform: scale(0.98); filter: brightness(0.96); }
+
+.btn-primary {
+  background: var(--c);
+  box-shadow: none;
+  color: var(--on-ink);
+}
+
+.btn-quiet { background: none; box-shadow: none; color: var(--ink-2); }
+
+.continue {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  padding: 18px 22px;
+  border-radius: var(--r-card);
+}
+.continue small { font-weight: 600; opacity: 0.9; font-size: 0.95rem; }
+
+.levels { display: grid; gap: 10px; }
+
+/* Level buttons are tinted ink fields, not outlined boxes. */
+.level, .new-game {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.05rem;
+  text-align: left;
+  border-radius: var(--r-tile);
+  padding: 16px 18px;
+  background: var(--tint);
+  box-shadow: none;
+  color: var(--ink);
+}
+.level small, .new-game small { color: var(--ink-2); font-weight: 600; font-size: 0.85rem; }
+
+.history-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  background: none;
+  color: var(--ink-2);
+}
+.history-link svg { width: 20px; height: 20px; }
+
+/* ---------- History ---------- */
+
+#history { padding-bottom: 24px; }
+
+.topbar-title { font-size: 1.15rem; font-weight: 850; font-variation-settings: 'CASL' 1; margin: 0; }
+
+.summary {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--sheet);
+  border-radius: var(--r-board);
+  overflow: hidden;
+  margin-top: 8px;
+  box-shadow: var(--shadow);
+}
+.summary th, .summary td { padding: 12px 10px; text-align: right; }
+.summary th:first-child { text-align: left; padding-left: 16px; }
+.summary td:last-child, .summary thead th:last-child { padding-right: 16px; }
+.summary thead th {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--c);
+  background: var(--tint);
+  font-variation-settings: 'CASL' 0.35, 'MONO' 0;
+}
+.summary tbody th, .summary tbody td { border-top: 1px solid var(--rule); }
+.summary tbody tr:first-child th, .summary tbody tr:first-child td { border-top: 0; }
+.summary tbody th { font-weight: 700; font-variation-settings: 'CASL' 0.35, 'MONO' 0; }
+.muted { color: var(--ink-2); }
+
+.history-empty { color: var(--ink-2); font-size: 0.9rem; line-height: 1.5; }
+
+.history-list { list-style: none; margin: 0; padding: 0; }
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.history-row:last-child { border-bottom: 0; }
+.history-level { font-weight: 700; }
+.history-date { color: var(--ink-2); font-size: 0.8rem; margin-top: 2px; }
+.history-result { text-align: right; flex-shrink: 0; }
+.history-time { font-weight: 700; }
+.history-status { font-size: 0.75rem; font-weight: 700; margin-top: 2px; color: var(--c); }
+.is-unfinished .history-status { color: var(--ink-2); }
+
+/* ---------- Game screen ---------- */
+
+#game {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding-bottom: 16px;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  height: 60px;
+}
+#history .topbar { grid-template-columns: 44px 1fr 44px; }
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--tint);
+  color: var(--c);
+}
+.icon-btn svg { width: 22px; height: 22px; stroke-width: 2.4; }
+span.icon-btn { background: none; }
+.icon-btn:active { filter: brightness(0.94); }
+
+/* Topbar title: level on top, game name and status underneath. */
+.meta { min-width: 0; line-height: 1.2; }
+.meta b { display: block; font-size: 1.15rem; font-weight: 850; font-variation-settings: 'CASL' 1; }
+.meta span { font-size: 0.82rem; color: var(--ink-2); font-weight: 600; }
+
+/* The timer is a solid-ink pill; its icon shows what a tap does. */
+.timer {
+  border: 0;
+  height: 40px;
+  min-width: 82px;
+  padding: 0 14px 0 12px;
+  border-radius: 999px;
+  background: var(--c);
+  color: var(--on-ink);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.timer::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 5v14M15 5v14' stroke='black' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.timer[aria-label='Resume']::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5l11 7-11 7z' fill='black'/%3E%3C/svg%3E");
+}
+
+.paused {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* Tools: an ink-tinted tile with the label underneath. Switched-on tools print in solid ink. */
+.tools {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 18px 0 12px;
+}
+
+.tool {
+  border: 0;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+.tool svg {
+  box-sizing: content-box;
+  width: 26px;
+  height: 26px;
+  padding: 10px 15px;
+  border-radius: var(--r-tile);
+  background: var(--tint);
+  color: var(--c);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.tool:active svg { filter: brightness(0.94); }
+.tool b { font-weight: 800; color: var(--ink-2); }
+.tool.active svg { background: var(--c); color: var(--on-ink); }
+.tool.active b { color: var(--c); }
+
+/* ---------- Dialogs ---------- */
 
 .dialog {
   border: 0;
-  border-radius: 20px;
+  border-radius: var(--r-card);
   padding: 28px 24px 20px;
   width: min(360px, calc(100vw - 32px));
-  background: var(--surface);
+  background: var(--sheet);
   color: var(--ink);
   text-align: center;
+  box-shadow: 0 24px 48px -16px rgb(10 14 30 / 0.45);
 }
-.dialog::backdrop { background: rgb(0 0 0 / 0.4); }
-.dialog h2 { margin: 0 0 8px; font-size: 1.6rem; }
-.dialog p { color: var(--muted); margin: 0 0 24px; line-height: 1.5; }
+.dialog::backdrop { background: rgb(14 18 32 / 0.45); }
+.dialog h2 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+  font-weight: 900;
+  font-variation-settings: 'CASL' 1;
+  color: var(--c);
+}
+.dialog p { color: var(--ink-2); margin: 0 0 24px; line-height: 1.5; }
 .dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 @media (prefers-reduced-motion: reduce) {

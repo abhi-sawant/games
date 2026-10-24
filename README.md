@@ -18,14 +18,17 @@ Each game is its own page with its own folder of code; the root page is the game
 
 ```
 index.html, src/main.ts, src/style.css   home page
-src/base.css                             shared colours, buttons and dialogs (home page, Minesweeper, 2248)
+src/base.css                             the shared Riso design: inks, type, buttons, top bar, tools, dialogs
+src/fonts/                               Recursive, self-hosted so the app works offline
 sudoku/index.html, src/sudoku/           Sudoku
 minesweeper/index.html, src/minesweeper/ Minesweeper
 2248/index.html, src/2248/               2248
 ```
 
-To add a game, create `<game>/index.html` and `src/<game>/`, add the page to `build.rolldownOptions.input` in
-`vite.config.ts`, and add a card to `index.html`. Link to pages as `/<game>/index.html`, not `/<game>/`: the Android
+Every page follows the Riso design language in [DESIGN.md](DESIGN.md): each game owns one ink and reuses the
+shared components in `src/base.css`. To add a game, follow "Adding a new game" in DESIGN.md (pick a free ink, a
+stylesheet that imports `base.css`, the page, and a home card), then add the page to `build.rolldownOptions.input`
+in `vite.config.ts`. Link to pages as `/<game>/index.html`, not `/<game>/`: the Android
 app's local server answers extensionless paths with the root page. Keep saved data under a `<game>.` localStorage prefix.
 
 ## Web (PWA)
