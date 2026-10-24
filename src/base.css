@@ -19,15 +19,18 @@
   --rule: #c9cfdb;
   --on-ink: #f9fafb;
 
-  /* The ink set. Sudoku blue, Minesweeper teal, 2248 coral, 2048 lilac, tic-tac-toe mint,
-     dots and boxes berry. */
+  /* The ink set. Each family of games prints in one ink (see DESIGN.md): number puzzles blue,
+     logic puzzles orange, number tiles lilac, board games sky, cards olive. Teal, coral, yellow
+     and mint are accents shared by all. */
   --blue: #3f5fb0;
   --teal: #1f6d66;
   --coral: #bc4c37;
   --yellow: #efbf45;
   --lilac: #6c5aa8;
   --mint: #2f7a5f;
-  --berry: #a3376f;
+  --orange: #a4520f;
+  --sky: #1d6a8f;
+  --olive: #62661c;
 
   --c: var(--blue);
   --field: 15%;
@@ -59,7 +62,9 @@
     --yellow: #e8c062;
     --lilac: #a897e6;
     --mint: #86d1b4;
-    --berry: #f19ac5;
+    --orange: #f2a766;
+    --sky: #6cc4ea;
+    --olive: #c3c86f;
     --field: 20%;
     --blend: screen;
     --grain-op: 0.1;

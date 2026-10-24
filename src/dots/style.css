@@ -1,7 +1,7 @@
 @import '../base.css';
 
-/* Dots and Boxes prints in berry. You (or player 1) draw in berry, the computer (or player 2) in blue. */
-:root { --c: var(--berry); --p0: var(--berry); --p1: var(--blue); }
+/* Dots and Boxes prints in sky, with the other board games. You (or player 1) draw in sky, the computer (or player 2) in coral. */
+:root { --c: var(--sky); --p0: var(--sky); --p1: var(--coral); }
 
 .is-lost .history-status { color: var(--wrong); }
 .is-drawn .history-status { color: var(--ink-2); }

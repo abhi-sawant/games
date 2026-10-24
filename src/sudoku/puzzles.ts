@@ -1,4 +1,4 @@
-// Loads the bundled puzzle files (precached by the service worker) and picks unplayed ones.
+// Loads the bundled puzzle files (cached by the service worker) and picks unplayed ones.
 
 export const LEVELS = ['easy', 'medium', 'hard', 'expert'] as const;
 export type Level = (typeof LEVELS)[number];

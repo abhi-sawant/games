@@ -2,13 +2,13 @@
 
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
-import { registerSW } from 'virtual:pwa-register';
+import './pwa';
 import { checkForUpdate } from './update';
 
-if (!Capacitor.isNativePlatform()) registerSW({ immediate: true });
+type Save = Record<string, any> | null;
 
 /** Reads a game's saved state without importing the game itself. */
-function readSave(key: string): Record<string, unknown> | null {
+function readSave(key: string): Save {
   try {
     return JSON.parse(localStorage.getItem(key) ?? 'null');
   } catch {
@@ -22,29 +22,27 @@ function showStatus(id: string, inProgress: boolean) {
   el.textContent = 'Game in progress';
 }
 
-function renderStatus() {
-  const sudoku = readSave('sudoku.current');
-  showStatus('sudoku-status', !!sudoku && !sudoku.done);
-
+/** When each game's saved state counts as a game in progress, without importing the game itself. */
+const IN_PROGRESS: [id: string, started: (save: Save) => boolean][] = [
+  ['sudoku', (s) => !!s && !s.done],
   // A Minesweeper board only counts as started once its mines are placed, on the first reveal.
-  const mines = readSave('minesweeper.current') as { status?: string; board?: { mines?: unknown[] } } | null;
-  showStatus('minesweeper-status', mines?.status === 'playing' && !!mines.board?.mines?.length);
+  ['minesweeper', (s) => s?.status === 'playing' && !!s.board?.mines?.length],
+  // A 2248 board counts as started from its first merge, a 2048 board from its first move.
+  ['2248', (s) => s?.status === 'playing' && !!s.startedAt],
+  ['2048', (s) => s?.status === 'playing' && !!s.startedAt],
+  // A tic-tac-toe round or a dots and boxes game counts once someone has played.
+  ['tictactoe', (s) => s?.status === 'playing' && !!s.moves?.length],
+  ['dots', (s) => s?.status === 'playing' && !!s.moves?.length],
+];
 
-  // A 2248 board counts as started from its first merge.
-  const merge = readSave('2248.current');
-  showStatus('2248-status', !!merge && merge.status === 'playing' && !!merge.startedAt);
+// The newer games all save `started` from their first move.
+for (const id of [
+  'killer', 'kakuro', 'nonograms', 'takuzu', 'nurikabe', 'hitori', 'starbattle', 'lightsout',
+  'threes', 'fifteen', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers', 'klondike', 'freecell',
+]) IN_PROGRESS.push([id, (s) => s?.status === 'playing' && !!s.started]);
 
-  // So does a 2048 board, from its first move.
-  const slide = readSave('2048.current');
-  showStatus('2048-status', !!slide && slide.status === 'playing' && !!slide.startedAt);
-
-  // A tic-tac-toe round counts once someone has played.
-  const ttt = readSave('tictactoe.current') as { status?: string; moves?: unknown[] } | null;
-  showStatus('tictactoe-status', ttt?.status === 'playing' && !!ttt.moves?.length);
-
-  // So does a dots and boxes game, once a line is drawn.
-  const dots = readSave('dots.current') as { status?: string; moves?: unknown[] } | null;
-  showStatus('dots-status', dots?.status === 'playing' && !!dots.moves?.length);
+function renderStatus() {
+  for (const [id, started] of IN_PROGRESS) showStatus(`${id}-status`, started(readSave(`${id}.current`)));
 }
 
 renderStatus();

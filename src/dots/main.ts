@@ -1,14 +1,12 @@
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
-import { registerSW } from 'virtual:pwa-register';
+import '../pwa';
 import {
   type Level, type Mode, type Player, type State, BOX_COUNT, H_LINES, LINE_COUNT, N,
   computerMove, drawLine, isOver, newState, score,
 } from './board';
 import { type Outcome, loadStats, recordResult } from './stats';
 import { addHistory, loadHistory } from './history';
-
-if (!Capacitor.isNativePlatform()) registerSW({ immediate: true });
 
 // ---------- State ----------
 

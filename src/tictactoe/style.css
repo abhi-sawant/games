@@ -1,7 +1,7 @@
 @import '../base.css';
 
-/* Tic-tac-toe prints in mint. X is the game's ink and O is coral, so the two sides never look alike. */
-:root { --c: var(--mint); --x: var(--mint); --o: var(--coral); }
+/* Tic-tac-toe prints in sky, with the other board games. X is the game's ink and O is coral, so the two sides never look alike. */
+:root { --c: var(--sky); --x: var(--sky); --o: var(--coral); }
 
 .is-lost .history-status { color: var(--wrong); }
 .is-drawn .history-status { color: var(--ink-2); }

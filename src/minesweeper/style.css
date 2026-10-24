@@ -1,9 +1,9 @@
 @import '../base.css';
 
-/* Minesweeper prints in teal. Numbers borrow the other inks so each count reads at a glance. */
+/* Minesweeper prints in orange, with the other logic puzzles. Numbers borrow the other inks so each count reads at a glance. */
 :root {
-  --c: var(--teal);
-  --flag: var(--coral);
+  --c: var(--orange);
+  --flag: var(--on-ink);
   --n1: var(--blue);
   --n2: var(--teal);
   --n3: var(--coral);
@@ -51,7 +51,7 @@
   container-type: inline-size;
 }
 
-/* Hidden cells are solid teal ink; dug cells are the sunken paper under them. */
+/* Hidden cells are solid orange ink; dug cells are the sunken paper under them. */
 .board {
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
@@ -74,7 +74,7 @@
   min-width: 0;
   min-height: 0;
   border-radius: calc(100cqi / var(--cols) * 0.2);
-  background: var(--teal);
+  background: var(--orange);
   font-size: calc(100cqi / var(--cols) * 0.55);
   font-weight: 850;
   font-variation-settings: 'CASL' 1;
@@ -98,15 +98,15 @@
 .glyph { width: 62%; height: 62%; stroke-width: 2.4; }
 .glyph .fill { fill: currentColor; }
 
-/* A flag is a coral pennant on a pale pole, printed on the teal cell. */
+/* A flag is a pale pennant on a pale pole, printed on the orange cell (coral would vanish into it). */
 .cell.flag { color: var(--on-ink); }
 .cell.flag .fill { fill: var(--flag); stroke: var(--flag); }
 .cell.mine { color: var(--on-ink); }
 .cell.open.mine { color: var(--ink); }
-.cell.exploded { background: var(--coral); color: var(--on-ink); }
+.cell.exploded { background: var(--ink); color: var(--paper); }
 .cell.flag.wrong { background: color-mix(in srgb, var(--coral) 25%, var(--sunk)); color: var(--ink-2); }
 
 .cell.cursor { outline: 2.5px solid var(--yellow); outline-offset: -2.5px; }
 
-.board.is-paused .cell { background: var(--teal); color: transparent; }
+.board.is-paused .cell { background: var(--orange); color: transparent; }
 .board.is-paused .glyph { visibility: hidden; }

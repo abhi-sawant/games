@@ -1,0 +1,51 @@
+@import '../base.css';
+@import '../shared/vs.css';
+
+/* Reversi prints in sky, with the board games. The board is a sky field; sky discs and ring discs (the sheet inside a sky ring). */
+
+.board {
+  display: grid;
+  grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+  aspect-ratio: 1;
+  gap: 3px;
+  container-type: inline-size;
+}
+
+.cell {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--sky) 20%, var(--sheet));
+  display: grid;
+  place-items: center;
+  position: relative;
+  --ring: 2.5px;
+}
+.cell:disabled { cursor: default; }
+.cell .piece { width: 80%; height: 80%; }
+.cell .piece.new { animation: drop 0.18s ease-out; }
+.cell .piece.flip { animation: flip 0.3s ease-in-out; }
+@keyframes flip { 50% { transform: scaleX(0); } }
+
+/* Legal moves are a faint dot of ink. */
+.cell.target::after {
+  content: '';
+  width: 26%;
+  height: 26%;
+  border-radius: 50%;
+  background: var(--sky);
+  opacity: 0.35;
+}
+.cell.target:active { filter: brightness(0.94); }
+
+/* The last disc played carries a small coral dot. */
+.cell.last::before {
+  content: '';
+  position: absolute;
+  width: 16%;
+  height: 16%;
+  border-radius: 50%;
+  background: var(--coral);
+  z-index: 1;
+}

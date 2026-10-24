@@ -1,0 +1,25 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Nurikabe prints in orange, with the logic puzzles. Undecided cells are a pale tint, the sea you shade
+   is solid ink, land you mark is sheet with an ink dot, and numbers sit on sunk paper. Broken rules go coral. */
+:root { --c: var(--orange); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.cell { cursor: pointer; background: var(--tint); }
+.cell:disabled { cursor: default; }
+.cell.clue { background: var(--sunk); color: var(--ink); }
+.cell.m1 { background: var(--orange); }
+.cell.m2 { background: var(--sheet); }
+.cell.m2::after {
+  content: '';
+  width: 22%;
+  height: 22%;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+.cell.wrong.clue { color: var(--wrong); box-shadow: inset 0 0 0 calc(100cqi / var(--cols) * 0.05) var(--wrong); }
+.cell.wrong.m1 { background: var(--wrong); }
+.cell.wrong.m2::after { background: var(--wrong); }

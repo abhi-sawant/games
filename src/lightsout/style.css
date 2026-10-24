@@ -1,0 +1,12 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Lights Out prints in orange, with the logic puzzles. A lit cell is solid ink; a dark one is sunk paper. */
+:root { --c: var(--orange); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.cell { cursor: pointer; }
+.cell.on { background: var(--orange); box-shadow: inset 0 0 0 calc(100cqi / var(--cols) * 0.06) color-mix(in srgb, var(--on-ink) 25%, transparent); }
+.cell:active:not(:disabled) { transform: scale(0.94); }
+.cell:disabled { cursor: default; }

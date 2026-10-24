@@ -1,0 +1,104 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Kakuro prints in Sudoku's blue, with the number puzzles. Clue blocks are solid ink split by a
+   diagonal, with the down clue under it and the across clue over it; empty blocks are sunk paper,
+   and the board itself is sunk so the white cells stand out. */
+:root { --c: var(--blue); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.board {
+  background: var(--sunk);
+  gap: calc(100cqi / var(--cols) * 0.05);
+  width: min(100%, calc(100dvh - 330px));
+}
+
+.cell { position: relative; overflow: hidden; }
+.cell.block { background: color-mix(in srgb, var(--ink) 10%, var(--sunk)); }
+.cell.clue {
+  background:
+    linear-gradient(to top right, transparent calc(50% - 0.7px), color-mix(in srgb, var(--on-ink) 45%, transparent) 50%, transparent calc(50% + 0.7px)),
+    var(--blue);
+  color: var(--on-ink);
+}
+.cell.clue b {
+  position: absolute;
+  font-size: calc(100cqi / var(--cols) * 0.3);
+  font-weight: 800;
+  font-variation-settings: 'CASL' 0, 'MONO' 1;
+  line-height: 1;
+}
+.cell.clue .across { top: 12%; right: 10%; }
+.cell.clue .down { bottom: 12%; left: 10%; }
+
+/* White cells: sheet with a fine blue rim, your digits in blue and mistakes in coral. */
+.cell.open {
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--blue) 28%, var(--sheet));
+  color: var(--blue);
+  font-weight: 750;
+  cursor: pointer;
+}
+.cell.open.in-run { background: color-mix(in srgb, var(--yellow) 45%, var(--sheet)); }
+.cell.open.selected {
+  background: color-mix(in srgb, var(--blue) 26%, var(--sheet));
+  box-shadow: inset 0 0 0 2.5px var(--blue);
+}
+.cell.open.wrong { color: var(--coral); background: color-mix(in srgb, var(--coral) 18%, var(--sheet)); }
+.cell.open.wrong.selected { box-shadow: inset 0 0 0 2.5px var(--coral); }
+@media (prefers-color-scheme: dark) {
+  /* Sunflower on navy turns olive, so at night the run highlight is blue. */
+  .cell.open.in-run { background: color-mix(in srgb, var(--blue) 22%, var(--sheet)); }
+}
+
+.notes {
+  position: absolute;
+  inset: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  font-size: calc(100cqi / var(--cols) * 0.22);
+  font-weight: 650;
+  font-variation-settings: 'CASL' 0, 'MONO' 1;
+  color: var(--ink-2);
+}
+.notes span { display: grid; place-items: center; }
+.notes .hl { color: var(--blue); font-weight: 900; }
+
+.board.is-paused .cell.open { background: var(--blue); }
+.board.is-paused .cell.clue b { visibility: hidden; }
+
+/* ---------- Pad ---------- */
+
+.tools { margin: 14px 0 10px; }
+
+.pad {
+  margin-bottom: auto;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 5px;
+}
+.pad-btn {
+  border: 0;
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--blue) 25%, var(--paper));
+  border-radius: var(--r-key);
+  padding: 10px 0;
+  display: grid;
+  place-items: center;
+  color: var(--blue);
+}
+.pad-btn:active { background: var(--tint); }
+.pad-digit {
+  font-size: clamp(1.5rem, 7.4vw, 2rem);
+  font-weight: 750;
+  font-variation-settings: 'CASL' 1;
+  line-height: 1.1;
+}
+
+@media (max-height: 700px) {
+  .tools { margin: 10px 0 8px; }
+  .tool span { display: none; }
+  .tool svg { padding: 8px 14px; }
+}

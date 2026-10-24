@@ -1,0 +1,97 @@
+/* The chrome shared by the two-sided board games (Reversi, Gomoku, Checkers, Nine Men's Morris): the
+   tally, the status line and the board frame. They print in sky. Side 0 is solid sky; side 1 is a sheet
+   piece with a sky ring (Gomoku's second side is coral instead). */
+
+:root { --c: var(--sky); --s0: var(--sky); --s1: var(--sheet); --s1-ring: var(--sky); }
+
+.is-lost .history-status { color: var(--wrong); }
+.is-drawn .history-status { color: var(--ink-2); }
+
+/* Tighter history table: a level name plus four columns has to fit a 320px-wide phone. */
+.summary th, .summary td { padding: 12px 6px; }
+@media (max-width: 360px) {
+  .summary { font-size: 0.8rem; }
+  .summary th, .summary td { padding: 10px 4px; }
+  .summary th:first-child { padding-left: 10px; }
+  .summary td:last-child, .summary thead th:last-child { padding-right: 10px; }
+}
+
+/* ---------- Game ---------- */
+
+/* The round tally sits where the timer is in the other games: your wins, draws, then the other side's. */
+.tally { display: flex; gap: 12px; text-align: center; line-height: 1.05; }
+.tally span { min-width: 30px; }
+.tally b {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 850;
+  color: var(--c);
+  font-variation-settings: 'CASL' 0, 'MONO' 1;
+  font-variant-numeric: tabular-nums;
+}
+.tally .draws b { color: var(--ink-2); }
+.tally small { font-size: 0.72rem; font-weight: 700; color: var(--ink-2); }
+.meta span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 360px) {
+  .tally { gap: 6px; }
+  .tally span { min-width: 26px; }
+}
+
+.tools { grid-template-columns: repeat(2, 88px); justify-content: center; margin-bottom: 0; }
+.tool:disabled { opacity: 0.4; cursor: default; }
+
+.board-wrap {
+  margin: auto 0;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-frame {
+  width: min(100%, 440px, calc(100dvh - 320px));
+  min-width: 260px;
+  padding: 8px;
+  border-radius: var(--r-board);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* A piece: side 0 solid ink, side 1 the sheet with an ink ring. */
+.piece {
+  display: block;
+  border-radius: 50%;
+  background: var(--s0);
+}
+.piece.s1 { background: var(--s1); box-shadow: inset 0 0 0 calc(var(--ring, 3px)) var(--s1-ring); }
+
+.status {
+  min-height: 1.5em;
+  margin: 16px 0 0;
+  font-size: 1.05rem;
+  font-weight: 750;
+  font-variation-settings: 'CASL' 1;
+  color: var(--ink);
+  text-align: center;
+}
+.status small { display: block; margin-top: 4px; font-size: 0.85rem; font-weight: 650; color: var(--ink-2); font-variation-settings: 'CASL' 0.35; }
+/* Side names carry a little swatch of their piece. */
+.side { white-space: nowrap; }
+.side::before {
+  content: '';
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 0.3em;
+  border-radius: 50%;
+  vertical-align: -0.05em;
+  background: var(--s0);
+}
+.side-1::before { background: var(--s1); box-shadow: inset 0 0 0 2px var(--s1-ring); }
+
+.next { margin-top: 14px; min-width: 180px; }
+
+@keyframes drop { from { transform: scale(0.4); opacity: 0; } }

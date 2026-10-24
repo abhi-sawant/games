@@ -1,12 +1,9 @@
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
-import { registerSW } from 'virtual:pwa-register';
+import '../pwa';
 import { BOX, COL, PEERS, ROW, parseGrid, solve } from './sudoku';
 import { LEVELS, LEVEL_LABELS, type Level, loadLevel, markPlayed, pickPuzzle } from './puzzles';
 import { addHistory, averageSolveTime, loadHistory } from './history';
-
-// The Android app already serves every file from the APK, so only the web build needs the service worker.
-if (!Capacitor.isNativePlatform()) registerSW({ immediate: true });
 
 // ---------- State ----------
 

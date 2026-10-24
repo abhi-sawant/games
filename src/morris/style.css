@@ -1,0 +1,30 @@
+@import '../base.css';
+@import '../shared/vs.css';
+
+/* Nine Men's Morris prints in sky, with the board games. Three nested squares in rule lines, sky pieces
+   and ring pieces; a piece standing in a mill is printed a little larger. */
+
+.board { aspect-ratio: 1; background: color-mix(in srgb, var(--sky) 10%, var(--sheet)); border-radius: 14px; }
+.board svg { display: block; width: 100%; height: 100%; }
+
+.lines { fill: none; stroke: var(--rule); stroke-width: 0.06; stroke-linecap: round; }
+
+.pt { cursor: pointer; }
+.pt .hit { fill: transparent; stroke: none; }
+.pt .dot { fill: var(--ink-2); stroke: none; }
+.pt .piece { fill: var(--sky); stroke: none; transition: r 0.12s ease, opacity 0.12s ease; }
+.pt.empty .piece { opacity: 0; }
+.pt.s1 .piece { fill: var(--sheet); stroke: var(--sky); stroke-width: 0.09; }
+.pt.mill .piece { r: 0.38px; }
+.locked .pt { cursor: default; }
+
+/* Where you can place or move is a faint dot of ink; pieces that can move carry a yellow ring. */
+.pt.target .dot { r: 0.16px; fill: var(--sky); opacity: 0.55; }
+.pt.movable .piece, .pt.selected .piece { stroke: var(--yellow); stroke-width: 0.1; }
+.pt.selected .piece { r: 0.4px; }
+/* A mill's choices: pieces you can take are ringed in coral. */
+.pt.take .piece { stroke: var(--coral); stroke-width: 0.12; }
+
+/* Empty points are a small dot; the last piece moved carries a coral one. */
+.pt:not(.empty) .dot { opacity: 0; }
+.pt.last .dot { opacity: 1; fill: var(--coral); }
