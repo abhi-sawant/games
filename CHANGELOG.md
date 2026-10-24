@@ -21,6 +21,9 @@ offline with its own history and stats.
 
 - Every game in a family now shares its ink: Minesweeper prints in orange with the logic puzzles, 2248 in lilac with
   the number tiles, and tic-tac-toe and dots and boxes in sky with the board games (the other side prints in coral).
+- The web app's first visit is much lighter: it saves only the home page straight away, then downloads the game you
+  open and the rest quietly in the background, so every game still works offline. With data saver on, it saves only
+  the games you open. Anything you already had saved isn't downloaded again.
 
 ## 3.0.1 — 2026-10-25
 
