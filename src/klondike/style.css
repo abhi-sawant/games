@@ -1,0 +1,9 @@
+@import '../base.css';
+@import '../cards/cards.css';
+
+/* Klondike prints in olive, with the card games. The stock shows a recycle mark once it's been turned through. */
+:root { --c: var(--olive); }
+
+.stock .mark { opacity: 0; transition: opacity 0.15s ease; }
+.stock.can-recycle .mark { opacity: 1; }
+.stock { cursor: pointer; }

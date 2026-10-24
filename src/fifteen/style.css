@@ -1,0 +1,88 @@
+@import '../base.css';
+
+/* The 15-puzzle prints in lilac, with the number tiles. A tile in its home cell is solid ink; the rest
+   are a lilac tint, so the solved part of the board reads at a glance. */
+:root { --c: var(--lilac); }
+
+/* A level name plus five columns has to fit a 320px-wide phone. */
+.summary th, .summary td { padding: 12px 5px; }
+@media (max-width: 360px) {
+  .summary { font-size: 0.8rem; }
+  .summary th, .summary td { padding: 10px 3px; }
+  .summary th:first-child { padding-left: 10px; }
+  .summary td:last-child, .summary thead th:last-child { padding-right: 10px; }
+}
+
+/* ---------- Game ---------- */
+
+.tools { grid-template-columns: repeat(2, 88px); justify-content: center; margin-bottom: 0; }
+.tool:disabled { opacity: 0.4; cursor: default; }
+
+.board-wrap {
+  position: relative;
+  touch-action: none; /* swipes slide the tiles, not the page */
+  margin: auto 0;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-frame {
+  width: min(100%, 460px, calc(100dvh - 290px));
+  min-width: 240px;
+  padding: 8px;
+  border-radius: var(--r-board);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  --gap: 6px;
+  position: relative;
+  aspect-ratio: 1;
+  container-type: inline-size;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Each cell is 1/n of the grid less the gaps, placed at (--x, --y) in cells. */
+.cell-bg, .tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc((100% - (var(--n) - 1) * var(--gap)) / var(--n));
+  height: calc((100% - (var(--n) - 1) * var(--gap)) / var(--n));
+  border-radius: calc(60cqw / var(--n) * 0.25);
+  translate: calc(var(--x) * (100% + var(--gap))) calc(var(--y) * (100% + var(--gap)));
+}
+
+.cell-bg { background: var(--sunk); }
+
+.tile {
+  border: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--lilac) 30%, var(--sheet));
+  color: var(--ink);
+  font-size: calc(100cqw / var(--n) * 0.4);
+  font-weight: 850;
+  font-variation-settings: 'CASL' 1;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: none;
+  transition: translate 0.12s ease-in-out, background 0.2s ease, color 0.2s ease;
+}
+.tile.home { background: var(--lilac); color: var(--on-ink); }
+.tile:disabled { cursor: default; }
+
+@media (prefers-color-scheme: dark) {
+  .tile { background: color-mix(in srgb, var(--lilac) 40%, var(--sheet)); }
+}
+
+/* A solved board ripples from the top-left corner. */
+.grid.solved .tile { animation: ripple 0.5s ease both; animation-delay: calc(var(--d, 0) * 40ms); }
+@keyframes ripple { 40% { scale: 0.86; } }
+
+.grid.is-paused .tile { color: transparent; background: var(--lilac); }

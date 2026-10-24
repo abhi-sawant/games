@@ -1,0 +1,41 @@
+@import '../sudoku/style.css';
+
+/* Killer Sudoku is Sudoku's board, in Sudoku's blue (the number puzzles share it), plus cages:
+   dashed outlines drawn just inside the cells, with the cage's sum tucked into its first cell. */
+
+.board { display: grid; }
+
+.cell::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1.5px dashed transparent;
+  pointer-events: none;
+}
+.cell.ct::after { top: 3px; border-top-color: var(--cage); }
+.cell.cb::after { bottom: 3px; border-bottom-color: var(--cage); }
+.cell.cl::after { left: 3px; border-left-color: var(--cage); }
+.cell.cr::after { right: 3px; border-right-color: var(--cage); }
+:root { --cage: color-mix(in srgb, var(--ink) 50%, transparent); }
+
+.sum {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  z-index: 1;
+  padding: 0 2px;
+  border-radius: 4px;
+  background: var(--sheet);
+  font-size: clamp(0.5rem, 2.3vw, 0.66rem);
+  font-weight: 800;
+  font-variation-settings: 'CASL' 0, 'MONO' 1;
+  color: var(--ink);
+  line-height: 1.15;
+}
+.cell.selected .sum { background: none; color: var(--on-ink); }
+.cell.has-sum .notes { top: 11px; }
+
+.cell.user { font-weight: 650; }
+.board.is-paused .sum, .board.is-paused .cell::after { visibility: hidden; }
+
+.summary th, .summary td { padding: 12px 8px; }

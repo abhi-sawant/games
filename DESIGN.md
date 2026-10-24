@@ -1,6 +1,6 @@
 # Design: Riso
 
-Free Games looks like a risograph print: a few soft inks on cool paper. It is colourful without being loud, friendly, and soft-cornered. Every game in the suite, current and future, uses this one language. A game is told apart only by its **ink**.
+Free Games looks like a risograph print: a few soft inks on cool paper. It is colourful without being loud, friendly, and soft-cornered. Every game in the suite, current and future, uses this one language. A category of games is told apart only by its **ink**.
 
 All tokens and shared components live in [`src/base.css`](src/base.css). Game stylesheets import it and add only what their board needs.
 
@@ -16,17 +16,33 @@ All tokens and shared components live in [`src/base.css`](src/base.css). Game st
 | `--rule` | `#c9cfdb` | `#2d3549` | Hairlines and outlines |
 | `--on-ink` | `#f9fafb` | `#141927` | Text on solid ink |
 
-The inks. Each game owns one; the rest of the set is shared.
+## Categories
 
-| Ink | Light | Dark | Owner |
+Every game belongs to exactly one **category**, shown as a section on the home page. The category owns the ink: every game in it prints in that ink, and no game picks its own. A game that fits no existing category gets a new category with a new ink, never a one-off colour.
+
+| Category | Ink | Games |
+|---|---|---|
+| Number puzzles | `--blue` | Sudoku, Killer Sudoku, Kakuro |
+| Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out |
+| Number tiles | `--lilac` | 2248, 2048, Threes, 15-puzzle |
+| Play the computer | `--sky` | Tic-tac-toe, Dots and Boxes, Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers |
+| Cards | `--olive` | Klondike, FreeCell |
+
+The inks. Each category ink belongs to one category; the other inks are accents shared by all.
+
+| Ink | Light | Dark | Use |
 |---|---|---|---|
-| `--blue` | `#3f5fb0` | `#7f9cec` | Sudoku |
-| `--teal` | `#1f6d66` | `#5cc0b5` | Minesweeper |
-| `--coral` | `#bc4c37` | `#f08f78` | 2248 (also errors and flags) |
+| `--blue` | `#3f5fb0` | `#7f9cec` | Number puzzles category |
+| `--teal` | `#1f6d66` | `#5cc0b5` | Accent: Minesweeper's 2s and the tile scale |
+| `--orange` | `#a4520f` | `#f2a766` | Logic puzzles category |
+| `--coral` | `#bc4c37` | `#f08f78` | Accent: errors and the second player |
 | `--yellow` | `#efbf45` | `#e8c062` | Shared highlighter, never a game's ink |
-| `--lilac` | `#6c5aa8` | `#a897e6` | 2048 |
-| `--mint` | `#2f7a5f` | `#86d1b4` | Tic-tac-toe (X; O prints in coral) |
-| `--berry` | `#a3376f` | `#f19ac5` | Dots and Boxes (you; the computer prints in blue) |
+| `--lilac` | `#6c5aa8` | `#a897e6` | Number tiles category |
+| `--mint` | `#2f7a5f` | `#86d1b4` | Accent: the tile scale |
+| `--sky` | `#1d6a8f` | `#6cc4ea` | Play the computer category |
+| `--olive` | `#62661c` | `#c3c86f` | Cards category (card backs; red suits print in coral, black suits in `--ink`) |
+
+Two-sided games print you (or player one) in the category ink and the other side in coral. Where pieces read as black and white (Reversi, Checkers, Morris), one side is solid ink and the other is `--sheet` with an ink ring.
 
 Light inks are dark enough for white text (4.5:1); dark-mode inks are light enough for `--on-ink` navy text. A new ink must meet the same contrast in both themes.
 
@@ -73,7 +89,7 @@ Boards sit on `--sheet` with `--r-board` corners and `--shadow`. Use paper as th
 
 - Something you can still act on (an unopened cell) is **solid ink**.
 - Something finished or empty is **`--sunk` paper**.
-- Numbers that carry meaning take inks from the set (Minesweeper counts: 1 blue, 2 teal, 3 coral, 4 lilac).
+- Numbers that carry meaning take inks from the set (Minesweeper counts: 1 blue, 2 teal, 3 coral, 4 lilac). Keep accents clear of the category ink: on Minesweeper's orange cells, flags are pale and a hit mine is navy, not coral.
 - Value scales (2248 and 2048 tiles, shared in `src/tiles.css`) step through the inks as a 40% screen, then solid: sunflower, coral, teal, blue, lilac, mint. At night the screen steps lighten towards `--ink` rather than darken towards paper, which goes muddy.
 - Paths and selections over a board are navy ink overprinted at about 45%.
 
@@ -83,8 +99,8 @@ Quick and physical: presses scale to 0.98 in 80ms, merged tiles pop, a solved bo
 
 ## Adding a new game
 
-1. **Pick an ink.** Every ink in the set is taken, so add a new ink to `:root` and the dark block in `base.css`, with white-text contrast of 4.5:1 or more in light and navy-text contrast of 4.5:1 or more in dark, and list it in the inks table above.
-2. **Stylesheet.** Create `src/<game>/style.css` that starts with `@import '../base.css';` and `:root { --c: var(--<ink>); }`. Add only the board's own styles. Don't redefine colours, buttons, top bars, tools, tables or dialogs.
+1. **Pick a category.** Every game must have one. Put the game in the category that fits and use that category's ink. If no category fits, add a new one: a new ink in `:root` and the dark block in `base.css` (white-text contrast of 4.5:1 or more in light, navy-text contrast of 4.5:1 or more in dark), a row in the categories and inks tables above, a `.ink-<name>` class in `src/style.css`, and a new `section.family` with its `h2.section-label` on the home page.
+2. **Stylesheet.** Create `src/<game>/style.css` that starts with `@import '../base.css';` and `:root { --c: var(--<category ink>); }`. Add only the board's own styles. Don't redefine colours, buttons, top bars, tools, tables or dialogs.
 3. **Page.** Copy an existing game page (`minesweeper/index.html` is the simplest) so the menu, history and game screens use the shared components above. Keep the `theme-color` metas (`#eef0f3` light, `#141927` dark), and link the stylesheet from `<head>` with `<link rel="stylesheet" href="/src/<game>/style.css" />` rather than importing it from `main.ts`: an import loads it after the page has painted, so the unstyled HTML flashes on every navigation.
-4. **Home card.** In `index.html`, copy a `.game-card` and give it `ink-<name>` and `grain`. Draw its `.game-icon` as a tiny 3×3 version of the board on `--sheet`, in the game's ink, and add the icon's styles to `src/style.css`. Add its `<game>-status` element and a line in `renderStatus()` in `src/main.ts`.
+4. **Home card.** In `index.html`, copy a `.game-card` into its category's section and give it the category's `ink-<name>` and `grain`. Draw its `.game-icon` as a tiny 3×3 version of the board on `--sheet`, in the category ink, and add the icon's styles to `src/style.css`. Add its `<game>-status` element and an entry in `IN_PROGRESS` in `src/main.ts`.
 5. **Check both themes** on a phone-sized screen: text contrast, the board in light and dark, and any overprint in dark mode (screen blending can turn warm inks olive).

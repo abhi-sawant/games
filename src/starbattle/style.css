@@ -1,0 +1,39 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Star Battle prints in orange, with the logic puzzles. Regions are four tints of the ink, outlined in
+   ink; stars are solid ink, cells you rule out get a small dot. Clashing stars go coral. */
+:root { --c: var(--orange); --edge: calc(100cqi / var(--cols) * 0.06); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+/* Cells butt up against each other so region outlines read as one line. */
+.board { gap: 0; padding: 4px; }
+.cell { cursor: pointer; border-radius: 0; position: relative; box-shadow: inset 0 0 0 0.5px var(--rule); }
+.cell:disabled { cursor: default; }
+.cell[data-shade='0'] { background: color-mix(in srgb, var(--orange) 6%, var(--sheet)); }
+.cell[data-shade='1'] { background: color-mix(in srgb, var(--orange) 26%, var(--sheet)); }
+.cell[data-shade='2'] { background: color-mix(in srgb, var(--orange) 16%, var(--sheet)); }
+.cell[data-shade='3'] { background: color-mix(in srgb, var(--orange) 36%, var(--sheet)); }
+
+/* Orange mixed into dark paper goes brown, so at night the regions step through the pale ink instead. */
+@media (prefers-color-scheme: dark) {
+  .cell[data-shade='0'] { background: color-mix(in srgb, var(--ink) 3%, var(--sheet)); }
+  .cell[data-shade='1'] { background: color-mix(in srgb, var(--ink) 15%, var(--sheet)); }
+  .cell[data-shade='2'] { background: color-mix(in srgb, var(--ink) 9%, var(--sheet)); }
+  .cell[data-shade='3'] { background: color-mix(in srgb, var(--ink) 21%, var(--sheet)); }
+}
+
+/* Region outlines: one ink rule on each side where the region changes. */
+.cell::before { content: ''; position: absolute; inset: 0; pointer-events: none; border: 0 solid var(--ink); }
+.cell[data-edges*='t']::before { border-top-width: var(--edge); }
+.cell[data-edges*='r']::before { border-right-width: var(--edge); }
+.cell[data-edges*='b']::before { border-bottom-width: var(--edge); }
+.cell[data-edges*='l']::before { border-left-width: var(--edge); }
+
+.cell.m1::after { content: ''; width: 18%; height: 18%; border-radius: 50%; background: var(--ink-2); }
+.cell svg { width: 66%; height: 66%; fill: var(--orange); stroke: var(--orange); stroke-width: 1.5; }
+.cell.wrong svg { fill: var(--wrong); stroke: var(--wrong); }
+
+.board.is-paused .cell { box-shadow: none; }
+.board.is-paused .cell::before { border-width: 0; }

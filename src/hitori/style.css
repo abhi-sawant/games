@@ -1,0 +1,17 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Hitori prints in orange, with the logic puzzles. Numbers sit on a pale tint; a shaded cell is solid
+   ink with its number knocked back, and a kept cell gets an ink ring. Kept repeats and touching shades go coral. */
+:root { --c: var(--orange); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.cell { cursor: pointer; background: var(--tint); }
+.cell:disabled { cursor: default; }
+.cell.m1 { background: var(--orange); color: color-mix(in srgb, var(--on-ink) 45%, var(--orange)); }
+.cell.m2 { background: var(--sheet); color: var(--orange); box-shadow: inset 0 0 0 calc(100cqi / var(--cols) * 0.05) var(--orange); }
+
+.cell.wrong { color: var(--wrong); }
+.cell.wrong.m1 { background: var(--wrong); color: color-mix(in srgb, var(--on-ink) 45%, var(--wrong)); }
+.cell.wrong.m2 { box-shadow: inset 0 0 0 calc(100cqi / var(--cols) * 0.05) var(--wrong); }

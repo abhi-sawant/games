@@ -45,14 +45,16 @@
 
 /* ---------- Game cards ---------- */
 
-.games { display: grid; gap: 14px; }
+.games { display: grid; gap: 4px; }
+.family { display: grid; gap: 14px; }
+.family .section-label { margin: 24px 4px 0; }
+.family:first-child .section-label { margin-top: 0; }
 
 .ink-blue { --c: var(--blue); }
-.ink-teal { --c: var(--teal); }
-.ink-coral { --c: var(--coral); }
 .ink-lilac { --c: var(--lilac); }
-.ink-mint { --c: var(--mint); }
-.ink-berry { --c: var(--berry); }
+.ink-orange { --c: var(--orange); }
+.ink-sky { --c: var(--sky); }
+.ink-olive { --c: var(--olive); }
 
 .game-card {
   --tint: color-mix(in srgb, var(--c) var(--field), var(--paper));
@@ -144,10 +146,10 @@
   opacity: 0.2;
 }
 
-.game-icon-mines i { background: var(--teal); }
-.game-icon-mines i.o { background: var(--sunk); color: var(--teal); }
+.game-icon-mines i { background: var(--orange); }
+.game-icon-mines i.o { background: var(--sunk); color: var(--orange); }
 .game-icon-mines svg { width: 72%; height: 72%; color: var(--on-ink); stroke-width: 2.4; }
-.game-icon-mines .fill { fill: var(--coral); stroke: var(--coral); }
+.game-icon-mines .fill { fill: currentColor; }
 
 .game-icon-2248 i { font-size: 0.72rem; color: var(--ink); }
 .game-icon-2248 [data-exp='1'] { background: color-mix(in srgb, var(--yellow) 40%, var(--sheet)); }
@@ -163,20 +165,119 @@
 .game-icon-2048 [data-exp='3'] { background: var(--lilac); color: var(--on-ink); }
 .game-icon-2048 [data-exp='4'] { background: var(--ink); color: var(--paper); }
 
-/* Tic-tac-toe: played cells sink into the sheet, open ones are a mint field, X in mint and O in coral. */
-.game-icon-ttt i { background: color-mix(in srgb, var(--mint) 18%, var(--sheet)); font-size: 0.8rem; font-weight: 900; }
+/* Tic-tac-toe: played cells sink into the sheet, open ones are a sky field, X in sky and O in coral. */
+.game-icon-ttt i { background: color-mix(in srgb, var(--sky) 18%, var(--sheet)); font-size: 0.8rem; font-weight: 900; }
 .game-icon-ttt i.x, .game-icon-ttt i.o { background: var(--sunk); }
-.game-icon-ttt i.x { color: var(--mint); }
+.game-icon-ttt i.x { color: var(--sky); }
 .game-icon-ttt i.o { color: var(--coral); }
 
-/* Dots and Boxes: a corner of the board, with your lines and box in berry and the computer's lines in blue. */
+/* Dots and Boxes: a corner of the board, with your lines and box in sky and the computer's lines in coral. */
 .game-icon-dots { display: block; padding: 4px; }
 .game-icon-dots svg { width: 100%; height: 100%; }
 .game-icon-dots path { stroke-width: 4; stroke-linecap: round; }
-.game-icon-dots .p0 { stroke: var(--berry); }
-.game-icon-dots .p1 { stroke: var(--blue); }
-.game-icon-dots .own { fill: var(--berry); stroke: none; opacity: 0.32; }
+.game-icon-dots .p0 { stroke: var(--sky); }
+.game-icon-dots .p1 { stroke: var(--coral); }
+.game-icon-dots .own { fill: var(--sky); stroke: none; opacity: 0.32; }
 .game-icon-dots .dots { fill: var(--ink); stroke: none; }
+
+/* Killer Sudoku: digits in blue, with a dashed cage round the top-left corner and its sum tucked in. */
+.game-icon-killer i { color: var(--blue); position: relative; }
+.game-icon-killer i.c { border: 1.5px dashed var(--blue); border-radius: 0; }
+.game-icon-killer i.tl { border-width: 1.5px 0 0 1.5px; border-top-left-radius: 5px; }
+.game-icon-killer i.tr { border-width: 1.5px 1.5px 0 0; border-top-right-radius: 5px; }
+.game-icon-killer i.bl { border-width: 0 0 1.5px 1.5px; border-bottom-left-radius: 5px; }
+.game-icon-killer i.br { border-width: 0 1.5px 1.5px 0; border-bottom-right-radius: 5px; }
+.game-icon-killer b { position: absolute; top: 1px; left: 2px; font-size: 0.45rem; font-weight: 800; }
+
+/* Kakuro: clue cells are solid blue with the sum on them, answer cells are sheet with blue digits. */
+.game-icon-kakuro i { color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, var(--sheet)); }
+.game-icon-kakuro i.k { background: var(--blue); color: var(--on-ink); }
+.game-icon-kakuro b { font-size: 0.55rem; font-weight: 800; align-self: start; justify-self: end; padding: 2px 3px 0 0; }
+
+/* Logic puzzles in orange: painted cells are solid ink, the rest is sunk paper. */
+.game-icon-nonograms i, .game-icon-nurikabe i, .game-icon-hitori i, .game-icon-lightsout i,
+.game-icon-takuzu i, .game-icon-starbattle i { background: var(--sunk); color: var(--orange); }
+.game-icon-nonograms i.f, .game-icon-nurikabe i.f, .game-icon-hitori i.f, .game-icon-lightsout i.f { background: var(--orange); color: var(--on-ink); }
+.game-icon-hitori i.f { color: color-mix(in srgb, var(--on-ink) 55%, var(--orange)); }
+.game-icon-takuzu i { background: color-mix(in srgb, var(--orange) 15%, var(--sheet)); color: var(--orange); }
+.game-icon-takuzu i.f { background: var(--orange); color: var(--on-ink); }
+.game-icon-starbattle { gap: 0; }
+.game-icon-starbattle i { border-radius: 0; background: color-mix(in srgb, var(--orange) 14%, var(--sheet)); font-size: 1rem; }
+.game-icon-starbattle i:nth-child(2), .game-icon-starbattle i:nth-child(3), .game-icon-starbattle i:nth-child(6) {
+  background: color-mix(in srgb, var(--orange) 30%, var(--sheet));
+}
+.game-icon-starbattle i:first-child { border-top-left-radius: 5px; }
+.game-icon-starbattle i:nth-child(3) { border-top-right-radius: 5px; }
+.game-icon-starbattle i:nth-child(7) { border-bottom-left-radius: 5px; }
+.game-icon-starbattle i:last-child { border-bottom-right-radius: 5px; }
+
+/* Threes: 1s print coral, 2s blue, everything from 3 up is a sheet tile with a lilac rim. */
+.game-icon-threes i { background: var(--sunk); font-size: 0.72rem; }
+.game-icon-threes i.one { background: var(--coral); color: var(--on-ink); }
+.game-icon-threes i.two { background: var(--blue); color: var(--on-ink); }
+.game-icon-threes i.t { background: var(--sheet); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--lilac); }
+
+/* 15-puzzle: lilac tiles and one empty slot. */
+.game-icon-fifteen i { background: var(--sunk); font-size: 0.72rem; }
+.game-icon-fifteen i.t { background: color-mix(in srgb, var(--lilac) 30%, var(--sheet)); color: var(--ink); }
+
+/* Board games in sky: you print in sky, the other side in coral, or as sheet discs with a sky ring. */
+.game-icon-connect4 { background: color-mix(in srgb, var(--sky) 22%, var(--sheet)); }
+.game-icon-connect4 i { border-radius: 50%; background: var(--sunk); }
+.game-icon-connect4 i.a { background: var(--sky); }
+.game-icon-connect4 i.b { background: var(--coral); }
+.game-icon-reversi { background: color-mix(in srgb, var(--sky) 22%, var(--sheet)); }
+.game-icon-reversi i { border-radius: 50%; margin: 2px; }
+.game-icon-reversi i.a { background: var(--sky); }
+.game-icon-reversi i.b { background: var(--sheet); box-shadow: inset 0 0 0 2px var(--sky); }
+.game-icon-gomoku {
+  background:
+    linear-gradient(var(--rule), var(--rule)) center / 100% 1.5px no-repeat,
+    linear-gradient(var(--rule), var(--rule)) center / 1.5px 100% no-repeat,
+    var(--sheet);
+}
+.game-icon-gomoku i { border-radius: 50%; margin: 3px; }
+.game-icon-gomoku i.a { background: var(--sky); }
+.game-icon-gomoku i.b { background: var(--coral); }
+.game-icon-morris { display: block; padding: 4px; }
+.game-icon-morris svg { width: 100%; height: 100%; }
+.game-icon-morris path { stroke: var(--rule); stroke-width: 2.5; }
+.game-icon-morris circle { stroke: none; }
+.game-icon-morris .a { fill: var(--sky); }
+.game-icon-morris .b { fill: var(--sheet); stroke: var(--sky); stroke-width: 2.5; }
+.game-icon-checkers { gap: 0; }
+.game-icon-checkers i { border-radius: 0; background: var(--sheet); }
+.game-icon-checkers i.d, .game-icon-checkers i.da, .game-icon-checkers i.db { background: color-mix(in srgb, var(--sky) 30%, var(--sheet)); }
+.game-icon-checkers i:first-child { border-top-left-radius: 5px; }
+.game-icon-checkers i:nth-child(3) { border-top-right-radius: 5px; }
+.game-icon-checkers i:nth-child(7) { border-bottom-left-radius: 5px; }
+.game-icon-checkers i:last-child { border-bottom-right-radius: 5px; }
+.game-icon-checkers i.da::after, .game-icon-checkers i.db::after { content: ''; width: 70%; height: 70%; border-radius: 50%; }
+.game-icon-checkers i.da::after { background: var(--sky); }
+.game-icon-checkers i.db::after { background: var(--coral); }
+
+/* Cards: three overlapping cards on the sheet, backs in olive, red suits in coral. */
+.game-icon-klondike, .game-icon-freecell { display: flex; align-items: center; justify-content: center; padding: 6px; gap: 0; }
+.game-icon .card {
+  flex: none;
+  width: 24px;
+  height: 36px;
+  margin-right: -6px;
+  border-radius: 4px;
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 1.5px var(--rule), 1px 1px 3px rgb(0 0 0 / 0.15);
+  color: var(--ink);
+  font-size: 0.7rem;
+  padding: 3px 0 0 4px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.game-icon .card:last-child { margin-right: 0; }
+.game-icon .card:nth-child(2) { transform: translateY(-4px); }
+.game-icon .card small { font-size: 0.65rem; }
+.game-icon .card.red { color: var(--coral); }
+.game-icon .card.back { background: var(--olive); box-shadow: inset 0 0 0 2px var(--sheet), 1px 1px 3px rgb(0 0 0 / 0.15); }
 
 .home-foot { margin-top: 28px; padding: 0 4px; font-size: 0.8rem; color: var(--ink-2); }
 

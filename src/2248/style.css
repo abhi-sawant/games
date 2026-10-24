@@ -1,8 +1,8 @@
 @import '../base.css';
 @import '../tiles.css';
 
-/* 2248 prints in coral. Tiles climb through the whole ink set, a screen tint then the solid ink. */
-:root { --c: var(--coral); }
+/* 2248 prints in lilac, with the other number-tile games. Tiles climb through the whole ink set, a screen tint then the solid ink. */
+:root { --c: var(--lilac); }
 
 .is-over .history-status { color: var(--c); }
 

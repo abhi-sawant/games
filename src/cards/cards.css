@@ -1,0 +1,101 @@
+/* The card table shared by the solitaire games. Cards print on --sheet with red suits in coral and black
+   suits in --ink; backs are the family's olive with paper grain. Empty piles are sunk paper outlines.
+   A game sets --cols on .table: 7 for Klondike, 8 for FreeCell. */
+
+#game { height: 100dvh; min-height: 0; overflow: hidden; }
+
+.table {
+  --gap: clamp(3px, 1.2cqi, 8px);
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--gap) * 2.5);
+  padding-top: 6px;
+  container-type: inline-size;
+  touch-action: none; /* drags move cards, not the page */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.top-row, .tableau {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: var(--gap);
+}
+.tableau { flex: 1 1 0; min-height: 0; align-items: start; }
+
+.pile {
+  position: relative;
+  aspect-ratio: 5 / 7;
+  border-radius: calc(100cqi / var(--cols) * 0.12);
+  background: var(--sunk);
+}
+.tableau .pile { aspect-ratio: auto; height: calc((100cqi - (var(--cols) - 1) * var(--gap)) / var(--cols) * 1.4); }
+.pile .mark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: color-mix(in srgb, var(--ink-2) 45%, transparent);
+  font-size: calc(100cqi / var(--cols) * 0.42);
+  font-weight: 800;
+  font-variation-settings: 'CASL' 1;
+  pointer-events: none;
+}
+.pile .mark svg { width: 45%; height: 45%; stroke-width: 2.4; }
+
+.card {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  border-radius: calc(100cqi / var(--cols) * 0.12);
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 1px var(--rule), 0 1px 3px -1px rgb(20 25 50 / 0.35);
+  color: var(--ink);
+  cursor: pointer;
+  font-variation-settings: 'CASL' 1;
+  font-variant-emoji: text;
+  will-change: transform;
+}
+.card.red { color: var(--coral); }
+
+/* Rank and suit in the top strip, the only part a fanned card shows; a big suit underneath. */
+.card .idx {
+  position: absolute;
+  top: 3%;
+  left: 7%;
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+  font-size: calc(100cqi / var(--cols) * 0.34);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.card .idx i { font-style: normal; font-size: 0.9em; }
+.card .pip {
+  position: absolute;
+  inset: 34% 0 0;
+  display: grid;
+  place-items: center;
+  font-size: calc(100cqi / var(--cols) * 0.62);
+  line-height: 1;
+}
+
+.card.down { background: var(--olive); box-shadow: inset 0 0 0 calc(100cqi / var(--cols) * 0.05) var(--sheet), 0 1px 3px -1px rgb(20 25 50 / 0.35); cursor: default; }
+.card.down > span { visibility: hidden; }
+
+.card.dragging { z-index: 100 !important; box-shadow: inset 0 0 0 1px var(--rule), var(--shadow); cursor: grabbing; }
+
+.table.is-paused .card:not(.down) { background: var(--olive); box-shadow: inset 0 0 0 calc(100cqi / var(--cols) * 0.05) var(--sheet); }
+.table.is-paused .card > span { visibility: hidden; }
+.table.is-paused .pile { pointer-events: none; }
+
+.tools { grid-template-columns: repeat(3, 1fr); margin: 10px 0 4px; }
+.tool:disabled { opacity: 0.4; cursor: default; }
+
+.summary th, .summary td { padding: 12px 8px; }

@@ -1,5 +1,27 @@
 # Changelog
 
+## 3.1.0 — 2026-10-25
+
+Seventeen new games join Free Games, and the home page now groups every game into five families: number puzzles,
+logic puzzles, number tiles, play the computer and cards. Each family prints in its own ink, and every game plays
+offline with its own history and stats.
+
+### Added
+
+- Number puzzles, in blue: Killer Sudoku and Kakuro.
+- Logic puzzles, in a new orange: Nonograms, Takuzu, Nurikabe, Hitori, Star Battle and Lights Out. Every bundled puzzle
+  has exactly one solution.
+- Number tiles, in lilac: Threes and the 15-puzzle.
+- Play the computer, in a new sky blue: Connect Four, Reversi, Gomoku, Nine Men's Morris and Checkers, each against the
+  computer on Easy, Medium or Hard, or against a friend on one screen.
+- Cards, in a new olive: Klondike (draw 1 or draw 3) and FreeCell (with numbered deals you can replay).
+- The home page shows which games you have in progress, for every game.
+
+### Changed
+
+- Every game in a family now shares its ink: Minesweeper prints in orange with the logic puzzles, 2248 in lilac with
+  the number tiles, and tic-tac-toe and dots and boxes in sky with the board games (the other side prints in coral).
+
 ## 3.0.1 — 2026-10-25
 
 Three new games join Free Games: 2048, tic-tac-toe and dots and boxes, each with its own ink, history and stats, and

@@ -1,0 +1,21 @@
+@import '../base.css';
+@import '../cards/cards.css';
+
+/* FreeCell prints in olive, with the card games. Free cells are tinted olive so they read apart from the foundations. */
+:root { --c: var(--olive); }
+
+.pile.cell { background: var(--tint); }
+
+.deal-input {
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: var(--r-tile);
+  background: var(--tint);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.4rem;
+  font-weight: 750;
+  text-align: center;
+}

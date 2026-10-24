@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Free offline games: Sudoku, Minesweeper, 2248, 2048, tic-tac-toe and dots and boxes." />
+    <meta name="description" content="Free offline puzzle, board and card games." />
     <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -25,8 +25,11 @@
         </header>
 
         <!-- Links name index.html explicitly: the Android app's local server sends extensionless paths to the root page. -->
-        <!-- Each card sets its game's ink with a class: ink-blue, ink-teal, ink-coral, ink-lilac, ink-mint, ink-berry. -->
+        <!-- Each card sets its family's ink with a class: ink-blue, ink-orange, ink-lilac, ink-sky or ink-olive.
+             Cards sit in their family's section. -->
         <nav class="games" aria-label="Games">
+          <section class="family">
+          <h2 class="section-label">Number puzzles</h2>
           <a class="game-card ink-blue grain" href="/sudoku/index.html">
             <span class="game-icon game-icon-sudoku" aria-hidden="true">
               <i>5</i><i></i><i>3</i><i></i><i>7</i><i></i><i>1</i><i></i><i>9</i>
@@ -38,8 +41,28 @@
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
-
-          <a class="game-card ink-teal grain" href="/minesweeper/index.html">
+          <a class="game-card ink-blue grain" href="/killer/index.html">
+            <span class="game-icon game-icon-killer" aria-hidden="true"><i class="c tl"><b>11</b></i><i class="c tr"></i><i></i><i class="c bl">5</i><i class="c br"></i><i></i><i>7</i><i></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Killer Sudoku</span>
+              <span class="game-desc">Sudoku with no givens: each dashed cage adds up to its sum.</span>
+              <span class="game-status" id="killer-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-blue grain" href="/kakuro/index.html">
+            <span class="game-icon game-icon-kakuro" aria-hidden="true"><i class="k"></i><i class="k"><b>4</b></i><i class="k"><b>16</b></i><i class="k"><b>3</b></i><i>1</i><i>2</i><i class="k"><b>17</b></i><i>3</i><i>9</i></span>
+            <span class="game-text">
+              <span class="game-name">Kakuro</span>
+              <span class="game-desc">A crossword of numbers: each run adds up to its clue.</span>
+              <span class="game-status" id="kakuro-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          </section>
+          <section class="family">
+          <h2 class="section-label">Logic puzzles</h2>
+          <a class="game-card ink-orange grain" href="/minesweeper/index.html">
             <span class="game-icon game-icon-mines" aria-hidden="true">
               <i class="o">1</i><i></i><i class="m-flag"><svg viewBox="0 0 24 24"><path d="M7 21V4" /><path class="fill" d="M7 4h10l-3 4 3 4H7z" /></svg></i><i class="o">2</i><i class="o"></i><i></i><i class="o">1</i><i class="o">1</i><i></i>
             </span>
@@ -50,8 +73,64 @@
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
-
-          <a class="game-card ink-coral grain" href="/2248/index.html">
+          <a class="game-card ink-orange grain" href="/nonograms/index.html">
+            <span class="game-icon game-icon-nonograms" aria-hidden="true"><i class="f"></i><i></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i class="f"></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Nonograms</span>
+              <span class="game-desc">Paint the grid from the number clues to reveal a picture.</span>
+              <span class="game-status" id="nonograms-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/takuzu/index.html">
+            <span class="game-icon game-icon-takuzu" aria-hidden="true"><i class="f">1</i><i>0</i><i>0</i><i>0</i><i class="f">1</i><i class="f">1</i><i class="f">1</i><i>0</i><i class="f">1</i></span>
+            <span class="game-text">
+              <span class="game-name">Takuzu</span>
+              <span class="game-desc">Fill with 0s and 1s, never three alike in a row.</span>
+              <span class="game-status" id="takuzu-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/nurikabe/index.html">
+            <span class="game-icon game-icon-nurikabe" aria-hidden="true"><i>3</i><i></i><i class="f"></i><i class="f"></i><i></i><i class="f"></i><i class="f"></i><i class="f"></i><i>1</i></span>
+            <span class="game-text">
+              <span class="game-name">Nurikabe</span>
+              <span class="game-desc">Shade the sea around numbered islands of the right size.</span>
+              <span class="game-status" id="nurikabe-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/hitori/index.html">
+            <span class="game-icon game-icon-hitori" aria-hidden="true"><i>2</i><i class="f">1</i><i>1</i><i>3</i><i>2</i><i class="f">2</i><i>1</i><i>3</i><i>2</i></span>
+            <span class="game-text">
+              <span class="game-name">Hitori</span>
+              <span class="game-desc">Shade repeats until no number appears twice in a line.</span>
+              <span class="game-status" id="hitori-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/starbattle/index.html">
+            <span class="game-icon game-icon-starbattle" aria-hidden="true"><i class="s">★</i><i></i><i></i><i></i><i></i><i class="s">★</i><i></i><i class="s">★</i><i> </i></span>
+            <span class="game-text">
+              <span class="game-name">Star Battle</span>
+              <span class="game-desc">Place stars so every row, column and region has its share.</span>
+              <span class="game-status" id="starbattle-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/lightsout/index.html">
+            <span class="game-icon game-icon-lightsout" aria-hidden="true"><i></i><i class="f"></i><i></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i class="f"></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Lights Out</span>
+              <span class="game-desc">Every tap flips a light and its neighbours. Turn them all off.</span>
+              <span class="game-status" id="lightsout-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          </section>
+          <section class="family">
+          <h2 class="section-label">Number tiles</h2>
+          <a class="game-card ink-lilac grain" href="/2248/index.html">
             <span class="game-icon game-icon-2248" aria-hidden="true">
               <i data-exp="1">2</i><i data-exp="1">2</i><i data-exp="3">8</i><i data-exp="2">4</i><i data-exp="2">4</i><i data-exp="1">2</i><i data-exp="4">16</i><i data-exp="3">8</i><i data-exp="5">32</i>
             </span>
@@ -73,7 +152,28 @@
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a class="game-card ink-mint grain" href="/tictactoe/index.html">
+          <a class="game-card ink-lilac grain" href="/threes/index.html">
+            <span class="game-icon game-icon-threes" aria-hidden="true"><i class="one">1</i><i></i><i class="two">2</i><i></i><i class="t">3</i><i></i><i class="t">6</i><i class="one">1</i><i class="t">12</i></span>
+            <span class="game-text">
+              <span class="game-name">Threes</span>
+              <span class="game-desc">Slide to add 1 and 2 into 3, then double up from there.</span>
+              <span class="game-status" id="threes-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-lilac grain" href="/fifteen/index.html">
+            <span class="game-icon game-icon-fifteen" aria-hidden="true"><i class="t">1</i><i class="t">2</i><i class="t">3</i><i class="t">4</i><i class="t">5</i><i class="t">6</i><i class="t">7</i><i class="t">8</i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">15-puzzle</span>
+              <span class="game-desc">Slide the tiles back into order.</span>
+              <span class="game-status" id="fifteen-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          </section>
+          <section class="family">
+          <h2 class="section-label">Play the computer</h2>
+          <a class="game-card ink-sky grain" href="/tictactoe/index.html">
             <span class="game-icon game-icon-ttt" aria-hidden="true">
               <i class="x">X</i><i class="o">O</i><i></i><i></i><i class="x">X</i><i class="o">O</i><i></i><i></i><i class="x">X</i>
             </span>
@@ -84,7 +184,7 @@
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a class="game-card ink-berry grain" href="/dots/index.html">
+          <a class="game-card ink-sky grain" href="/dots/index.html">
             <span class="game-icon game-icon-dots" aria-hidden="true">
               <svg viewBox="0 0 60 60">
                 <rect class="own" x="12" y="12" width="16" height="16" rx="3" />
@@ -100,6 +200,73 @@
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
+          <a class="game-card ink-sky grain" href="/connect4/index.html">
+            <span class="game-icon game-icon-connect4" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="b"></i><i></i><i class="a"></i><i class="a"></i><i class="b"></i></span>
+            <span class="game-text">
+              <span class="game-name">Connect Four</span>
+              <span class="game-desc">Drop discs to line up four before the computer does.</span>
+              <span class="game-status" id="connect4-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/reversi/index.html">
+            <span class="game-icon game-icon-reversi" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="a"></i><i class="b"></i><i></i><i class="b"></i><i class="a"></i></span>
+            <span class="game-text">
+              <span class="game-name">Reversi</span>
+              <span class="game-desc">Outflank the other side’s discs to flip them to yours.</span>
+              <span class="game-status" id="reversi-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/gomoku/index.html">
+            <span class="game-icon game-icon-gomoku" aria-hidden="true"><i class="a"></i><i></i><i class="b"></i><i></i><i class="a"></i><i class="b"></i><i></i><i></i><i class="a"></i></span>
+            <span class="game-text">
+              <span class="game-name">Gomoku</span>
+              <span class="game-desc">Five in a row on a big board.</span>
+              <span class="game-status" id="gomoku-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/morris/index.html">
+            <span class="game-icon game-icon-morris" aria-hidden="true"><svg viewBox="0 0 60 60"><path d="M8 8h44v44H8zM19 19h22v22H19zM30 8v11M30 41v11M8 30h11M41 30h11" /><circle class="a" cx="8" cy="8" r="5" /><circle class="a" cx="30" cy="8" r="5" /><circle class="b" cx="52" cy="30" r="5" /><circle class="b" cx="19" cy="41" r="5" /><circle class="a" cx="41" cy="19" r="5" /></svg></span>
+            <span class="game-text">
+              <span class="game-name">Nine Men’s Morris</span>
+              <span class="game-desc">Form mills of three to take the other side’s pieces.</span>
+              <span class="game-status" id="morris-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/checkers/index.html">
+            <span class="game-icon game-icon-checkers" aria-hidden="true"><i class="d"></i><i class="da"></i><i class="d"></i><i></i><i class="d"></i><i></i><i class="d"></i><i class="db"></i><i class="d"></i></span>
+            <span class="game-text">
+              <span class="game-name">Checkers</span>
+              <span class="game-desc">Jump diagonally, crown a king, and take every piece.</span>
+              <span class="game-status" id="checkers-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          </section>
+          <section class="family">
+          <h2 class="section-label">Cards</h2>
+          <a class="game-card ink-olive grain" href="/klondike/index.html">
+            <span class="game-icon game-icon-klondike" aria-hidden="true"><b class="card back"></b><b class="card red">A<small>♥</small></b><b class="card">K<small>♠</small></b></span>
+            <span class="game-text">
+              <span class="game-name">Klondike</span>
+              <span class="game-desc">Classic solitaire: build up the four suits from ace to king.</span>
+              <span class="game-status" id="klondike-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-olive grain" href="/freecell/index.html">
+            <span class="game-icon game-icon-freecell" aria-hidden="true"><b class="card">7<small>♣</small></b><b class="card red">8<small>♦</small></b><b class="card">9<small>♠</small></b></span>
+            <span class="game-text">
+              <span class="game-name">FreeCell</span>
+              <span class="game-desc">Every card face up, four free cells, and nearly every deal can be won.</span>
+              <span class="game-status" id="freecell-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          </section>
         </nav>
 
         <footer class="home-foot">Works offline after the first visit</footer>

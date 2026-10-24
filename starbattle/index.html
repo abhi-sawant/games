@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Free offline Star Battle logic puzzles." />
+    <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <link rel="preload" href="/src/fonts/recursive-latin-full.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="color-scheme" content="light dark" />
+    <!-- The paper colour from base.css, so the page never shows the browser's white canvas while the stylesheet loads. -->
+    <style>html { background: #eef0f3; } @media (prefers-color-scheme: dark) { html { background: #141927; } }</style>
+    <link rel="stylesheet" href="/src/starbattle/style.css" />
+    <title>Star Battle</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Home -->
+      <section id="home" class="screen">
+        <div class="home-inner">
+          <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <span>All games</span>
+          </a>
+          <h1 class="logo">Star Battle</h1>
+          <p class="tagline">Put stars in every row, column and outlined region, as many as the level asks. Stars never touch, not even at the corners. Tap to mark a cell empty, tap again for a star.</p>
+
+          <button id="continue-btn" class="btn btn-primary continue" hidden>
+            <span>Continue</span>
+            <small id="continue-meta"></small>
+          </button>
+
+          <h2 class="section-label">New game</h2>
+          <div class="levels" id="levels"></div>
+
+          <button id="history-btn" class="btn history-link">
+            <span>History &amp; stats</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen" hidden>
+        <header class="topbar">
+          <button id="history-back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <h1 class="topbar-title">History</h1>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <table class="summary">
+          <thead>
+            <tr><th></th><th scope="col">Played</th><th scope="col">Solved</th><th scope="col">Best</th><th scope="col">Avg</th></tr>
+          </thead>
+          <tbody id="history-summary"></tbody>
+        </table>
+
+        <h2 class="section-label">Recent games</h2>
+        <p id="history-empty" class="history-empty">No finished games yet. Solve a board and it will show up here.</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+
+      <!-- Game -->
+      <section id="game" class="screen" hidden>
+        <header class="topbar">
+          <button id="back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <div class="meta">
+            <b id="level-label"></b>
+            <span>Star Battle · <span id="meta-extra" class="mono"></span></span>
+          </div>
+          <button id="timer" class="timer" aria-label="Pause"></button>
+        </header>
+
+        <div class="board-wrap">
+          <div id="board" class="board" role="grid" aria-label="Star Battle board"></div>
+          <div id="paused" class="paused" hidden>
+            <button id="resume-btn" class="btn btn-primary">Resume</button>
+          </div>
+        </div>
+
+        <div class="tools">
+          <button class="tool" id="undo-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" /></svg>
+            <span>Undo</span>
+          </button>
+          <button class="tool" id="hint-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.5 10.9V15h7v-1.1A6 6 0 0 0 12 3z" /></svg>
+            <span>Hint</span>
+          </button>
+          <button class="tool" id="restart-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7" /><path d="M4 4v4h4" /></svg>
+            <span>Restart</span>
+          </button>
+          <button class="tool" id="new-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+            <span>New board</span>
+          </button>
+        </div>
+
+      </section>
+      <!-- End-of-game dialog -->
+      <dialog id="end-dialog" class="dialog">
+        <h2 id="end-title"></h2>
+        <p id="end-summary"></p>
+        <div class="dialog-actions">
+          <button id="end-menu" class="btn">Menu</button>
+          <button id="end-again" class="btn btn-primary">Play again</button>
+        </div>
+      </dialog>
+    </div>
+    <script type="module" src="/src/starbattle/main.ts"></script>
+  </body>
+</html>

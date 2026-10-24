@@ -1,0 +1,120 @@
+@import '../base.css';
+
+/* Connect Four prints in sky, with the board games. Your discs are sky and the other side's coral,
+   dropped into sunk holes in a sky-tinted board. */
+:root { --c: var(--sky); --p1: var(--sky); --p2: var(--coral); }
+
+.is-lost .history-status { color: var(--wrong); }
+.is-drawn .history-status { color: var(--ink-2); }
+
+/* A level name plus four columns has to fit a 320px-wide phone. */
+.summary th, .summary td { padding: 12px 6px; }
+@media (max-width: 360px) {
+  .summary { font-size: 0.8rem; }
+  .summary th, .summary td { padding: 10px 4px; }
+  .summary th:first-child { padding-left: 10px; }
+  .summary td:last-child, .summary thead th:last-child { padding-right: 10px; }
+}
+
+/* ---------- Game ---------- */
+
+/* The round tally sits where the timer is in the other games: your wins, draws, then the other side's. */
+.tally { display: flex; gap: 12px; text-align: center; line-height: 1.05; }
+.tally span { min-width: 30px; }
+.tally b {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 850;
+  font-variation-settings: 'CASL' 0, 'MONO' 1;
+  font-variant-numeric: tabular-nums;
+}
+.tally .a b { color: var(--p1); }
+.tally .b b { color: var(--p2); }
+.tally .draws b { color: var(--ink-2); }
+.tally small { font-size: 0.72rem; font-weight: 700; color: var(--ink-2); }
+.meta span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 360px) {
+  .tally { gap: 6px; }
+  .tally span { min-width: 26px; }
+}
+
+.tools { grid-template-columns: repeat(2, 88px); justify-content: center; margin-bottom: 0; }
+.tool:disabled { opacity: 0.4; cursor: default; }
+
+.board-wrap {
+  margin: auto 0;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-frame {
+  width: min(100%, 460px, calc((100dvh - 330px) * 7 / 6));
+  min-width: 260px;
+  padding: 8px;
+  border-radius: var(--r-board);
+  background: var(--tint);
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  display: grid;
+  grid-template: repeat(6, 1fr) / repeat(7, 1fr);
+  aspect-ratio: 7 / 6;
+  container-type: inline-size;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+.grid.locked { cursor: default; }
+
+.slot {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+  touch-action: manipulation;
+}
+
+/* Each hole is sunk paper; a disc fills it in its side's ink. */
+.slot span {
+  width: 84%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--sunk);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+}
+.slot[data-side='1'] span { background: var(--p1); }
+.slot[data-side='2'] span { background: var(--p2); }
+
+/* A mouse over a column previews where the disc would land. */
+.slot.ghost[data-turn='1'] span { background: color-mix(in srgb, var(--p1) 30%, var(--sunk)); }
+.slot.ghost[data-turn='2'] span { background: color-mix(in srgb, var(--p2) 30%, var(--sunk)); }
+
+/* The disc just played falls from above the board to its row. */
+.slot.drop span { animation: drop calc(0.12s + var(--row) * 0.05s) cubic-bezier(0.5, 0, 1, 1); }
+@keyframes drop {
+  from { translate: 0 calc((var(--row) + 1) * -100cqw / 7); }
+}
+
+/* Once someone has won, the four in a row get a sheet ring and the rest step back. */
+.grid.decided .slot:not(.in-line) span { opacity: 0.35; }
+.slot.in-line span { box-shadow: inset 0 0 0 calc(100cqw / 7 * 0.09) var(--sheet); }
+
+.status {
+  min-height: 1.5em;
+  margin: 18px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 750;
+  font-variation-settings: 'CASL' 1;
+  color: var(--ink);
+}
+.status .dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+.status .side-1 { background: var(--p1); }
+.status .side-2 { background: var(--p2); }
+
+.next { margin-top: 14px; min-width: 180px; }

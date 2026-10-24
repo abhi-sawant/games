@@ -1,0 +1,61 @@
+/* The square-cell board shared by the grid puzzles (Lights Out, Takuzu, Nonograms, Hitori, Nurikabe,
+   Star Battle, Kakuro). A game sets --cols and --rows on .board and styles its own cell states. */
+
+.board-wrap {
+  position: relative;
+  margin: auto 0;
+  padding-top: 8px;
+  container-type: inline-size;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  aspect-ratio: var(--cols) / var(--rows);
+  width: min(100%, calc(100dvh - 280px) * var(--cols) / var(--rows));
+  min-width: 260px;
+  margin: 0 auto;
+  gap: calc(100cqi / var(--cols) * 0.06);
+  padding: 6px;
+  border-radius: var(--r-board);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+  border: 0;
+  padding: 0;
+  border-radius: calc(100cqi / var(--cols) * 0.18);
+  background: var(--sunk);
+  color: var(--ink);
+  font-size: calc(100cqi / var(--cols) * 0.5);
+  font-weight: 850;
+  font-variation-settings: 'CASL' 1;
+  line-height: 1;
+  touch-action: manipulation;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.cell.cursor { outline: 2.5px solid var(--yellow); outline-offset: -2.5px; }
+
+/* The hint marks a cell with a pulsing yellow ring. */
+.cell.hint { outline: 3px solid var(--yellow); outline-offset: -3px; animation: hint 1s ease-in-out infinite alternate; }
+@keyframes hint { to { outline-color: transparent; } }
+
+/* A solved board ripples from the top-left corner. */
+.board.solved .cell { animation: ripple 0.5s ease both; animation-delay: calc(var(--d, 0) * 35ms); }
+@keyframes ripple { 40% { transform: scale(0.86); } }
+
+.board.is-paused .cell { background: var(--c); color: transparent; }
+.board.is-paused .cell > * { visibility: hidden; }
+
+.tools { margin-bottom: 0; }
+.tool:disabled { opacity: 0.4; cursor: default; }
