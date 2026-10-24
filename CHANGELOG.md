@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.0.0 — 2026-10-24
+
+Free Sudoku is now **Free Games**: still free, offline and ad-free, with two new games alongside Sudoku. Play in the
+browser at [games.slowatcoding.com](https://games.slowatcoding.com), install it to your home screen, or get the Android app.
+
+### Added
+
+- A home page to pick your game, showing which ones have a game in progress.
+- Minesweeper: Beginner, Intermediate and Expert boards with a safe first click, flags (long-press, right-click or
+  flag mode), chording, a pausable timer, and auto-saved progress.
+- 2248: drag a path through matching numbers, or each one a step higher, to merge them into the next power of two.
+  Keeps your score, tells you when you're out of moves, and saves your board as you play.
+- History & stats for Minesweeper and 2248, just like Sudoku.
+- Every game works fully offline after your first visit.
+
+### Changed
+
+- The app is now called Free Games and lives at [games.slowatcoding.com](https://games.slowatcoding.com).
+- Sudoku has moved to its own page, reached from the home page.
+- The Android app is a new app (Free Games). It installs separately from Free Sudoku 1.0.0, which you can uninstall.
+
 ## 1.0.0 — 2026-10-24
 
 The first release of Free Sudoku: free, offline, no ads. Play it in the browser at
