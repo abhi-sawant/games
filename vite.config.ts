@@ -13,6 +13,7 @@ export default defineConfig({
         sudoku: 'sudoku/index.html',
         minesweeper: 'minesweeper/index.html',
         '2248': '2248/index.html',
+        '2048': '2048/index.html',
       },
     },
   },
@@ -23,7 +24,7 @@ export default defineConfig({
       manifest: {
         name: 'Free Games',
         short_name: 'Games',
-        description: 'Free offline puzzle games: Sudoku, Minesweeper and 2248.',
+        description: 'Free offline puzzle games: Sudoku, Minesweeper, 2248 and 2048.',
         theme_color: '#eef0f3',
         background_color: '#eef0f3',
         display: 'standalone',
