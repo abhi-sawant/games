@@ -186,8 +186,14 @@ function render() {
 
   $('mode-label').textContent = MODE_LABELS[g.mode];
   $('round-label').textContent = vsComputer(g) ? `You're ${g.you} · Round ${g.round}` : `Round ${g.round}`;
-  $('tally').textContent = `${g.tally.a}–${g.tally.b}`;
-  $('tally-label').textContent = vsComputer(g) ? 'You–Computer' : 'X–O';
+  $('tally-a').textContent = String(g.tally.a);
+  $('tally-draws').textContent = String(g.tally.draws);
+  $('tally-b').textContent = String(g.tally.b);
+  $('tally-a-label').textContent = vsComputer(g) ? 'You' : 'X';
+  $('tally-b-label').textContent = vsComputer(g) ? 'CPU' : 'O';
+  $('tally').setAttribute('aria-label', vsComputer(g)
+    ? `You ${g.tally.a}, draws ${g.tally.draws}, computer ${g.tally.b}`
+    : `X ${g.tally.a}, draws ${g.tally.draws}, O ${g.tally.b}`);
 
   statusEl.innerHTML = statusText(g);
   nextBtn.hidden = !over;

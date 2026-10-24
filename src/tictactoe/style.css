@@ -17,10 +17,25 @@
 
 /* ---------- Game ---------- */
 
-/* The round tally sits where the timer is in the other games. */
-.score { text-align: right; line-height: 1.05; min-width: 64px; }
-.score b { display: block; font-size: 1.5rem; font-weight: 850; color: var(--c); }
-.score span { font-size: 0.72rem; font-weight: 700; color: var(--ink-2); font-variation-settings: 'CASL' 0.35, 'MONO' 0; }
+/* The round tally sits where the timer is in the other games: your wins, draws, then the other side's. */
+.tally { display: flex; gap: 12px; text-align: center; line-height: 1.05; }
+.tally span { min-width: 30px; }
+.tally b {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 850;
+  color: var(--c);
+  font-variation-settings: 'CASL' 0, 'MONO' 1;
+  font-variant-numeric: tabular-nums;
+}
+.tally .draws b { color: var(--ink-2); }
+.tally small { font-size: 0.72rem; font-weight: 700; color: var(--ink-2); }
+/* The tally takes room from the title, so keep the round line to one line. */
+.meta span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 360px) {
+  .tally { gap: 6px; }
+  .tally span { min-width: 26px; }
+}
 
 .tools { grid-template-columns: repeat(2, 88px); justify-content: center; margin-bottom: 0; }
 .tool:disabled { opacity: 0.4; cursor: default; }
