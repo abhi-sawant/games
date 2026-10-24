@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Free offline puzzle games: Sudoku, Minesweeper and 2248." />
+    <meta name="description" content="Free offline puzzle games: Sudoku, Minesweeper, 2248 and 2048." />
     <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -21,7 +21,7 @@
         </header>
 
         <!-- Links name index.html explicitly: the Android app's local server sends extensionless paths to the root page. -->
-        <!-- Each card sets its game's ink with a class: ink-blue, ink-teal, ink-coral (ink-lilac, ink-mint are free). -->
+        <!-- Each card sets its game's ink with a class: ink-blue, ink-teal, ink-coral, ink-lilac (ink-mint is free). -->
         <nav class="games" aria-label="Games">
           <a class="game-card ink-blue grain" href="/sudoku/index.html">
             <span class="game-icon game-icon-sudoku" aria-hidden="true">
@@ -55,6 +55,17 @@
               <span class="game-name">2248</span>
               <span class="game-desc">Connect matching numbers to merge them.</span>
               <span class="game-status" id="2248-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-lilac grain" href="/2048/index.html">
+            <span class="game-icon game-icon-2048" aria-hidden="true">
+              <i data-exp="1">2</i><i></i><i data-exp="2">4</i><i></i><i data-exp="3">8</i><i data-exp="1">2</i><i data-exp="2">4</i><i></i><i data-exp="4">16</i>
+            </span>
+            <span class="game-text">
+              <span class="game-name">2048</span>
+              <span class="game-desc">Slide the tiles and merge them to reach 2048.</span>
+              <span class="game-status" id="2048-status" hidden></span>
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>

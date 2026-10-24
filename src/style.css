@@ -155,6 +155,13 @@
 .game-icon-2248 [data-exp='4'] { background: var(--coral); color: var(--on-ink); }
 .game-icon-2248 [data-exp='5'] { background: var(--teal); color: var(--on-ink); }
 
+/* 2048: a corner of the board, with empty cells sunk into the sheet and tiles on the shared value scale. */
+.game-icon-2048 i { font-size: 0.72rem; color: var(--ink); background: var(--sunk); }
+.game-icon-2048 [data-exp='1'] { background: color-mix(in srgb, var(--lilac) 25%, var(--sheet)); }
+.game-icon-2048 [data-exp='2'] { background: color-mix(in srgb, var(--lilac) 45%, var(--sheet)); }
+.game-icon-2048 [data-exp='3'] { background: var(--lilac); color: var(--on-ink); }
+.game-icon-2048 [data-exp='4'] { background: var(--ink); color: var(--paper); }
+
 .home-foot { margin-top: 28px; padding: 0 4px; font-size: 0.8rem; color: var(--ink-2); }
 
 /* Update dialog (Android only): a changelog that scrolls, with the actions stacked under it. */

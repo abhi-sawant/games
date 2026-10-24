@@ -34,6 +34,10 @@ function renderStatus() {
   // A 2248 board counts as started from its first merge.
   const merge = readSave('2248.current');
   showStatus('2248-status', !!merge && merge.status === 'playing' && !!merge.startedAt);
+
+  // So does a 2048 board, from its first move.
+  const slide = readSave('2048.current');
+  showStatus('2048-status', !!slide && slide.status === 'playing' && !!slide.startedAt);
 }
 
 renderStatus();

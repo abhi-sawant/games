@@ -1,0 +1,27 @@
+/* The value scale shared by the number-tile games (2248, 2048). A tile sets data-exp to its exponent, wrapped
+   to 1-12. See "Boards" in DESIGN.md. */
+
+/* Tiles: sunflower, coral, teal, blue, lilac, mint, each as a 40% screen and then solid, repeating every 12 steps. */
+[data-exp='1'] { background: color-mix(in srgb, var(--yellow) 38%, var(--sheet)); color: var(--ink); }
+[data-exp='2'] { background: var(--yellow); color: #1e2741; }
+[data-exp='3'] { background: color-mix(in srgb, var(--coral) 40%, var(--sheet)); color: var(--ink); }
+[data-exp='4'] { background: var(--coral); color: var(--on-ink); }
+[data-exp='5'] { background: color-mix(in srgb, var(--teal) 40%, var(--sheet)); color: var(--ink); }
+[data-exp='6'] { background: var(--teal); color: var(--on-ink); }
+[data-exp='7'] { background: color-mix(in srgb, var(--blue) 40%, var(--sheet)); color: var(--ink); }
+[data-exp='8'] { background: var(--blue); color: var(--on-ink); }
+[data-exp='9'] { background: color-mix(in srgb, var(--lilac) 40%, var(--sheet)); color: var(--ink); }
+[data-exp='10'] { background: var(--lilac); color: var(--on-ink); }
+[data-exp='11'] { background: color-mix(in srgb, var(--mint) 40%, var(--sheet)); color: var(--ink); }
+[data-exp='12'] { background: var(--ink); color: var(--paper); }
+
+/* At night a tint mixed with dark paper goes muddy, so the screen steps lighten towards the pale ink instead. */
+@media (prefers-color-scheme: dark) {
+  [data-exp='1'] { background: color-mix(in srgb, var(--yellow) 45%, var(--ink)); }
+  [data-exp='3'] { background: color-mix(in srgb, var(--coral) 45%, var(--ink)); }
+  [data-exp='5'] { background: color-mix(in srgb, var(--teal) 45%, var(--ink)); }
+  [data-exp='7'] { background: color-mix(in srgb, var(--blue) 45%, var(--ink)); }
+  [data-exp='9'] { background: color-mix(in srgb, var(--lilac) 45%, var(--ink)); }
+  [data-exp='11'] { background: color-mix(in srgb, var(--mint) 45%, var(--ink)); }
+  [data-exp='1'], [data-exp='3'], [data-exp='5'], [data-exp='7'], [data-exp='9'], [data-exp='11'] { color: #1e2741; }
+}

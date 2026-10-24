@@ -1,0 +1,101 @@
+@import '../base.css';
+@import '../tiles.css';
+
+/* 2048 prints in lilac. Tiles climb through the same value scale as 2248. */
+:root { --c: var(--lilac); }
+
+.is-over .history-status { color: var(--c); }
+
+/* Four even columns, centred, since there is no row label. */
+.summary { table-layout: fixed; }
+.summary th, .summary td, .summary th:first-child { text-align: center; padding: 12px 8px; }
+.summary td { font-weight: 700; }
+
+/* ---------- Game ---------- */
+
+/* Sits where the timer is in the other games. */
+.score { text-align: right; line-height: 1.05; min-width: 64px; }
+.score b { display: block; font-size: 1.5rem; font-weight: 850; color: var(--c); }
+.score span { font-size: 0.72rem; font-weight: 700; color: var(--ink-2); font-variation-settings: 'CASL' 0.35, 'MONO' 0; }
+
+.tools { grid-template-columns: repeat(2, 88px); justify-content: center; margin-bottom: 0; }
+.tool:disabled { opacity: 0.4; cursor: default; }
+
+.board-wrap {
+  touch-action: none; /* swipes slide the tiles, not the page */
+  margin: auto 0;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Square, as wide as the screen allows, but short enough to leave room for the top bar and tools. */
+.board-frame {
+  width: min(100%, 460px, calc(100dvh - 290px));
+  min-width: 240px;
+  padding: 8px;
+  border-radius: var(--r-board);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  --gap: 8px;
+  position: relative;
+  aspect-ratio: 1;
+  container-type: inline-size;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Cells and tiles are a quarter of the grid less the gaps. Each sits at (--x, --y) in cells; translate's
+   percentages are of the tile's own size, so a step is 100% plus a gap. */
+.cell-bg, .tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc((100% - 3 * var(--gap)) / 4);
+  height: calc((100% - 3 * var(--gap)) / 4);
+  border-radius: 14px;
+  translate: calc(var(--x) * (100% + var(--gap))) calc(var(--y) * (100% + var(--gap)));
+}
+
+.cell-bg { background: var(--sunk); }
+
+.tile {
+  display: grid;
+  place-items: center;
+  font-weight: 850;
+  font-variation-settings: 'CASL' 1;
+  font-size: 10cqw;
+  line-height: 1;
+  z-index: 2;
+  transition: translate 0.12s ease-in-out;
+}
+.tile[data-len='3'] { font-size: 8.5cqw; }
+.tile[data-len='4'] { font-size: 7cqw; }
+.tile[data-len='5'], .tile[data-len='6'] { font-size: 5.6cqw; }
+/* A tile sliding into another passes under it, then goes. */
+.tile.absorbed { z-index: 1; }
+.tile.spawn { animation: spawn 0.18s ease-out 0.1s backwards; }
+.tile.pop { z-index: 3; animation: pop 0.18s ease-out 0.08s; }
+
+@keyframes spawn {
+  from { scale: 0; }
+  to { scale: 1; }
+}
+@keyframes pop {
+  0% { scale: 1; }
+  50% { scale: 1.12; }
+  100% { scale: 1; }
+}
+
+.hint {
+  min-height: 1.5em;
+  margin: 14px 0 0;
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  font-weight: 600;
+}

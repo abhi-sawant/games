@@ -10,6 +10,8 @@ Offline puzzle games: a PWA that also ships as an Android app through Capacitor.
 - **2248**: drag a path through matching numbers (or each one step higher) to merge them; the sum rounds up to
   the next power of two. Ported from [Parth2500/2248-Merge](https://github.com/Parth2500/2248-Merge), with score,
   game over detection, history and stats per game, and auto-saved progress.
+- **2048**: swipe or use the arrow keys to slide the tiles; equal tiles merge. One-step undo, a "keep going"
+  option after 2048, score, history and stats, and auto-saved progress.
 - After the first visit, the service worker caches every page and puzzle file, so it works with no connection.
 
 ## Layout
@@ -23,6 +25,8 @@ src/fonts/                               Recursive, self-hosted so the app works
 sudoku/index.html, src/sudoku/           Sudoku
 minesweeper/index.html, src/minesweeper/ Minesweeper
 2248/index.html, src/2248/               2248
+2048/index.html, src/2048/               2048
+src/tiles.css                            the number-tile colour scale shared by 2248 and 2048
 ```
 
 Every page follows the Riso design language in [DESIGN.md](DESIGN.md): each game owns one ink and reuses the
