@@ -42,6 +42,10 @@ function renderStatus() {
   // A tic-tac-toe round counts once someone has played.
   const ttt = readSave('tictactoe.current') as { status?: string; moves?: unknown[] } | null;
   showStatus('tictactoe-status', ttt?.status === 'playing' && !!ttt.moves?.length);
+
+  // So does a dots and boxes game, once a line is drawn.
+  const dots = readSave('dots.current') as { status?: string; moves?: unknown[] } | null;
+  showStatus('dots-status', dots?.status === 'playing' && !!dots.moves?.length);
 }
 
 renderStatus();

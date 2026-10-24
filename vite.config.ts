@@ -15,6 +15,7 @@ export default defineConfig({
         '2248': '2248/index.html',
         '2048': '2048/index.html',
         tictactoe: 'tictactoe/index.html',
+        dots: 'dots/index.html',
       },
     },
   },
@@ -25,7 +26,7 @@ export default defineConfig({
       manifest: {
         name: 'Free Games',
         short_name: 'Games',
-        description: 'Free offline games: Sudoku, Minesweeper, 2248, 2048 and tic-tac-toe.',
+        description: 'Free offline games: Sudoku, Minesweeper, 2248, 2048, tic-tac-toe and dots and boxes.',
         theme_color: '#eef0f3',
         background_color: '#eef0f3',
         display: 'standalone',

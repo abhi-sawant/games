@@ -14,6 +14,9 @@ Offline puzzle games: a PWA that also ships as an Android app through Capacitor.
   option after 2048, score, history and stats, and auto-saved progress.
 - **Tic-tac-toe**: play the computer (Easy, Medium, or a Hard opponent that never loses) or a friend on one
   screen. Rounds alternate who goes first, with a running tally, undo, history and win/draw/loss stats per level.
+- **Dots and Boxes**: a 4×4-box board against the computer (Easy, Medium, or a Hard opponent that plans the
+  endgame and uses the double-cross) or a friend on one screen. Closing a box claims it and you go again.
+  Undo, alternating first move, history and win/draw/loss stats per level.
 - After the first visit, the service worker caches every page and puzzle file, so it works with no connection.
 
 ## Layout
@@ -29,6 +32,7 @@ minesweeper/index.html, src/minesweeper/ Minesweeper
 2248/index.html, src/2248/               2248
 2048/index.html, src/2048/               2048
 tictactoe/index.html, src/tictactoe/     Tic-tac-toe
+dots/index.html, src/dots/               Dots and Boxes
 src/tiles.css                            the number-tile colour scale shared by 2248 and 2048
 ```
 

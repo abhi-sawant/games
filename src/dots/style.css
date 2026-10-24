@@ -1,0 +1,114 @@
+@import '../base.css';
+
+/* Dots and Boxes prints in berry. You (or player 1) draw in berry, the computer (or player 2) in blue. */
+:root { --c: var(--berry); --p0: var(--berry); --p1: var(--blue); }
+
+.is-lost .history-status { color: var(--wrong); }
+.is-drawn .history-status { color: var(--ink-2); }
+
+/* Tighter history table: a level name plus four columns has to fit a 320px-wide phone. */
+.summary th, .summary td { padding: 12px 6px; }
+@media (max-width: 360px) {
+  .summary { font-size: 0.8rem; }
+  .summary th, .summary td { padding: 10px 4px; }
+  .summary th:first-child { padding-left: 10px; }
+  .summary td:last-child, .summary thead th:last-child { padding-right: 10px; }
+}
+
+/* ---------- Game ---------- */
+
+/* Box counts sit where the timer is in the other games, each in its player's ink. */
+.tally { display: flex; gap: 12px; text-align: center; line-height: 1.05; }
+.tally span { min-width: 34px; padding: 2px 4px 3px; border-radius: 12px; transition: background 0.15s ease; }
+.tally b {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 850;
+  font-variation-settings: 'CASL' 0, 'MONO' 1;
+  font-variant-numeric: tabular-nums;
+}
+.tally .p0 b { color: var(--p0); }
+.tally .p1 b { color: var(--p1); }
+.tally small { font-size: 0.72rem; font-weight: 700; color: var(--ink-2); }
+/* Whoever is to move gets a field of their ink behind their count. */
+.tally .p0.turn { background: color-mix(in srgb, var(--p0) var(--field), transparent); }
+.tally .p1.turn { background: color-mix(in srgb, var(--p1) var(--field), transparent); }
+.meta span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.tools { grid-template-columns: repeat(2, 88px); justify-content: center; margin-bottom: 0; }
+.tool:disabled { opacity: 0.4; cursor: default; }
+
+.board-wrap {
+  margin: auto 0;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-frame {
+  width: min(100%, 440px, calc(100dvh - 320px));
+  min-width: 260px;
+  padding: 4px;
+  border-radius: var(--r-board);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+}
+
+.board {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  overflow: visible;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* A claimed box is its owner's ink overprinted on the sheet. */
+.box { stroke: none; opacity: 0; transition: opacity 0.25s ease; mix-blend-mode: var(--blend); }
+.box.p0, .box.p1 { opacity: 0.32; }
+/* Screened onto dark paper the same ink reads weaker, so print it heavier at night. */
+@media (prefers-color-scheme: dark) {
+  .box.p0, .box.p1 { opacity: 0.5; }
+}
+.box.p0 { fill: var(--p0); }
+.box.p1 { fill: var(--p1); }
+
+/* An open line is a faint dotted track; drawn lines are solid in the ink of whoever drew them. */
+.line .track { stroke: var(--rule); stroke-width: 4; stroke-dasharray: 1 13; stroke-linecap: round; }
+.line .ink { stroke-width: 10; stroke-linecap: round; stroke: transparent; stroke-dasharray: 1; }
+.line .hit { stroke: transparent; stroke-width: 44; stroke-linecap: butt; cursor: pointer; }
+.line.drawn .track, .line.drawn .hit { display: none; }
+.line.drawn .ink { animation: draw 0.18s ease-out; }
+.line.drawn.p0 .ink { stroke: var(--p0); }
+.line.drawn.p1 .ink { stroke: var(--p1); }
+/* The latest line is a touch heavier, so you can see what the other side just did. */
+.line.last .ink { stroke-width: 14; }
+.board.locked .line .hit { cursor: default; }
+@media (hover: hover) {
+  .board:not(.locked) .line:not(.drawn):hover .track { stroke: var(--turn); stroke-dasharray: none; stroke-width: 8; opacity: 0.5; }
+}
+.line:focus-visible { outline: none; }
+.line:focus-visible .track { stroke: var(--turn); stroke-dasharray: none; stroke-width: 8; }
+
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+.dot { fill: var(--ink); }
+
+.status {
+  min-height: 1.5em;
+  margin: 18px 0 0;
+  font-size: 1.05rem;
+  font-weight: 750;
+  font-variation-settings: 'CASL' 1;
+  color: var(--ink);
+}
+.status .p0 { color: var(--p0); }
+.status .p1 { color: var(--p1); }
+
+.again { margin-top: 14px; min-width: 180px; }
