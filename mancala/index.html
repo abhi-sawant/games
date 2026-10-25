@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Free offline Mancala (Kalah) against the computer or a friend." />
+    <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <link rel="preload" href="/src/fonts/recursive-latin-full.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="color-scheme" content="light dark" />
+    <!-- The paper colour from base.css, so the page never shows the browser's white canvas while the stylesheet loads. -->
+    <style>html { background: #eef0f3; } @media (prefers-color-scheme: dark) { html { background: #141927; } }</style>
+    <link rel="stylesheet" href="/src/mancala/style.css" />
+    <title>Mancala</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Home -->
+      <section id="home" class="screen">
+        <div class="home-inner">
+          <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <span>All games</span>
+          </a>
+          <h1 class="logo">Mancala</h1>
+          <p class="tagline">Sow seeds round the board. End in your store to go again, or in an empty pit of yours to capture across.</p>
+
+          <button id="continue-btn" class="btn btn-primary continue" hidden>
+            <span>Continue</span>
+            <small id="continue-meta"></small>
+          </button>
+
+          <h2 class="section-label">Play the computer</h2>
+          <div class="levels">
+            <button class="btn level" data-mode="easy"><span>Easy</span><small>Plays at random</small></button>
+            <button class="btn level" data-mode="medium"><span>Medium</span><small>Looks a few moves ahead</small></button>
+            <button class="btn level" data-mode="hard"><span>Hard</span><small>Thinks hard</small></button>
+          </div>
+
+          <h2 class="section-label">Play a friend</h2>
+          <div class="levels">
+            <button class="btn level" data-mode="two"><span>Two players</span><small>Take turns on one screen</small></button>
+          </div>
+
+          <button id="history-btn" class="btn history-link">
+            <span>History &amp; stats</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen" hidden>
+        <header class="topbar">
+          <button id="history-back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <h1 class="topbar-title">History</h1>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <table class="summary">
+          <thead>
+            <tr><th></th><th scope="col">Played</th><th scope="col">Won</th><th scope="col">Drawn</th><th scope="col">Lost</th></tr>
+          </thead>
+          <tbody id="history-summary"></tbody>
+        </table>
+
+        <h2 class="section-label">Recent games</h2>
+        <p id="history-empty" class="history-empty">No finished games yet. Play a round and it will show up here.</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+
+      <!-- Game -->
+      <section id="game" class="screen" hidden>
+        <header class="topbar">
+          <button id="back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <div class="meta">
+            <b id="level-label"></b>
+            <span><span id="round-label"></span></span>
+          </div>
+          <div class="tally" id="tally">
+            <span><b id="tally-a"></b><small id="tally-a-label"></small></span>
+            <span class="draws"><b id="tally-draws"></b><small>Draws</small></span>
+            <span><b id="tally-b"></b><small id="tally-b-label"></small></span>
+          </div>
+        </header>
+
+        <div class="board-wrap">
+          <div class="board-frame">
+            <div id="board" class="board" role="grid" aria-label="Mancala board"></div>
+          </div>
+          <p id="status" class="status" aria-live="polite"></p>
+          <button id="next-btn" class="btn btn-primary next" hidden>Next round</button>
+        </div>
+
+        <div class="tools">
+          <button class="tool" id="undo-btn" aria-label="Undo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" /></svg>
+            <span>Undo</span>
+          </button>
+          <button class="tool" id="restart-btn" aria-label="Restart round">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7" /><path d="M4 4v4h4" /></svg>
+            <span>Restart</span>
+          </button>
+        </div>
+
+      </section>
+    </div>
+    <script type="module" src="/src/mancala/main.ts"></script>
+  </body>
+</html>

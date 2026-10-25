@@ -1,0 +1,35 @@
+@import '../base.css';
+@import '../shared/vs.css';
+
+/* Mancala prints in sky, with the board games. Pits are sunk paper holding their seed count; side 0's row
+   is a sky field, side 1's a sky ring, like the pieces in the other board games. Pits you can play from
+   carry the yellow ring. */
+
+.board {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(6, 1fr) 1.2fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 6px;
+  aspect-ratio: 8.4 / 3;
+}
+
+.pit, .store {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--sunk);
+  color: var(--ink);
+  font-variation-settings: 'CASL' 1;
+  transition: box-shadow 0.12s ease;
+}
+.store { border-radius: 22px; }
+.pit b, .store b { font-size: clamp(1rem, 5vw, 1.4rem); font-weight: 850; }
+.pit.s0, .store.s0 { background: color-mix(in srgb, var(--sky) 26%, var(--sheet)); }
+.pit.s1, .store.s1 { box-shadow: inset 0 0 0 3px var(--sky); }
+.pit.movable { box-shadow: 0 0 0 3px var(--yellow); cursor: pointer; }
+.pit.s1.movable { box-shadow: inset 0 0 0 3px var(--sky), 0 0 0 3px var(--yellow); }
+.pit.last { background: color-mix(in srgb, var(--sky) 42%, var(--sheet)); }
+.pit:disabled, .store:disabled { cursor: default; }

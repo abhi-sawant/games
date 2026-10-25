@@ -52,7 +52,7 @@
 /* ---------- Line boards ---------- */
 
 .board.lines { display: block; padding: 8px; aspect-ratio: auto; }
-.lattice { display: block; width: 100%; height: auto; touch-action: none; user-select: none; -webkit-user-select: none; }
+.lattice { display: block; width: 100%; height: auto; stroke: none; touch-action: none; user-select: none; -webkit-user-select: none; }
 .lattice .dots circle { fill: var(--ink); }
 .lattice .grid line { stroke: var(--rule); stroke-width: 2; }
 .lattice .loop line { stroke: var(--c); stroke-width: 14; stroke-linecap: round; }

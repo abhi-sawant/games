@@ -346,6 +346,48 @@
 .game-icon-checkers i.da::after { background: var(--sky); }
 .game-icon-checkers i.db::after { background: var(--coral); }
 
+/* Mancala: two rows of pits, the near row in a sky field. */
+.game-icon-mancala { grid-template: repeat(2, 1fr) / repeat(3, 1fr); padding: 10px 6px; }
+.game-icon-mancala i { border-radius: 50%; background: var(--sunk); color: var(--ink); font-size: 0.7rem; }
+.game-icon-mancala i.s { background: color-mix(in srgb, var(--sky) 30%, var(--sheet)); }
+.game-icon-mancala i:nth-child(n + 7) { display: none; }
+
+/* Ultimate, Hex, Go: sky stones and ringed stones. */
+.game-icon-ultimate i, .game-icon-hex i, .game-icon-go i { background: var(--sunk); }
+.game-icon-ultimate i.a::after, .game-icon-hex i.a::after, .game-icon-go i.a::after,
+.game-icon-ultimate i.b::after, .game-icon-hex i.b::after, .game-icon-go i.b::after {
+  content: ''; width: 64%; height: 64%; border-radius: 50%; background: var(--sky);
+}
+.game-icon-ultimate i.b::after, .game-icon-hex i.b::after, .game-icon-go i.b::after { background: var(--sheet); box-shadow: inset 0 0 0 2.5px var(--sky); }
+.game-icon-hex i { border-radius: 30%; }
+.game-icon-hex i:nth-child(n + 4):nth-child(-n + 6) { translate: 25% 0; }
+.game-icon-hex i:nth-child(n + 7) { translate: 50% 0; }
+.game-icon-hex { padding-right: 14px; }
+.game-icon-go { background: color-mix(in srgb, var(--sky) 18%, var(--sheet)); }
+.game-icon-go i { background: none; }
+
+/* Chess: pieces on a sky-checked board. */
+.game-icon-chess { gap: 0; }
+.game-icon-chess i { border-radius: 0; color: var(--sky); font-size: 1rem; font-family: 'Apple Symbols', 'Segoe UI Symbol', serif; }
+.game-icon-chess i.d { background: color-mix(in srgb, var(--sky) 26%, var(--sheet)); }
+.game-icon-chess i.s { color: var(--ink); }
+.game-icon-chess i:first-child { border-top-left-radius: 5px; }
+.game-icon-chess i:nth-child(3) { border-top-right-radius: 5px; }
+.game-icon-chess i:nth-child(7) { border-bottom-left-radius: 5px; }
+.game-icon-chess i:last-child { border-bottom-right-radius: 5px; }
+
+/* Backgammon: points with checkers, and a pair of dice. */
+.game-icon-backgammon i { background: none; }
+.game-icon-backgammon i.t { background: linear-gradient(to bottom, color-mix(in srgb, var(--sky) 30%, var(--sheet)), transparent); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.game-icon-backgammon i.u { background: linear-gradient(to top, color-mix(in srgb, var(--sky) 30%, var(--sheet)), transparent); clip-path: polygon(0 100%, 100% 100%, 50% 0); }
+.game-icon-backgammon i.a, .game-icon-backgammon i.b { position: relative; }
+.game-icon-backgammon i.die { background: var(--sky); color: var(--on-ink); font-size: 0.7rem; border-radius: 4px; margin: 2px; }
+
+/* Battleship: hits on a sunk-paper sea, misses dotted. */
+.game-icon-battleship i { background: var(--sunk); }
+.game-icon-battleship i.h { background: var(--sky); }
+.game-icon-battleship i.m::after { content: ''; width: 26%; height: 26%; border-radius: 50%; background: var(--ink-2); }
+
 /* Cards: three overlapping cards on the sheet, backs in olive, red suits in coral. */
 .game-icon-klondike, .game-icon-freecell, .game-icon-cards { display: flex; align-items: center; justify-content: center; padding: 6px; gap: 0; }
 .game-icon .card {

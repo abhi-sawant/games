@@ -45,6 +45,7 @@ interface Game {
   status: 'playing' | 'over';
   winner: Side | null;
   started: boolean;
+  seed?: number; // the round's dice, for games that roll them
 }
 
 interface HistoryEntry {
@@ -99,13 +100,15 @@ export function startMatch<S>(cfg: Config<S>) {
 
   // ---------- Helpers ----------
 
+  const newSeed = () => Math.floor(Math.random() * 2 ** 31);
+
   const vsComputer = (g: Game): g is Game & { mode: Level } => g.mode !== 'two';
   const computersTurn = (g: Game) => vsComputer(g) && g.status === 'playing' && rules.turn(state) !== g.you;
   const sideName = (side: Side) => `<span class="side side-${side}">${cfg.sideNames[side]}</span>`;
 
   /** Rebuilds the position from the move list, noting who made each move. */
   function replay() {
-    state = rules.initial();
+    state = rules.initial(game!.seed);
     movers = [];
     for (const m of game!.moves) {
       movers.push(rules.turn(state));
@@ -127,7 +130,7 @@ export function startMatch<S>(cfg: Config<S>) {
   function newMatch(mode: Mode) {
     game = {
       mode, you: 0, moves: [], round: 1, tally: { a: 0, b: 0, draws: 0 },
-      status: 'playing', winner: null, started: false,
+      status: 'playing', winner: null, started: false, seed: newSeed(),
     };
     saveGame();
     showGame();
@@ -273,7 +276,7 @@ export function startMatch<S>(cfg: Config<S>) {
     thinkId++;
     if (!game || !computersTurn(game)) return;
     askedAt = performance.now();
-    getWorker().postMessage({ id: thinkId, moves: game.moves, level: game.mode });
+    getWorker().postMessage({ id: thinkId, moves: game.moves, level: game.mode, seed: game.seed });
   }
 
   function endRound(winner: Side | null) {
@@ -296,10 +299,10 @@ export function startMatch<S>(cfg: Config<S>) {
     restartRound();
   }
 
-  /** Clears the board for the same round, keeping who plays which side. */
+  /** Clears the board for the same round, keeping who plays which side. Dice games roll afresh. */
   function restartRound() {
     if (!game) return;
-    Object.assign(game, { moves: [], status: 'playing', winner: null, started: false });
+    Object.assign(game, { moves: [], status: 'playing', winner: null, started: false, seed: newSeed() });
     replay();
     selected = [];
     saveGame();
@@ -341,7 +344,7 @@ export function startMatch<S>(cfg: Config<S>) {
     if (!valid) return null;
     try {
       // A save from an older rule set might not replay; start fresh rather than break the page.
-      let s = rules.initial();
+      let s = rules.initial(g.seed);
       for (const m of g.moves) s = rules.apply(s, m);
       return g;
     } catch {

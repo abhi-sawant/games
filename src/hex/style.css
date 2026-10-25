@@ -1,0 +1,25 @@
+@import '../base.css';
+@import '../shared/vs.css';
+
+/* Hex prints in sky, with the board games. Sky's stones are solid sky, Ring's are paper ringed in sky, as in
+   the other board games; each side's two edges are ruled in its own way, and the winning chain glows. */
+
+.board { display: block; }
+.board-frame { width: min(100%, 520px, calc((100dvh - 320px) * 1.5)); }
+.hex { display: block; width: 100%; height: auto; stroke: none; }
+
+.hex .cell { fill: var(--sunk); stroke: var(--sheet); stroke-width: 1.2; cursor: default; }
+.hex .cell.open { cursor: pointer; }
+.hex .cell.open:hover { fill: color-mix(in srgb, var(--sky) 18%, var(--sunk)); }
+.hex .cell.s0 { fill: var(--s0); }
+.hex .cell.s1 { fill: var(--s1); stroke: var(--s1-ring); stroke-width: 2.2; }
+.hex .cell.last { stroke: var(--yellow); stroke-width: 2.4; }
+.hex .cell.path { filter: drop-shadow(0 0 2px var(--yellow)); }
+
+.hex .edge { fill: none; stroke-width: 4; stroke-linecap: round; }
+.hex .edge.e0 { stroke: var(--sky); }
+.hex .edge.e1 { stroke: var(--sky); stroke-dasharray: 1 6; }
+.hex .edge.top { transform: translateY(-9px); }
+.hex .edge.bottom { transform: translateY(9px); }
+.hex .edge.left { transform: translateX(-10px); }
+.hex .edge.right { transform: translateX(10px); }

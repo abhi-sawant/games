@@ -37,6 +37,11 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
   plays the English, European and triangle boards.
 - **Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers**: against the computer (Easy, Medium, Hard, searched in a
   Web Worker) or a friend on one screen, with tally, undo, history and stats.
+- **Mancala, Ultimate Tic-tac-toe, Hex, Go, Chess, Backgammon**: the same match runner. Hex and Go choose moves by
+  Monte Carlo tree search (`src/shared/mcts.ts`); chess has its own engine (`src/chess/engine.ts`, checked by perft);
+  backgammon rolls from a seed kept with each round, so a replay rolls the same dice and Undo can't reroll.
+- **Battleship**: against the computer only, since one screen can't hide two fleets. Easy fires at random, Medium
+  follows up hits, Hard fires where the remaining ships most often fit.
 - **Klondike** (draw 1 or 3) and **FreeCell** (numbered Microsoft-compatible deals): drag or tap to move, undo, timer,
   history and stats.
 - **Spider** (1, 2 or 4 suits), **Yukon**, **Canfield**, **Forty Thieves**, **Pyramid**, **TriPeaks** and **Golf**: the
@@ -62,7 +67,8 @@ dots/index.html, src/dots/               Dots and Boxes
 <game>/index.html, src/<game>/           the newer games: killer, kakuro, calcudoku, futoshiki, skyscrapers,
                                          jigsaw, sudokux, nonograms, takuzu, nurikabe, hitori,
                                          starbattle, lightsout, tents, lightup, heyawake, lits, slitherlink,
-                                         masyu, bridges, flow, sokoban, rushhour, pegs, threes, fifteen, connect4, reversi, gomoku,
+                                         masyu, bridges, flow, sokoban, rushhour, pegs, mancala,
+                                         ultimate, hex, go, chess, backgammon, battleship, threes, fifteen, connect4, reversi, gomoku,
                                          morris, checkers, klondike, freecell, spider, yukon, canfield,
                                          fortythieves, pyramid, tripeaks, golf
 src/shared/                              helpers the newer games share: screens, timer, storage, puzzle loading,

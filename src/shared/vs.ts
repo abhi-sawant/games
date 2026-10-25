@@ -7,7 +7,9 @@ export type Mode = Level | 'two';
 export type Move = number[];
 
 export interface Rules<S> {
-  initial(): S;
+  /** The starting position. Games with dice take the round's random seed and roll from it, so a replay of
+   *  the same moves rolls the same dice (and Undo can't reroll). */
+  initial(seed?: number): S;
   moves(s: S): Move[];
   apply(s: S, m: Move): S;
   turn(s: S): Side;
@@ -17,9 +19,9 @@ export interface Rules<S> {
 
 /** The body of each game's worker: replays the moves and answers with the computer's move. */
 export function serveAI<S>(rules: Rules<S>, choose: (s: S, level: Level) => Move) {
-  self.onmessage = (e: MessageEvent<{ id: number; moves: Move[]; level: Level }>) => {
-    const { id, moves, level } = e.data;
-    let s = rules.initial();
+  self.onmessage = (e: MessageEvent<{ id: number; moves: Move[]; level: Level; seed?: number }>) => {
+    const { id, moves, level, seed } = e.data;
+    let s = rules.initial(seed);
     for (const m of moves) s = rules.apply(s, m);
     postMessage({ id, move: choose(s, level) });
   };

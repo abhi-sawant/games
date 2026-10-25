@@ -37,11 +37,11 @@ const IN_PROGRESS: [id: string, started: (save: Save) => boolean][] = [
 
 // The newer games all save `started` from their first move.
 for (const id of [
-  'killer', 'kakuro', 'calcudoku', 'futoshiki', 'skyscrapers', 'jigsaw', 'sudokux', 'nonograms', 'takuzu',
-  'nurikabe', 'hitori', 'starbattle', 'lightsout', 'tents', 'lightup', 'heyawake', 'lits', 'slitherlink', 'masyu',
-  'bridges', 'flow',
-  'threes', 'fifteen', 'sokoban', 'rushhour', 'pegs', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers', 'klondike', 'freecell',
-  'spider', 'yukon', 'canfield', 'fortythieves', 'pyramid', 'tripeaks', 'golf',
+  'killer', 'kakuro', 'calcudoku', 'futoshiki', 'skyscrapers', 'jigsaw', 'sudokux', 'nonograms', 'takuzu', 'nurikabe',
+  'hitori', 'starbattle', 'lightsout', 'tents', 'lightup', 'heyawake', 'lits', 'slitherlink', 'masyu', 'bridges',
+  'flow', 'threes', 'fifteen', 'sokoban', 'rushhour', 'pegs', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers',
+  'mancala', 'ultimate', 'hex', 'go', 'chess', 'backgammon', 'battleship', 'klondike', 'freecell', 'spider', 'yukon',
+  'canfield', 'fortythieves', 'pyramid', 'tripeaks', 'golf',
 ]) IN_PROGRESS.push([id, (s) => s?.status === 'playing' && !!s.started]);
 
 function renderStatus() {
