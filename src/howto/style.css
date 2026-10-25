@@ -1,0 +1,134 @@
+@import '../base.css';
+
+/* The how-to page takes the ink of the game's category (set as a class on <body> by main.ts). Examples are
+   built from cells: sheet paper with a hairline by default, solid ink where something is acted on, sunk paper
+   where it is empty or finished, and the accent inks for pieces that need telling apart. */
+:root { --c: var(--blue); }
+.ink-blue { --c: var(--blue); }
+.ink-orange { --c: var(--orange); }
+.ink-lilac { --c: var(--lilac); }
+.ink-sky { --c: var(--sky); }
+.ink-olive { --c: var(--olive); }
+.ink-berry { --c: var(--berry); }
+.ink-plum { --c: var(--plum); }
+.ink-cocoa { --c: var(--cocoa); }
+
+.kicker { margin: 0 0 6px; font-weight: 800; font-variation-settings: 'CASL' 1; color: var(--ink-2); }
+.home-inner { padding-bottom: 40px; }
+.tagline { font-size: 1.05rem; color: var(--ink); }
+
+.example {
+  margin: 0 0 8px;
+  padding: 20px 16px 16px;
+  border-radius: var(--r-board);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+.example-art { max-width: 100%; display: grid; justify-items: center; }
+.example figcaption { color: var(--ink-2); font-weight: 600; font-size: 0.95rem; line-height: 1.45; text-align: center; }
+
+.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 10px; }
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 14px 16px 14px 56px;
+  border-radius: var(--r-tile);
+  background: var(--tint);
+  line-height: 1.45;
+  font-weight: 550;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c);
+  color: var(--on-ink);
+  font-weight: 800;
+  font-variation-settings: 'CASL' 1;
+}
+.notes { margin: 0; padding: 0 0 0 20px; display: grid; gap: 8px; line-height: 1.45; color: var(--ink-2); font-weight: 550; }
+.notes li::marker { color: var(--c); }
+.steps b, .notes b { color: var(--ink); }
+
+.play { display: block; margin-top: 32px; text-align: center; text-decoration: none; font-size: 1.1rem; padding: 18px 22px; }
+
+/* ---------- Example pieces ---------- */
+
+.fig-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: 3px;
+  padding: 6px;
+  border-radius: 14px;
+  background: var(--paper);
+}
+.fc {
+  display: grid;
+  place-items: center;
+  position: relative;
+  min-width: 0;
+  border-radius: 8px;
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--ink);
+  font-weight: 800;
+  font-variation-settings: 'CASL' 1;
+  font-size: calc(var(--cell, 40px) * 0.5);
+  line-height: 1;
+}
+.fc.on { background: var(--c); color: var(--on-ink); box-shadow: none; }
+.fc.tint { background: var(--tint); box-shadow: none; }
+.fc.sunk { background: var(--sunk); box-shadow: none; }
+.fc.ring { box-shadow: inset 0 0 0 3px var(--ink); }
+.fc.dim { opacity: 0.45; }
+.fc.round { border-radius: 50%; }
+.fc.ink { color: var(--c); }
+.fc.small { font-size: calc(var(--cell, 40px) * 0.3); }
+.fc.bare { background: none; box-shadow: none; }
+.fc.blue { background: var(--blue); color: var(--on-ink); box-shadow: none; }
+.fc.orange { background: var(--orange); color: var(--on-ink); box-shadow: none; }
+.fc.teal { background: var(--teal); color: var(--on-ink); box-shadow: none; }
+.fc.coral { background: var(--coral); color: var(--on-ink); box-shadow: none; }
+.fc.yellow { background: var(--yellow); color: #1e2741; box-shadow: none; }
+.fc.lilac { background: var(--lilac); color: var(--on-ink); box-shadow: none; }
+.fc.mint { background: var(--mint); color: var(--on-ink); box-shadow: none; }
+.fc.sky { background: var(--sky); color: var(--on-ink); box-shadow: none; }
+.fc.olive { background: var(--olive); color: var(--on-ink); box-shadow: none; }
+.fc.berry { background: var(--berry); color: var(--on-ink); box-shadow: none; }
+.fc.plum { background: var(--plum); color: var(--on-ink); box-shadow: none; }
+.fc.cocoa { background: var(--cocoa); color: var(--on-ink); box-shadow: none; }
+.fc.black { background: var(--ink); color: var(--paper); box-shadow: none; }
+.fc.white { background: var(--sheet); box-shadow: inset 0 0 0 2px var(--ink); }
+@media (prefers-color-scheme: dark) {
+  .fc.blue, .fc.orange, .fc.teal, .fc.coral, .fc.lilac, .fc.mint, .fc.sky, .fc.olive, .fc.berry, .fc.plum, .fc.cocoa { color: var(--on-ink); }
+}
+
+.fc.card { width: calc(var(--cell, 40px) * 0.9); height: calc(var(--cell, 40px) * 1.3); grid-template-rows: auto auto; align-content: center; gap: 2px; font-size: 0.95rem; }
+.fc.card i { font-style: normal; font-size: 1.1rem; }
+.fc.card.red { color: var(--coral); }
+.fc.card.back { background: var(--c); box-shadow: inset 0 0 0 3px var(--sheet); }
+
+.fig-row { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: flex-end; }
+.fig-part { display: grid; gap: 8px; justify-items: center; }
+.fig-part small { color: var(--ink-2); font-weight: 650; font-size: 0.8rem; }
+.fig-svg { height: auto; max-width: 100%; }
+.fig-svg .line { stroke: var(--c); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.fig-svg .rule { stroke: var(--rule); stroke-width: 2; fill: none; }
+.fig-svg .dot { fill: var(--ink); stroke: none; }
+.fig-svg .ink { fill: var(--c); stroke: none; }
+.fig-svg text { stroke: none; fill: var(--ink); font-weight: 800; font-size: 16px; font-variation-settings: 'CASL' 1; text-anchor: middle; dominant-baseline: central; }
+.fig-svg text.on { fill: var(--on-ink); }
+.fig-svg .pearl-w { fill: var(--sheet); stroke: var(--ink); stroke-width: 3; }
+.fig-svg .pearl-b { fill: var(--ink); stroke: none; }
+.fig-svg .bridge { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.fig-svg .wall { fill: var(--ink); stroke: none; }

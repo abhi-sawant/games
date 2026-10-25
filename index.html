@@ -28,6 +28,20 @@
           </button>
         </header>
 
+        <!-- Filled in by src/gotd.ts from the game's own card below. -->
+        <section class="gotd" id="gotd" aria-labelledby="gotd-label" hidden>
+          <h2 class="section-label" id="gotd-label">Game of the day</h2>
+          <a class="gotd-card grain" id="gotd-link" href="/">
+            <span class="gotd-icon" aria-hidden="true"></span>
+            <span class="gotd-text">
+              <span class="gotd-tag"></span>
+              <span class="gotd-name"></span>
+              <span class="gotd-desc"></span>
+            </span>
+            <svg class="gotd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+        </section>
+
         <!-- Links name index.html explicitly: the Android app's local server sends extensionless paths to the root page. -->
         <!-- Each card sets its family's ink with a class: ink-blue, ink-orange, ink-lilac, ink-sky, ink-olive, ink-berry, ink-plum or ink-cocoa.
              Cards sit in their family's section. -->
@@ -245,6 +259,15 @@
               <span class="game-name">Flow</span>
               <span class="game-desc">Join every pair of matching dots and fill the whole board.</span>
               <span class="game-status" id="flow-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/watersort/index.html">
+            <span class="game-icon game-icon-watersort" aria-hidden="true"><i></i><i class="b"></i><i></i><i></i><i class="b"></i><i class="b"></i><i></i><i class="b"></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Water Sort</span>
+              <span class="game-desc">Pour the colours between tubes until every tube holds just one.</span>
+              <span class="game-status" id="watersort-status" hidden></span>
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="How to play each game in Games, with a small example." />
+    <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <link rel="preload" href="/src/fonts/recursive-latin-full.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="color-scheme" content="light dark" />
+    <!-- The paper colour from base.css, so the page never shows the browser's white canvas while the stylesheet loads. -->
+    <style>html { background: #eef0f3; } @media (prefers-color-scheme: dark) { html { background: #141927; } }</style>
+    <link rel="stylesheet" href="/src/howto/style.css" />
+    <title>How to play</title>
+  </head>
+  <body>
+    <div id="app">
+      <main id="guide" class="screen">
+        <div class="home-inner">
+          <a id="back" href="/" class="back-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <span id="back-label">All games</span>
+          </a>
+          <p class="kicker">How to play</p>
+          <h1 id="title" class="logo"></h1>
+          <p id="goal" class="tagline"></p>
+
+          <figure id="example" class="example" hidden>
+            <div id="example-art" class="example-art"></div>
+            <figcaption id="example-caption"></figcaption>
+          </figure>
+
+          <h2 class="section-label">How it works</h2>
+          <ol id="steps" class="steps"></ol>
+
+          <h2 class="section-label">Controls</h2>
+          <ul id="controls" class="notes"></ul>
+
+          <div id="tips-block">
+            <h2 class="section-label">Tips</h2>
+            <ul id="tips" class="notes"></ul>
+          </div>
+
+          <a id="play" href="/" class="btn btn-primary play">Play</a>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/howto/main.ts"></script>
+  </body>
+</html>
