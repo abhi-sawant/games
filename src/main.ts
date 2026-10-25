@@ -83,6 +83,8 @@ function setupInstallButton() {
   btn.hidden = false;
 }
 
+document.getElementById('app-version')!.textContent = `v${__APP_VERSION__}`;
+
 renderStatus();
 // Coming back with the browser's back button can restore this page from the bfcache.
 window.addEventListener('pageshow', renderStatus);
