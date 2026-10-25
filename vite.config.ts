@@ -8,7 +8,7 @@ import pkg from './package.json' with { type: 'json' };
 const games = [
   'sudoku', 'killer', 'kakuro', 'calcudoku', 'futoshiki', 'skyscrapers', 'jigsaw', 'sudokux', 'minesweeper',
   'nonograms', 'takuzu', 'nurikabe', 'hitori', 'starbattle', 'lightsout', 'tents', 'lightup', 'heyawake', 'lits',
-  'slitherlink', 'masyu', 'bridges', 'flow', '2248', '2048', 'threes', 'fifteen', 'sokoban', 'rushhour', 'pegs',
+  'slitherlink', 'masyu', 'bridges', 'flow', 'watersort', '2248', '2048', 'threes', 'fifteen', 'sokoban', 'rushhour', 'pegs',
   'tictactoe', 'dots', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers', 'mancala', 'ultimate', 'hex', 'go',
   'chess', 'backgammon', 'battleship', 'klondike', 'freecell', 'spider', 'yukon', 'canfield', 'fortythieves',
   'pyramid', 'tripeaks', 'golf', 'wordguess', 'wordsearch', 'letterwheel', 'yacht', 'farkle', 'pig',

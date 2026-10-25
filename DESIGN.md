@@ -23,7 +23,7 @@ Every game belongs to exactly one **category**, shown as a section on the home p
 | Category | Ink | Games |
 |---|---|---|
 | Number puzzles | `--blue` | Sudoku, Killer Sudoku, Kakuro, Calcudoku, Futoshiki, Skyscrapers, Jigsaw Sudoku, Sudoku X |
-| Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out, Tents, Light Up, Heyawake, LITS, Slitherlink, Masyu, Bridges, Flow |
+| Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out, Tents, Light Up, Heyawake, LITS, Slitherlink, Masyu, Bridges, Flow, Water Sort |
 | Number tiles | `--lilac` | 2248, 2048, Threes, 15-puzzle, Sokoban, Rush Hour, Peg Solitaire |
 | Play the computer | `--sky` | Tic-tac-toe, Dots and Boxes, Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers, Mancala, Ultimate Tic-tac-toe, Hex, Go, Chess, Backgammon, Battleship |
 | Cards | `--olive` | Klondike, FreeCell, Spider, Yukon, Canfield, Forty Thieves, Pyramid, TriPeaks, Golf |
