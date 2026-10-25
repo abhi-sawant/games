@@ -7,6 +7,11 @@
   justify-content: center;
   padding: 40px 0 24px;
 }
+/* The phone column widens on bigger screens so the game grid gets more columns. */
+.screen.home { max-width: 1120px; }
+@media (min-width: 640px) {
+  .home { padding: 64px 0 40px; }
+}
 
 /* ---------- Wordmark ---------- */
 
@@ -45,9 +50,14 @@
 
 /* ---------- Game cards ---------- */
 
+/* Each family is a grid of tiles: the icon over the name. The label spans the full row. */
 .games { display: grid; gap: 4px; }
-.family { display: grid; gap: 14px; }
-.family .section-label { margin: 24px 4px 0; }
+.family {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+.family .section-label { grid-column: 1 / -1; margin: 24px 4px 4px; }
 .family:first-child .section-label { margin-top: 0; }
 
 .ink-blue { --c: var(--blue); }
@@ -61,48 +71,61 @@
 .game-card {
   --tint: color-mix(in srgb, var(--c) var(--field), var(--paper));
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 20px 16px 20px 18px;
+  gap: 12px;
+  padding: 16px 8px 14px;
   border-radius: var(--r-card);
   background: var(--tint);
   color: var(--ink);
+  text-align: center;
   text-decoration: none;
   transition: transform 0.08s ease, filter 0.15s ease;
 }
-.game-card:active { transform: scale(0.98); filter: brightness(0.96); }
+.game-card:active { transform: scale(0.97); filter: brightness(0.96); }
+@media (hover: hover) {
+  .game-card:hover { filter: brightness(0.97); }
+}
 
-.game-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.game-text { min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .game-name {
-  font-size: 1.4rem;
+  font-size: 0.95rem;
+  line-height: 1.15;
   font-weight: 850;
   font-variation-settings: 'CASL' 1;
   letter-spacing: -0.01em;
   color: color-mix(in srgb, var(--c) 85%, var(--ink));
+  overflow-wrap: anywhere;
 }
-.game-desc { color: var(--ink-2); font-size: 0.875rem; line-height: 1.4; }
+/* The tile has room for the name only; the description stays for screen readers. */
+.game-desc { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .game-status {
-  align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  padding: 5px 12px 5px 10px;
+  gap: 5px;
+  padding: 4px 10px 4px 8px;
   border-radius: 999px;
   background: var(--c);
   color: var(--on-ink);
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 750;
+  white-space: nowrap;
 }
 .game-status::before {
   content: '';
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background: currentColor;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 3l15 9-15 9z' fill='black'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-.chevron { flex-shrink: 0; width: 20px; height: 20px; color: var(--c); stroke-width: 2.4; }
+.chevron { display: none; }
+
+@media (min-width: 640px) {
+  .family { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
+  .game-card { padding: 20px 12px 18px; gap: 14px; }
+  .game-name { font-size: 1.05rem; }
+}
 
 /* ---------- Game icons: little printed boards ---------- */
 
