@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.2.0 — 2026-10-25
+
+Thirty-six new games join Games, and two new families arrive on the home page: word games in berry and dice games in
+plum. Every game plays offline with its own history and stats.
+
+### Added
+
+- Number puzzles, in blue: Calcudoku, Futoshiki, Skyscrapers, Jigsaw Sudoku and Sudoku X, with notes, hints and four
+  levels of 300 puzzles each. Every puzzle has exactly one solution.
+- Logic puzzles, in orange: Tents, Light Up, Heyawake, LITS, Slitherlink, Masyu, Bridges and Flow. Draw loops,
+  bridges and pipes by dragging, and tap to cross out.
+- Number tiles, in lilac: Sokoban (every level can be solved, with hints from wherever you are), Rush Hour and Peg
+  Solitaire on the English, European and triangle boards.
+- Play the computer, in sky: Mancala, Ultimate Tic-tac-toe, Hex, Go, Chess and Backgammon, against the computer on
+  Easy, Medium or Hard, or against a friend on one screen; and Battleship, against the computer.
+- Cards, in olive: Spider, Yukon, Canfield, Forty Thieves, Pyramid, TriPeaks and Golf.
+- Word games, a new family in berry: Word Guess (a daily word that's the same for everyone, or unlimited play, with
+  streaks), Word Search and Letter Wheel.
+- Dice games, a new family in plum: Yacht (alone for a high score, or against the computer), Farkle and Pig. Your
+  rolls are saved with the game, so reloading never rerolls the dice.
+
 ## 3.1.1 — 2026-10-25
 
 Free Games is now just **Games**: still free, offline and ad-free, with a new icon.
