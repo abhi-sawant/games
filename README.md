@@ -53,6 +53,9 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
 - **Yacht, Farkle, Pig**: dice games in plum, sharing a dice row (`src/dice/`). Yacht is played alone for a high score
   or against the computer, which plans its holds by playing rerolls out; Farkle and Pig are races against the
   computer or a friend. Rolls are saved with the game, so a reload never rerolls.
+- **Crazy Cat**: an arcade runner in cocoa. The cat runs by itself; tap, click or press Space to jump, and again in the
+  air to jump higher. Clear crates (+1) and catch fish (+2) at Kitten, Tabby or Crazy speed until you hit one. Best score
+  and history per level; the rules are in `src/crazycat/engine.ts`, free of any drawing.
 - Works with no connection: the service worker installs with just the home page, caches each game when it's opened,
   then fetches the rest in the background, the open game first (see `src/sw.ts`).
 
@@ -77,7 +80,7 @@ dots/index.html, src/dots/               Dots and Boxes
                                          sokoban, rushhour, pegs, connect4, reversi, gomoku, morris, checkers,
                                          mancala, ultimate, hex, go, chess, backgammon, battleship, klondike,
                                          freecell, spider, yukon, canfield, fortythieves, pyramid, tripeaks, golf,
-                                         wordguess, wordsearch, letterwheel, yacht, farkle, pig
+                                         wordguess, wordsearch, letterwheel, yacht, farkle, pig, crazycat
 src/dice/                                dice drawing and rolling, and the race layout, for the dice games
 src/shared/                              helpers the newer games share: screens, timer, storage, puzzle loading,
                                          grid.css for the grid puzzles, the match runner, search and styles for

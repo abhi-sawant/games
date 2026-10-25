@@ -29,6 +29,7 @@ Every game belongs to exactly one **category**, shown as a section on the home p
 | Cards | `--olive` | Klondike, FreeCell, Spider, Yukon, Canfield, Forty Thieves, Pyramid, TriPeaks, Golf |
 | Word games | `--berry` | Word Guess, Word Search, Letter Wheel |
 | Dice games | `--plum` | Yacht, Farkle, Pig |
+| Arcade | `--cocoa` | Crazy Cat |
 
 The inks. Each category ink belongs to one category; the other inks are accents shared by all.
 
@@ -45,6 +46,7 @@ The inks. Each category ink belongs to one category; the other inks are accents 
 | `--olive` | `#62661c` | `#c3c86f` | Cards category (card backs; red suits print in coral, black suits in `--ink`) |
 | `--berry` | `#a3376f` | `#f19ac5` | Word games category (6.0:1 with white text, 8.5:1 with navy) |
 | `--plum` | `#7e3f96` | `#d6a0ea` | Dice games category (6.6:1 with white text, 8.4:1 with navy) |
+| `--cocoa` | `#7a5236` | `#dcb497` | Arcade category (6.5:1 with white text, 9.2:1 with navy) |
 
 Two-sided games print you (or player one) in the category ink and the other side in coral. Where pieces read as black and white (Reversi, Checkers, Morris), one side is solid ink and the other is `--sheet` with an ink ring.
 
