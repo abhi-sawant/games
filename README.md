@@ -46,6 +46,10 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
   history and stats.
 - **Spider** (1, 2 or 4 suits), **Yukon**, **Canfield**, **Forty Thieves**, **Pyramid**, **TriPeaks** and **Golf**: the
   same table and controls, run by a shared solitaire loop (`src/cards/solitaire.ts`) that ends a deal when no move is left.
+- **Word Guess, Word Search, Letter Wheel**: word games in berry. Word Guess has a daily word, the same for everyone,
+  and unlimited play; Word Search makes a fresh themed grid each game; Letter Wheel fills a little crossword from a
+  wheel of letters. Their words come from `scripts/words/common.txt` (written for these games) and the system word
+  list, `/usr/share/dict/words` (Webster's Second International, public domain), via `scripts/gen-words.ts`.
 - Works with no connection: the service worker installs with just the home page, caches each game when it's opened,
   then fetches the rest in the background, the open game first (see `src/sw.ts`).
 
@@ -68,7 +72,8 @@ dots/index.html, src/dots/               Dots and Boxes
                                          jigsaw, sudokux, nonograms, takuzu, nurikabe, hitori,
                                          starbattle, lightsout, tents, lightup, heyawake, lits, slitherlink,
                                          masyu, bridges, flow, sokoban, rushhour, pegs, mancala,
-                                         ultimate, hex, go, chess, backgammon, battleship, threes, fifteen, connect4, reversi, gomoku,
+                                         ultimate, hex, go, chess, backgammon, battleship, wordguess,
+                                         wordsearch, letterwheel, threes, fifteen, connect4, reversi, gomoku,
                                          morris, checkers, klondike, freecell, spider, yukon, canfield,
                                          fortythieves, pyramid, tripeaks, golf
 src/shared/                              helpers the newer games share: screens, timer, storage, puzzle loading,

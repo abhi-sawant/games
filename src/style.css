@@ -55,6 +55,7 @@
 .ink-orange { --c: var(--orange); }
 .ink-sky { --c: var(--sky); }
 .ink-olive { --c: var(--olive); }
+.ink-berry { --c: var(--berry); }
 
 .game-card {
   --tint: color-mix(in srgb, var(--c) var(--field), var(--paper));
@@ -387,6 +388,17 @@
 .game-icon-battleship i { background: var(--sunk); }
 .game-icon-battleship i.h { background: var(--sky); }
 .game-icon-battleship i.m::after { content: ''; width: 26%; height: 26%; border-radius: 50%; background: var(--ink-2); }
+
+/* Word games in berry: letters on tiles, marked the way each game marks them. */
+.game-icon-wordguess { grid-template: repeat(2, 1fr) / repeat(5, 1fr); padding: 14px 6px; }
+.game-icon-wordguess i { background: var(--sunk); color: var(--ink-2); font-size: 0.65rem; }
+.game-icon-wordguess i:nth-child(n + 6) { display: none; }
+.game-icon-wordguess i.h { background: var(--berry); color: var(--on-ink); }
+.game-icon-wordguess i.n { background: color-mix(in srgb, var(--berry) 28%, var(--sheet)); box-shadow: inset 0 0 0 2px var(--berry); color: var(--ink); }
+.game-icon-wordsearch i { color: var(--ink-2); font-size: 0.75rem; }
+.game-icon-wordsearch i.f { background: color-mix(in srgb, var(--berry) 30%, var(--sheet)); color: var(--ink); border-radius: 50%; }
+.game-icon-letterwheel i.w { background: var(--sheet); box-shadow: inset 0 0 0 2px var(--berry); border-radius: 50%; color: var(--ink); font-size: 0.75rem; }
+.game-icon-letterwheel i.c { background: color-mix(in srgb, var(--berry) 18%, var(--sheet)); border-radius: 50%; }
 
 /* Cards: three overlapping cards on the sheet, backs in olive, red suits in coral. */
 .game-icon-klondike, .game-icon-freecell, .game-icon-cards { display: flex; align-items: center; justify-content: center; padding: 6px; gap: 0; }

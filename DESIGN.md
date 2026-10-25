@@ -27,6 +27,7 @@ Every game belongs to exactly one **category**, shown as a section on the home p
 | Number tiles | `--lilac` | 2248, 2048, Threes, 15-puzzle, Sokoban, Rush Hour, Peg Solitaire |
 | Play the computer | `--sky` | Tic-tac-toe, Dots and Boxes, Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers, Mancala, Ultimate Tic-tac-toe, Hex, Go, Chess, Backgammon, Battleship |
 | Cards | `--olive` | Klondike, FreeCell, Spider, Yukon, Canfield, Forty Thieves, Pyramid, TriPeaks, Golf |
+| Word games | `--berry` | Word Guess, Word Search, Letter Wheel |
 
 The inks. Each category ink belongs to one category; the other inks are accents shared by all.
 
@@ -41,6 +42,7 @@ The inks. Each category ink belongs to one category; the other inks are accents 
 | `--mint` | `#2f7a5f` | `#86d1b4` | Accent: the tile scale |
 | `--sky` | `#1d6a8f` | `#6cc4ea` | Play the computer category |
 | `--olive` | `#62661c` | `#c3c86f` | Cards category (card backs; red suits print in coral, black suits in `--ink`) |
+| `--berry` | `#a3376f` | `#f19ac5` | Word games category (6.0:1 with white text, 8.5:1 with navy) |
 
 Two-sided games print you (or player one) in the category ink and the other side in coral. Where pieces read as black and white (Reversi, Checkers, Morris), one side is solid ink and the other is `--sheet` with an ink ring.
 
