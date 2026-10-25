@@ -1,0 +1,5 @@
+@import '../base.css';
+@import '../shared/latin.css';
+
+/* Skyscrapers prints in blue, with the number puzzles. Its clues ring the board. */
+:root { --c: var(--blue); }

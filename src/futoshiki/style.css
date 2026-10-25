@@ -1,0 +1,5 @@
+@import '../base.css';
+@import '../shared/latin.css';
+
+/* Futoshiki prints in blue, with the number puzzles. Its signs sit on the line between two cells. */
+:root { --c: var(--blue); }

@@ -1,0 +1,6 @@
+@import '../base.css';
+@import '../shared/latin.css';
+
+/* Jigsaw Sudoku prints in blue, with the number puzzles. Thick rules mark the regions, and the selected
+   cell's region is tinted. */
+:root { --c: var(--blue); }

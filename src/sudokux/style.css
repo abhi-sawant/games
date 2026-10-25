@@ -1,0 +1,5 @@
+@import '../base.css';
+@import '../shared/latin.css';
+
+/* Sudoku X prints in blue, with the number puzzles. Its two diagonals are drawn in screened blue. */
+:root { --c: var(--blue); }

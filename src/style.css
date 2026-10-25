@@ -194,6 +194,42 @@
 .game-icon-kakuro i.k { background: var(--blue); color: var(--on-ink); }
 .game-icon-kakuro b { font-size: 0.55rem; font-weight: 800; align-self: start; justify-self: end; padding: 2px 3px 0 0; }
 
+/* Calcudoku: a Killer-style dashed cage with its target and sign. */
+.game-icon-calcudoku i { color: var(--blue); position: relative; }
+.game-icon-calcudoku i.c { border: 1.5px dashed var(--blue); border-radius: 0; }
+.game-icon-calcudoku i.tl { border-width: 1.5px 0 0 1.5px; border-top-left-radius: 5px; }
+.game-icon-calcudoku i.tr { border-width: 1.5px 1.5px 0 0; border-top-right-radius: 5px; }
+.game-icon-calcudoku i.bl { border-width: 0 0 1.5px 1.5px; border-bottom-left-radius: 5px; }
+.game-icon-calcudoku i.br { border-width: 0 1.5px 1.5px 0; border-bottom-right-radius: 5px; }
+.game-icon-calcudoku b { position: absolute; top: 1px; left: 2px; font-size: 0.45rem; font-weight: 800; }
+
+/* Futoshiki: digits with the signs between them. */
+.game-icon-futoshiki i { color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, var(--sheet)); }
+.game-icon-futoshiki i.s { background: none; font-size: 0.75rem; font-weight: 900; }
+.game-icon-futoshiki i.d { rotate: 90deg; }
+
+/* Skyscrapers: edge clues over buildings screened deeper the taller they are. */
+.game-icon-skyscrapers i { color: var(--blue); }
+.game-icon-skyscrapers i.k { font-size: 0.7rem; }
+.game-icon-skyscrapers i.h1 { background: color-mix(in srgb, var(--blue) 15%, var(--sheet)); }
+.game-icon-skyscrapers i.h2 { background: color-mix(in srgb, var(--blue) 40%, var(--sheet)); }
+.game-icon-skyscrapers i.h3 { background: var(--blue); color: var(--on-ink); }
+
+/* Jigsaw Sudoku: one odd-shaped region tinted blue. */
+.game-icon-jigsaw i { color: var(--blue); }
+.game-icon-jigsaw i.r { background: color-mix(in srgb, var(--blue) 22%, var(--sheet)); }
+
+/* Sudoku X: digits over the two diagonals. */
+.game-icon-sudokux i { color: var(--blue); position: relative; z-index: 1; }
+.game-icon-sudokux::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  background:
+    linear-gradient(to top right, transparent calc(50% - 1px), color-mix(in srgb, var(--blue) 40%, transparent) 50%, transparent calc(50% + 1px)),
+    linear-gradient(to bottom right, transparent calc(50% - 1px), color-mix(in srgb, var(--blue) 40%, transparent) 50%, transparent calc(50% + 1px));
+}
+
 /* Logic puzzles in orange: painted cells are solid ink, the rest is sunk paper. */
 .game-icon-nonograms i, .game-icon-nurikabe i, .game-icon-hitori i, .game-icon-lightsout i,
 .game-icon-takuzu i, .game-icon-starbattle i { background: var(--sunk); color: var(--orange); }

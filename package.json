@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "pack-puzzles": "node scripts/pack-puzzles.mjs",
-    "gen-puzzles": "for g in nonograms killer kakuro takuzu nurikabe hitori starbattle; do node scripts/gen-$g.ts || exit 1; done",
+    "gen-puzzles": "for g in nonograms killer kakuro calcudoku futoshiki skyscrapers jigsaw sudokux takuzu nurikabe hitori starbattle; do node scripts/gen-$g.ts || exit 1; done",
     "android:sync": "npm run build && npx cap sync android",
     "android:open": "npx cap open android",
     "android:apk": "npm run android:sync && cd android && ./gradlew assembleDebug"

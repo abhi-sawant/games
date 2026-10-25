@@ -22,7 +22,7 @@ Every game belongs to exactly one **category**, shown as a section on the home p
 
 | Category | Ink | Games |
 |---|---|---|
-| Number puzzles | `--blue` | Sudoku, Killer Sudoku, Kakuro |
+| Number puzzles | `--blue` | Sudoku, Killer Sudoku, Kakuro, Calcudoku, Futoshiki, Skyscrapers, Jigsaw Sudoku, Sudoku X |
 | Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out |
 | Number tiles | `--lilac` | 2248, 2048, Threes, 15-puzzle |
 | Play the computer | `--sky` | Tic-tac-toe, Dots and Boxes, Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers |
