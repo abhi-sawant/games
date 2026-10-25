@@ -1,5 +1,5 @@
 import type { Guide } from '../guides';
-import { grid, svg } from '../art';
+import { grid, row, svg } from '../art';
 
 const COMMON = '<b>Undo</b> takes back your last move, <b>Hint</b> helps with one cell, and a rule that is broken is highlighted.';
 
@@ -339,6 +339,32 @@ export const logic: Record<string, Guide> = {
     example: {
       html: svg(120, 120, `<path class="line" d="M20 20H100"/><path class="line" style="stroke:var(--blue)" d="M20 60H100"/><path class="line" style="stroke:var(--teal)" d="M20 100H100"/><circle class="ink" cx="20" cy="20" r="9"/><circle class="ink" cx="100" cy="20" r="9"/><circle cx="20" cy="60" r="9" style="fill:var(--blue)"/><circle cx="100" cy="60" r="9" style="fill:var(--blue)"/><circle cx="20" cy="100" r="9" style="fill:var(--teal)"/><circle cx="100" cy="100" r="9" style="fill:var(--teal)"/>`),
       caption: 'Three pairs joined, with no crossings. Every cell is covered.',
+    },
+  },
+  watersort: {
+    name: 'Water Sort',
+    ink: 'orange',
+    goal: 'Pour the colours between tubes until every tube holds just one colour.',
+    steps: [
+      'Each tube holds up to four units of colour. Some tubes start mixed, and two are spare.',
+      'Tap a tube to pick it up, then tap another tube to pour into it. The whole run of matching colour on top moves, as much as fits.',
+      'You can pour onto an empty tube, or onto a tube whose top colour is the same. Nothing else is allowed.',
+      'When every tube is empty or full of a single colour, the board is sorted.',
+    ],
+    controls: [
+      '<b>Tap</b> a tube, then the tube to pour it into. Tap the same tube again to put it down.',
+      COMMON,
+    ],
+    tips: [
+      'Use a spare tube to hold a colour that is in your way, then pour it back later.',
+      'Try to pour onto a tube that already has the same colour, so you do not use up the spare ones.',
+    ],
+    example: {
+      html: row(
+        [`<div style="display:flex;gap:12px">${grid(1, ['', '|blue', '|blue', '|orange'], 34)}${grid(1, ['', '', '|blue', '|blue'], 34)}</div>`, 'Pour the left tube into the right'],
+        [`<div style="display:flex;gap:12px">${grid(1, ['', '', '', '|orange'], 34)}${grid(1, ['|blue', '|blue', '|blue', '|blue'], 34)}</div>`, 'Blue is sorted'],
+      ),
+      caption: 'The two blues on top of the left tube fit on the two blues in the right tube. The orange stays behind.',
     },
   },
 };

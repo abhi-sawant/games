@@ -311,6 +311,10 @@
 .game-icon-flow i.p1 { background: color-mix(in srgb, var(--orange) 30%, var(--sheet)); }
 .game-icon-flow i.p2 { background: color-mix(in srgb, var(--blue) 30%, var(--sheet)); }
 
+/* Water Sort: two sorted tubes and a third still mixed. */
+.game-icon-watersort i { background: var(--orange); }
+.game-icon-watersort i.b { background: var(--blue); }
+
 .game-icon-starbattle { gap: 0; }
 .game-icon-starbattle i { border-radius: 0; background: color-mix(in srgb, var(--orange) 14%, var(--sheet)); font-size: 1rem; }
 .game-icon-starbattle i:nth-child(2), .game-icon-starbattle i:nth-child(3), .game-icon-starbattle i:nth-child(6) {

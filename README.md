@@ -17,6 +17,9 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
 - **Dots and Boxes**: a 4×4-box board against the computer (Easy, Medium, or a Hard opponent that plans the
   endgame and uses the double-cross) or a friend on one screen. Closing a box claims it and you go again.
   Undo, alternating first move, history and win/draw/loss stats per level.
+- **Water Sort**: pour the top colour of one tube onto another until every tube holds a single colour. Easy, Medium
+  or Hard deals a fresh shuffle each game, checked solvable by a search (`src/watersort/board.ts`) that also gives
+  hints. Runs on the shared logic page, with undo, restart, history and best times.
 - **Killer Sudoku** and **Kakuro**: sum puzzles with notes, mistake highlighting and a pausable timer.
 - **Calcudoku, Futoshiki, Skyscrapers, Jigsaw Sudoku, Sudoku X**: Latin-square puzzles on one shared board
   (`src/shared/latin-board.ts`), with one solver for cages, inequality signs, edge clues, regions and diagonals
@@ -76,7 +79,7 @@ tictactoe/index.html, src/tictactoe/     Tic-tac-toe
 dots/index.html, src/dots/               Dots and Boxes
 <game>/index.html, src/<game>/           the newer games: killer, kakuro, calcudoku, futoshiki, skyscrapers, jigsaw,
                                          sudokux, nonograms, takuzu, nurikabe, hitori, starbattle, lightsout, tents,
-                                         lightup, heyawake, lits, slitherlink, masyu, bridges, flow, threes, fifteen,
+                                         lightup, heyawake, lits, slitherlink, masyu, bridges, flow, watersort, threes, fifteen,
                                          sokoban, rushhour, pegs, connect4, reversi, gomoku, morris, checkers,
                                          mancala, ultimate, hex, go, chess, backgammon, battleship, klondike,
                                          freecell, spider, yukon, canfield, fortythieves, pyramid, tripeaks, golf,

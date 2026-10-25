@@ -39,7 +39,7 @@ const IN_PROGRESS: [id: string, started: (save: Save) => boolean][] = [
 for (const id of [
   'killer', 'kakuro', 'calcudoku', 'futoshiki', 'skyscrapers', 'jigsaw', 'sudokux', 'nonograms', 'takuzu', 'nurikabe',
   'hitori', 'starbattle', 'lightsout', 'tents', 'lightup', 'heyawake', 'lits', 'slitherlink', 'masyu', 'bridges',
-  'flow', 'threes', 'fifteen', 'sokoban', 'rushhour', 'pegs', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers',
+  'flow', 'watersort', 'threes', 'fifteen', 'sokoban', 'rushhour', 'pegs', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers',
   'mancala', 'ultimate', 'hex', 'go', 'chess', 'backgammon', 'battleship', 'klondike', 'freecell', 'spider', 'yukon',
   'canfield', 'fortythieves', 'pyramid', 'tripeaks', 'golf', 'wordguess', 'wordsearch', 'letterwheel', 'yacht',
   'farkle', 'pig',
