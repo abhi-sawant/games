@@ -31,6 +31,10 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
 - **Lights Out**: every tap flips a light and its neighbours; boards are made by random taps so they're always solvable,
   and Hint shows a move from the shortest solution.
 - **Threes** and **15-puzzle**: slide-and-merge and sliding-tile puzzles with undo, history and stats.
+- **Sokoban, Rush Hour, Peg Solitaire**: on the shared logic page. Sokoban levels are made backwards, by pulling
+  boxes off their targets, so all can be solved; Rush Hour starts each board at the position furthest from a way
+  out. Both are graded by their fewest moves, and hints come from a search from wherever you are. Peg Solitaire
+  plays the English, European and triangle boards.
 - **Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers**: against the computer (Easy, Medium, Hard, searched in a
   Web Worker) or a friend on one screen, with tally, undo, history and stats.
 - **Klondike** (draw 1 or 3) and **FreeCell** (numbered Microsoft-compatible deals): drag or tap to move, undo, timer,
@@ -58,7 +62,7 @@ dots/index.html, src/dots/               Dots and Boxes
 <game>/index.html, src/<game>/           the newer games: killer, kakuro, calcudoku, futoshiki, skyscrapers,
                                          jigsaw, sudokux, nonograms, takuzu, nurikabe, hitori,
                                          starbattle, lightsout, tents, lightup, heyawake, lits, slitherlink,
-                                         masyu, bridges, flow, threes, fifteen, connect4, reversi, gomoku,
+                                         masyu, bridges, flow, sokoban, rushhour, pegs, threes, fifteen, connect4, reversi, gomoku,
                                          morris, checkers, klondike, freecell, spider, yukon, canfield,
                                          fortythieves, pyramid, tripeaks, golf
 src/shared/                              helpers the newer games share: screens, timer, storage, puzzle loading,

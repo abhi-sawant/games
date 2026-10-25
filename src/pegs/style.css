@@ -1,0 +1,38 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Peg Solitaire prints in lilac, with the number tiles. Holes are sunk paper; pegs are solid lilac, a picked
+   peg rings in navy, and the holes it can jump to show a lilac ring. */
+:root { --c: var(--lilac); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.board.pegs { position: relative; display: block; padding: 6px; touch-action: none; }
+.hole {
+  position: absolute;
+  left: calc(6px + (100% - 12px) / var(--cols) * var(--x));
+  top: calc(6px + (100% - 12px) / var(--rows) * var(--y));
+  width: calc((100% - 12px) / var(--cols));
+  height: calc((100% - 12px) / var(--rows));
+  display: grid;
+  place-items: center;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+.hole::after {
+  content: '';
+  width: 42%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--sunk);
+  box-shadow: inset 0 2px 3px rgb(20 25 50 / 0.18);
+  transition: width 0.12s ease, background 0.12s ease;
+}
+.hole.peg::after { width: 70%; background: var(--c); box-shadow: 0 2px 4px -1px rgb(20 25 50 / 0.35); }
+.hole.picked::after { box-shadow: 0 0 0 4px var(--ink); }
+.hole.target::after { box-shadow: inset 0 0 0 3px var(--c); }
+.hole.hint::after { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.hole:disabled { cursor: default; }
+.board.pegs.is-paused .hole { visibility: hidden; }

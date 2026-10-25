@@ -1,0 +1,46 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Sokoban prints in lilac, with the number tiles. Walls are solid navy, targets a lilac ring, boxes a lilac
+   tint that goes solid once home, and the player a navy counter that slides from square to square. */
+:root { --c: var(--lilac); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.board.sokoban { position: relative; gap: 0; padding: 6px; touch-action: none; }
+.square { position: relative; background: var(--sheet); }
+.square.wall { background: var(--ink); border-radius: 3px; }
+.square.target::after {
+  content: '';
+  position: absolute;
+  inset: 32%;
+  border-radius: 50%;
+  box-shadow: 0 0 0 calc(100cqi / var(--cols) * 0.05) var(--c);
+}
+.square.box::before {
+  content: '';
+  position: absolute;
+  inset: 9%;
+  z-index: 1;
+  border-radius: calc(100cqi / var(--cols) * 0.12);
+  background: color-mix(in srgb, var(--c) 40%, var(--sheet));
+  box-shadow: inset 0 0 0 calc(100cqi / var(--cols) * 0.05) var(--c);
+}
+.square.box.home::before { background: var(--c); }
+.square.hint { outline: 3px solid var(--yellow); outline-offset: -3px; animation: hint 1s ease-in-out infinite alternate; }
+
+.player {
+  position: absolute;
+  z-index: 2;
+  left: 6px;
+  top: 6px;
+  width: calc((100% - 12px) / var(--cols));
+  height: calc((100% - 12px) / var(--rows));
+  translate: calc(var(--x) * 100%) calc(var(--y) * 100%);
+  transition: translate 0.1s ease-out;
+  pointer-events: none;
+}
+.player::after { content: ''; position: absolute; inset: 20%; border-radius: 50%; background: var(--ink); }
+
+.board.sokoban.is-paused > * { visibility: hidden; }
+.board.sokoban.is-paused { background: var(--c); }

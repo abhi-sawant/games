@@ -293,6 +293,24 @@
 .game-icon-fifteen i { background: var(--sunk); font-size: 0.72rem; }
 .game-icon-fifteen i.t { background: color-mix(in srgb, var(--lilac) 30%, var(--sheet)); color: var(--ink); }
 
+/* Sokoban: navy walls, the navy player, a lilac box and a ringed target. */
+.game-icon-sokoban i { background: var(--sheet); }
+.game-icon-sokoban i.w { background: var(--ink); }
+.game-icon-sokoban i.p::after { content: ''; width: 55%; height: 55%; border-radius: 50%; background: var(--ink); }
+.game-icon-sokoban i.b { background: color-mix(in srgb, var(--lilac) 40%, var(--sheet)); box-shadow: inset 0 0 0 2px var(--lilac); }
+.game-icon-sokoban i.t::after { content: ''; width: 36%; height: 36%; border-radius: 50%; box-shadow: 0 0 0 2px var(--lilac); }
+
+/* Rush Hour: lilac cars and the coral one. */
+.game-icon-rushhour { gap: 3px; }
+.game-icon-rushhour i { background: var(--sunk); }
+.game-icon-rushhour i.v, .game-icon-rushhour i.h, .game-icon-rushhour i.h2 { background: color-mix(in srgb, var(--lilac) 45%, var(--sheet)); }
+.game-icon-rushhour i.r { background: var(--coral); }
+
+/* Peg Solitaire: lilac pegs in sunk holes. */
+.game-icon-pegs i { background: none; }
+.game-icon-pegs i::after { content: ''; width: 46%; height: 46%; border-radius: 50%; background: var(--sunk); }
+.game-icon-pegs i.g::after { width: 70%; height: 70%; background: var(--lilac); }
+
 /* Board games in sky: you print in sky, the other side in coral, or as sheet discs with a sky ring. */
 .game-icon-connect4 { background: color-mix(in srgb, var(--sky) 22%, var(--sheet)); }
 .game-icon-connect4 i { border-radius: 50%; background: var(--sunk); }

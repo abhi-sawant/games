@@ -1,0 +1,57 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Rush Hour prints in lilac, with the number tiles. Cars are lilac with an ink rim; the red car is coral,
+   the shared accent, so it stands out. The exit is a gap in the frame on the red car's row. */
+:root { --c: var(--lilac); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.board.traffic {
+  --cols: var(--n);
+  --rows: var(--n);
+  --gap: 4px;
+  position: relative;
+  display: block;
+  padding: 8px;
+  touch-action: none;
+  box-shadow: 0 0 0 3px var(--ink), var(--shadow);
+}
+.lot, .car {
+  --cell: calc((100% - 16px) / var(--n));
+  position: absolute;
+  left: calc(8px + var(--cell) * var(--x) + var(--gap) / 2);
+  top: calc(8px + var(--cell) * var(--y) + var(--gap) / 2);
+  width: calc(var(--cell) - var(--gap));
+  height: calc(var(--cell) - var(--gap));
+}
+.lot { border-radius: 6px; background: var(--sunk); }
+.exit {
+  position: absolute;
+  right: -3px;
+  top: calc(8px + (100% - 16px) / var(--n) * var(--exit));
+  width: 6px;
+  height: calc((100% - 16px) / var(--n));
+  background: var(--sheet);
+}
+
+.car {
+  z-index: 1;
+  border-radius: calc(100cqi / var(--n) * 0.18);
+  background: color-mix(in srgb, var(--c) 45%, var(--sheet));
+  box-shadow: inset 0 0 0 calc(100cqi / var(--n) * 0.04) var(--c);
+  cursor: grab;
+  transition: left 0.15s ease-out, top 0.15s ease-out;
+}
+.car.across { width: calc(var(--cell) * var(--len) - var(--gap)); }
+.car.down { height: calc(var(--cell) * var(--len) - var(--gap)); }
+.car.red { background: var(--coral); box-shadow: none; }
+.car.dragging { transition: none; z-index: 2; cursor: grabbing; }
+.car.hint { outline: 3px solid var(--yellow); outline-offset: 2px; animation: hint 1s ease-in-out infinite alternate; }
+.board.traffic.out .car.red { translate: 150% 0; opacity: 0; transition: translate 0.6s ease-in, opacity 0.6s ease-in; }
+
+@media (prefers-color-scheme: dark) {
+  .board.traffic { box-shadow: 0 0 0 3px var(--rule), var(--shadow); }
+}
+
+.board.traffic.is-paused > * { visibility: hidden; }
