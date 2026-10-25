@@ -3,6 +3,7 @@
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import './pwa';
+import { showGameOfTheDay } from './gotd';
 import { checkForUpdate } from './update';
 
 type Save = Record<string, any> | null;
@@ -83,6 +84,7 @@ function setupInstallButton() {
   btn.hidden = false;
 }
 
+showGameOfTheDay();
 renderStatus();
 // Coming back with the browser's back button can restore this page from the bfcache.
 window.addEventListener('pageshow', renderStatus);

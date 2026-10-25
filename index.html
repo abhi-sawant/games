@@ -28,6 +28,20 @@
           </button>
         </header>
 
+        <!-- Filled in by src/gotd.ts from the game's own card below. -->
+        <section class="gotd" id="gotd" aria-labelledby="gotd-label" hidden>
+          <h2 class="section-label" id="gotd-label">Game of the day</h2>
+          <a class="gotd-card grain" id="gotd-link" href="/">
+            <span class="gotd-icon" aria-hidden="true"></span>
+            <span class="gotd-text">
+              <span class="gotd-tag"></span>
+              <span class="gotd-name"></span>
+              <span class="gotd-desc"></span>
+            </span>
+            <svg class="gotd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+        </section>
+
         <!-- Links name index.html explicitly: the Android app's local server sends extensionless paths to the root page. -->
         <!-- Each card sets its family's ink with a class: ink-blue, ink-orange, ink-lilac, ink-sky, ink-olive, ink-berry, ink-plum or ink-cocoa.
              Cards sit in their family's section. -->
