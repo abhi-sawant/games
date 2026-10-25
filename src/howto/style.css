@@ -126,3 +126,9 @@
 .fig-svg .rule { stroke: var(--rule); stroke-width: 2; fill: none; }
 .fig-svg .dot { fill: var(--ink); stroke: none; }
 .fig-svg .ink { fill: var(--c); stroke: none; }
+.fig-svg text { stroke: none; fill: var(--ink); font-weight: 800; font-size: 16px; font-variation-settings: 'CASL' 1; text-anchor: middle; dominant-baseline: central; }
+.fig-svg text.on { fill: var(--on-ink); }
+.fig-svg .pearl-w { fill: var(--sheet); stroke: var(--ink); stroke-width: 3; }
+.fig-svg .pearl-b { fill: var(--ink); stroke: none; }
+.fig-svg .bridge { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.fig-svg .wall { fill: var(--ink); stroke: none; }

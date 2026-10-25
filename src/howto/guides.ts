@@ -15,10 +15,13 @@ export interface Guide {
   example?: { html: string; caption: string };
 }
 
+import { arcade } from './guides/arcade';
 import { cards } from './guides/cards';
+import { dice } from './guides/dice';
 import { logic } from './guides/logic';
+import { tiles } from './guides/tiles';
 import { number } from './guides/number';
 import { versus } from './guides/versus';
 import { words } from './guides/words';
 
-export const GUIDES: Record<string, Guide> = { ...number, ...logic, ...versus, ...cards, ...words };
+export const GUIDES: Record<string, Guide> = { ...number, ...logic, ...tiles, ...versus, ...cards, ...words, ...dice, ...arcade };
