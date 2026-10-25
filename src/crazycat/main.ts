@@ -41,6 +41,8 @@ $('end-menu').addEventListener('click', () => { endDialog.close(); screens.home(
 // Tapping the board jumps. The first tap also starts the run, and a tap while paused carries on.
 const frame = canvas.parentElement!;
 frame.addEventListener('pointerdown', (e) => { e.preventDefault(); tap(); });
+// A big button under the board, so a thumb never has to cover the game.
+$('jump-btn').addEventListener('pointerdown', (e) => { e.preventDefault(); tap(); });
 document.addEventListener('keydown', (e) => {
   if (!screens.is('game') || e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w') {

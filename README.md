@@ -111,10 +111,11 @@ npm run preview   # serve dist/ (the service worker only runs in a build)
 
 Deploy `dist/` to any static host served over HTTPS.
 
-Pushes to `master` deploy automatically to cPanel through `.github/workflows/deploy.yml`, which bumps the patch version (committing `release: vX.Y.Z` and tagging it), builds the site and uploads
-`dist/` over FTPS. Add these repository secrets (Settings → Secrets and variables → Actions): `FTP_SERVER` (the host,
-e.g. `ftp.example.com`), `FTP_USERNAME`, `FTP_PASSWORD` (an FTP account from cPanel) and `FTP_SERVER_DIR` (the web root
-to upload into, ending in `/`, e.g. `public_html/`).
+Pushes to `master` deploy automatically to cPanel through `.github/workflows/deploy.yml`, which bumps the patch version
+(committing `release: vX.Y.Z` and tagging it), builds the site, zips `dist/`, copies the zip over SSH and unzips it in the web
+root. Enable SSH in cPanel (Security → SSH Access), authorize a key pair there, and add these repository secrets
+(Settings → Secrets and variables → Actions): `SSH_HOST`, `SSH_USER`, `SSH_PRIVATE_KEY` (the private key, whole file),
+`SSH_DIR` (the web root, as an absolute path such as `/home/user/public_html`) and optionally `SSH_PORT` (default 22).
 
 ## Android
 
