@@ -11,7 +11,7 @@ const games = [
   'slitherlink', 'masyu', 'bridges', 'flow', '2248', '2048', 'threes', 'fifteen', 'sokoban', 'rushhour', 'pegs',
   'tictactoe', 'dots', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers', 'mancala', 'ultimate', 'hex', 'go',
   'chess', 'backgammon', 'battleship', 'klondike', 'freecell', 'spider', 'yukon', 'canfield', 'fortythieves',
-  'pyramid', 'tripeaks', 'golf', 'wordguess', 'wordsearch', 'letterwheel',
+  'pyramid', 'tripeaks', 'golf', 'wordguess', 'wordsearch', 'letterwheel', 'yacht', 'farkle', 'pig',
 ];
 
 // The built files each game needs that the home page doesn't, in home page order, so the service worker can

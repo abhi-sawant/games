@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Free offline Yacht, the five-dice game: alone for a high score, or against the computer." />
+    <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <link rel="preload" href="/src/fonts/recursive-latin-full.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="color-scheme" content="light dark" />
+    <!-- The paper colour from base.css, so the page never shows the browser's white canvas while the stylesheet loads. -->
+    <style>html { background: #eef0f3; } @media (prefers-color-scheme: dark) { html { background: #141927; } }</style>
+    <link rel="stylesheet" href="/src/yacht/style.css" />
+    <title>Yacht</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Home -->
+      <section id="home" class="screen">
+        <div class="home-inner">
+          <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <span>All games</span>
+          </a>
+          <h1 class="logo">Yacht</h1>
+          <p class="tagline">Roll five dice up to three times a turn, keeping any you like, then fill one of thirteen boxes on your card.</p>
+
+          <button id="continue-btn" class="btn btn-primary continue" hidden>
+            <span>Continue</span>
+            <small id="continue-meta"></small>
+          </button>
+
+          <h2 class="section-label">Play the computer</h2>
+          <div class="levels">
+            <button class="btn level" data-mode="easy"><span>Easy</span><small>Takes what comes</small></button>
+            <button class="btn level" data-mode="medium"><span>Medium</span><small>Plans its rolls</small></button>
+            <button class="btn level" data-mode="hard"><span>Hard</span><small>Plans them carefully</small></button>
+          </div>
+
+          <h2 class="section-label">Play alone</h2>
+          <div class="levels">
+            <button class="btn level" data-mode="solo"><span>Solo</span><small>Go for a high score</small></button>
+          </div>
+
+          <button id="history-btn" class="btn history-link">
+            <span>History &amp; stats</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen" hidden>
+        <header class="topbar">
+          <button id="history-back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <h1 class="topbar-title">History</h1>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <table class="summary">
+          <thead>
+            <tr><th></th><th scope="col">Played</th><th scope="col">Won</th><th scope="col">Lost</th></tr>
+          </thead>
+          <tbody id="history-summary"></tbody>
+        </table>
+
+        <h2 class="section-label">Recent games</h2>
+        <p id="history-empty" class="history-empty">No finished games yet. Play a round and it will show up here.</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+
+      <!-- Game -->
+      <section id="game" class="screen" hidden>
+        <header class="topbar">
+          <button id="back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <div class="meta">
+            <b id="level-label"></b>
+            <span><span id="round-label"></span></span>
+          </div>
+          <div class="tally" id="tally">
+            <span><b id="tally-a"></b><small>You</small></span>
+            <span id="tally-b-wrap"><b id="tally-b"></b><small>CPU</small></span>
+          </div>
+        </header>
+
+        <div class="board-wrap yacht">
+          <div id="dice" class="dice-row"></div>
+          <p id="status" class="status" aria-live="polite"></p>
+          <div class="actions">
+            <button id="roll-btn" class="btn btn-primary">Roll</button>
+          </div>
+          <div id="card" class="card" role="table" aria-label="Score card">
+            <div class="row head"><span></span><b>You</b><b class="cpu">CPU</b></div>
+          </div>
+          <button id="next-btn" class="btn btn-primary next" hidden>New game</button>
+        </div>
+
+      </section>
+    </div>
+    <script type="module" src="/src/yacht/main.ts"></script>
+  </body>
+</html>

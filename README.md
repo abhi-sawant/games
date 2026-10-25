@@ -50,6 +50,9 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
   and unlimited play; Word Search makes a fresh themed grid each game; Letter Wheel fills a little crossword from a
   wheel of letters. Their words come from `scripts/words/common.txt` (written for these games) and the system word
   list, `/usr/share/dict/words` (Webster's Second International, public domain), via `scripts/gen-words.ts`.
+- **Yacht, Farkle, Pig**: dice games in plum, sharing a dice row (`src/dice/`). Yacht is played alone for a high score
+  or against the computer, which plans its holds by playing rerolls out; Farkle and Pig are races against the
+  computer or a friend. Rolls are saved with the game, so a reload never rerolls.
 - Works with no connection: the service worker installs with just the home page, caches each game when it's opened,
   then fetches the rest in the background, the open game first (see `src/sw.ts`).
 
@@ -68,17 +71,20 @@ minesweeper/index.html, src/minesweeper/ Minesweeper
 2048/index.html, src/2048/               2048
 tictactoe/index.html, src/tictactoe/     Tic-tac-toe
 dots/index.html, src/dots/               Dots and Boxes
-<game>/index.html, src/<game>/           the newer games: killer, kakuro, calcudoku, futoshiki, skyscrapers,
-                                         jigsaw, sudokux, nonograms, takuzu, nurikabe, hitori,
-                                         starbattle, lightsout, tents, lightup, heyawake, lits, slitherlink,
-                                         masyu, bridges, flow, sokoban, rushhour, pegs, mancala,
-                                         ultimate, hex, go, chess, backgammon, battleship, wordguess,
-                                         wordsearch, letterwheel, threes, fifteen, connect4, reversi, gomoku,
-                                         morris, checkers, klondike, freecell, spider, yukon, canfield,
-                                         fortythieves, pyramid, tripeaks, golf
+<game>/index.html, src/<game>/           the newer games: killer, kakuro, calcudoku, futoshiki, skyscrapers, jigsaw,
+                                         sudokux, nonograms, takuzu, nurikabe, hitori, starbattle, lightsout, tents,
+                                         lightup, heyawake, lits, slitherlink, masyu, bridges, flow, threes, fifteen,
+                                         sokoban, rushhour, pegs, connect4, reversi, gomoku, morris, checkers,
+                                         mancala, ultimate, hex, go, chess, backgammon, battleship, klondike,
+                                         freecell, spider, yukon, canfield, fortythieves, pyramid, tripeaks, golf,
+                                         wordguess, wordsearch, letterwheel, yacht, farkle, pig
+src/dice/                                dice drawing and rolling, and the race layout, for the dice games
 src/shared/                              helpers the newer games share: screens, timer, storage, puzzle loading,
-                                         grid.css for the grid puzzles, and the match runner, search and
-                                         styles for the two-sided board games (vsmatch.ts, vs.ts, vs.css)
+                                         grid.css for the grid puzzles, the match runner, search and styles for
+                                         the two-sided board games (vsmatch.ts, vs.ts, vs.css, mcts.ts), the
+                                         Latin-square board and solver (latin*.ts), and the logic page with its
+                                         lattice and loop solver (logic-board.ts, logic.css, lattice.ts,
+                                         loopsolver.ts)
 src/cards/                               deck (one or two decks), card drawing and drag, and the solitaire loop
 scripts/gen-<game>.ts                    puzzle generators writing public/puzzles/<game>/<level>.txt; the slow
                                          ones spread over every core with scripts/parallel-gen.ts

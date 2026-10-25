@@ -1,0 +1,26 @@
+/* The dice shared by the dice games, in the category ink: a die is the sheet with ink pips; a held die (or
+   one set aside to score) turns solid ink with paper pips and lifts. */
+
+.dice-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.die {
+  --size: clamp(40px, 12.5vw, 58px);
+  width: var(--size);
+  aspect-ratio: 1;
+  padding: calc(var(--size) * 0.16); /* a percentage would be of the row's width */
+  border: 0;
+  border-radius: 22%;
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 2px var(--c), var(--shadow);
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 6%;
+  cursor: pointer;
+  transition: translate 0.15s ease, background 0.15s ease;
+}
+.die i { border-radius: 50%; }
+.die i.pip { background: var(--c); }
+.die.held { background: var(--c); translate: 0 -6px; }
+.die.held i.pip { background: var(--on-ink); }
+.die.blank { box-shadow: inset 0 0 0 2px var(--rule); background: var(--sunk); }
+.die.gone { opacity: 0.25; box-shadow: inset 0 0 0 2px var(--rule); }
+.die:disabled { cursor: default; }

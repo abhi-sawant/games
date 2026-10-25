@@ -20,8 +20,8 @@
   --on-ink: #f9fafb;
 
   /* The ink set. Each family of games prints in one ink (see DESIGN.md): number puzzles blue,
-     logic puzzles orange, number tiles lilac, board games sky, cards olive, word games berry. Teal,
-     coral, yellow and mint are accents shared by all. */
+     logic puzzles orange, number tiles lilac, board games sky, cards olive, word games berry, dice
+     games plum. Teal, coral, yellow and mint are accents shared by all. */
   --blue: #3f5fb0;
   --teal: #1f6d66;
   --coral: #bc4c37;
@@ -32,6 +32,7 @@
   --sky: #1d6a8f;
   --olive: #62661c;
   --berry: #a3376f;
+  --plum: #7e3f96;
 
   --c: var(--blue);
   --field: 15%;
@@ -67,6 +68,7 @@
     --sky: #6cc4ea;
     --olive: #c3c86f;
     --berry: #f19ac5;
+    --plum: #d6a0ea;
     --field: 20%;
     --blend: screen;
     --grain-op: 0.1;
