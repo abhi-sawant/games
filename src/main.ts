@@ -38,7 +38,8 @@ const IN_PROGRESS: [id: string, started: (save: Save) => boolean][] = [
 // The newer games all save `started` from their first move.
 for (const id of [
   'killer', 'kakuro', 'calcudoku', 'futoshiki', 'skyscrapers', 'jigsaw', 'sudokux', 'nonograms', 'takuzu',
-  'nurikabe', 'hitori', 'starbattle', 'lightsout',
+  'nurikabe', 'hitori', 'starbattle', 'lightsout', 'tents', 'lightup', 'heyawake', 'lits', 'slitherlink', 'masyu',
+  'bridges', 'flow',
   'threes', 'fifteen', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers', 'klondike', 'freecell',
   'spider', 'yukon', 'canfield', 'fortythieves', 'pyramid', 'tripeaks', 'golf',
 ]) IN_PROGRESS.push([id, (s) => s?.status === 'playing' && !!s.started]);

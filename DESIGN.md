@@ -23,7 +23,7 @@ Every game belongs to exactly one **category**, shown as a section on the home p
 | Category | Ink | Games |
 |---|---|---|
 | Number puzzles | `--blue` | Sudoku, Killer Sudoku, Kakuro, Calcudoku, Futoshiki, Skyscrapers, Jigsaw Sudoku, Sudoku X |
-| Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out |
+| Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out, Tents, Light Up, Heyawake, LITS, Slitherlink, Masyu, Bridges, Flow |
 | Number tiles | `--lilac` | 2248, 2048, Threes, 15-puzzle |
 | Play the computer | `--sky` | Tic-tac-toe, Dots and Boxes, Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers |
 | Cards | `--olive` | Klondike, FreeCell, Spider, Yukon, Canfield, Forty Thieves, Pyramid, TriPeaks, Golf |
@@ -93,7 +93,7 @@ Boards sit on `--sheet` with `--r-board` corners and `--shadow`. Use paper as th
 
 - Something you can still act on (an unopened cell) is **solid ink**.
 - Something finished or empty is **`--sunk` paper**.
-- Numbers that carry meaning take inks from the set (Minesweeper counts: 1 blue, 2 teal, 3 coral, 4 lilac). Keep accents clear of the category ink: on Minesweeper's orange cells, flags are pale and a hit mine is navy, not coral.
+- Numbers that carry meaning take inks from the set (Minesweeper counts: 1 blue, 2 teal, 3 coral, 4 lilac). Flow's pairs do the same, starting from the category's orange, and every pair carries its number too. Keep accents clear of the category ink: on Minesweeper's orange cells, flags are pale and a hit mine is navy, not coral.
 - Value scales (2248 and 2048 tiles, shared in `src/tiles.css`) step through the inks as a 40% screen, then solid: sunflower, coral, teal, blue, lilac, mint. At night the screen steps lighten towards `--ink` rather than darken towards paper, which goes muddy.
 - Paths and selections over a board are navy ink overprinted at about 45%.
 

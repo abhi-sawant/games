@@ -237,6 +237,42 @@
 .game-icon-hitori i.f { color: color-mix(in srgb, var(--on-ink) 55%, var(--orange)); }
 .game-icon-takuzu i { background: color-mix(in srgb, var(--orange) 15%, var(--sheet)); color: var(--orange); }
 .game-icon-takuzu i.f { background: var(--orange); color: var(--on-ink); }
+.game-icon-tents i, .game-icon-lightup i, .game-icon-heyawake i, .game-icon-lits i, .game-icon-slitherlink i,
+.game-icon-masyu i, .game-icon-bridges i, .game-icon-flow i { background: var(--sunk); color: var(--orange); }
+.game-icon-heyawake i.f, .game-icon-lits i.f { background: var(--orange); }
+.game-icon-heyawake b { align-self: start; justify-self: start; padding: 2px 0 0 3px; font-size: 0.55rem; color: var(--ink); }
+
+/* Tents: ink tents and mint trees. */
+.game-icon-tents i.g { color: var(--mint); font-size: 1rem; }
+.game-icon-tents i.t { font-size: 0.9rem; }
+
+/* Light Up: navy walls, lit cells under the highlighter, ink bulbs. */
+.game-icon-lightup i.w { background: var(--ink); color: var(--paper); }
+.game-icon-lightup i.l { background: color-mix(in srgb, var(--yellow) 42%, var(--sheet)); }
+.game-icon-lightup i.b { font-size: 1rem; }
+
+/* Slitherlink: clues on paper, ringed by the loop's ink. */
+.game-icon-slitherlink { background: var(--sheet); }
+.game-icon-slitherlink i { background: none; color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule); border-radius: 0; }
+.game-icon-slitherlink::after { content: ''; position: absolute; inset: 12px 12px 30px 30px; border: 3px solid var(--orange); border-radius: 3px; }
+
+/* Masyu: a white and a black pearl. */
+.game-icon-masyu i.pw::after, .game-icon-masyu i.pb::after { content: ''; width: 62%; height: 62%; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--ink); }
+.game-icon-masyu i.pb::after { background: var(--ink); }
+
+/* Bridges: islands joined by ink bridges. */
+.game-icon-bridges i { background: none; }
+.game-icon-bridges i.is { background: var(--sheet); border-radius: 50%; box-shadow: inset 0 0 0 2px var(--ink); color: var(--ink); }
+.game-icon-bridges i.br { background: linear-gradient(var(--orange), var(--orange)) center / 100% 3px no-repeat; }
+.game-icon-bridges i.bv { background: linear-gradient(var(--orange), var(--orange)) center / 3px 100% no-repeat; }
+
+/* Flow: two pairs in two inks, numbered. */
+.game-icon-flow i.d1, .game-icon-flow i.d2 { border-radius: 50%; color: var(--on-ink); }
+.game-icon-flow i.d1 { background: var(--orange); }
+.game-icon-flow i.d2 { background: var(--blue); }
+.game-icon-flow i.p1 { background: color-mix(in srgb, var(--orange) 30%, var(--sheet)); }
+.game-icon-flow i.p2 { background: color-mix(in srgb, var(--blue) 30%, var(--sheet)); }
+
 .game-icon-starbattle { gap: 0; }
 .game-icon-starbattle i { border-radius: 0; background: color-mix(in srgb, var(--orange) 14%, var(--sheet)); font-size: 1rem; }
 .game-icon-starbattle i:nth-child(2), .game-icon-starbattle i:nth-child(3), .game-icon-starbattle i:nth-child(6) {

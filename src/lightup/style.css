@@ -1,0 +1,19 @@
+@import '../base.css';
+@import '../shared/grid.css';
+@import '../shared/logic.css';
+
+/* Light Up prints in orange, with the logic puzzles. Walls are solid ink with their number on them; lit cells
+   take the shared sunflower highlighter. At night sunflower and orange both go muddy on navy, so lit cells
+   step up through the pale ink instead, as Star Battle's regions do. */
+:root { --c: var(--orange); }
+
+.cell.wall { background: var(--ink) !important; color: var(--paper); cursor: default; font-size: calc(100cqi / var(--cols) * 0.46); }
+.cell.wall:disabled { opacity: 1; }
+.cell.wall.wrong { color: var(--wrong); }
+.board.cells .cell.lit { background: color-mix(in srgb, var(--yellow) 42%, var(--sheet)); }
+@media (prefers-color-scheme: dark) {
+  .board.cells .cell.lit { background: color-mix(in srgb, var(--ink) 16%, var(--sheet)); }
+}
+.cell .glass { fill: var(--c); }
+.cell .base { stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; fill: none; }
+.cell.wrong .glass { fill: var(--wrong); }

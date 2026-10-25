@@ -1,0 +1,73 @@
+/* Shared by the newer logic puzzles, on top of grid.css: region outlines (Star Battle's), the marks cells
+   take (a small dot for ruled out, solid ink for shaded), clue cells beside the board, and the line-drawn
+   boards (Slitherlink, Masyu, Flow, Bridges) as SVG in the category ink. */
+
+:root { --edge: calc(100cqi / var(--cols) * 0.06); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+/* ---------- Cell boards ---------- */
+
+/* Cells butt up against each other so region outlines read as one line. */
+.board.cells { gap: 0; padding: 4px; }
+.board.cells .cell { cursor: pointer; border-radius: 0; position: relative; background: var(--sheet); box-shadow: inset 0 0 0 0.5px var(--rule); }
+.board.cells .cell:disabled { cursor: default; }
+
+/* Region outlines: one ink rule on each side where the region changes. */
+.cell[data-edges]::before { content: ''; position: absolute; inset: 0; pointer-events: none; border: 0 solid var(--ink); z-index: 1; }
+.cell[data-edges*='t']::before { border-top-width: var(--edge); }
+.cell[data-edges*='r']::before { border-right-width: var(--edge); }
+.cell[data-edges*='b']::before { border-bottom-width: var(--edge); }
+.cell[data-edges*='l']::before { border-left-width: var(--edge); }
+
+.cell.dot::after { content: ''; width: 18%; height: 18%; border-radius: 50%; background: var(--ink-2); }
+.cell.shaded { background: var(--c) !important; }
+.cell.shaded.wrong { background: var(--wrong) !important; }
+.cell.wrong-dot::after { content: ''; width: 22%; height: 22%; border-radius: 50%; background: var(--wrong); }
+.cell svg { width: 66%; height: 66%; }
+
+/* A number tucked into a cell's corner (Heyawake's rooms). */
+.cell .corner {
+  position: absolute;
+  top: 6%;
+  left: 10%;
+  font-size: calc(100cqi / var(--cols) * 0.3);
+  font-weight: 850;
+  color: var(--ink);
+  z-index: 2;
+}
+.cell.shaded .corner { color: var(--on-ink); }
+
+/* Clues beside the board (Tents' counts): plain numbers, struck through once met, coral when passed. */
+.board .clue {
+  display: grid;
+  place-items: center;
+  font-size: calc(100cqi / var(--cols) * 0.42);
+  font-weight: 850;
+  color: var(--c);
+}
+.board .clue.met { color: var(--ink-2); opacity: 0.5; }
+.board .clue.over { color: var(--wrong); }
+
+/* ---------- Line boards ---------- */
+
+.board.lines { display: block; padding: 8px; aspect-ratio: auto; }
+.lattice { display: block; width: 100%; height: auto; touch-action: none; user-select: none; -webkit-user-select: none; }
+.lattice .dots circle { fill: var(--ink); }
+.lattice .grid line { stroke: var(--rule); stroke-width: 2; }
+.lattice .loop line { stroke: var(--c); stroke-width: 14; stroke-linecap: round; }
+.lattice .loop line.wrong { stroke: var(--wrong); }
+.lattice .crosses path { stroke: var(--ink-2); stroke-width: 5; stroke-linecap: round; }
+.lattice .hint line { stroke: var(--yellow); stroke-width: 30; stroke-linecap: round; animation: hint-line 1s ease-in-out infinite alternate; }
+@keyframes hint-line { to { opacity: 0.2; } }
+.lattice text {
+  font-family: inherit;
+  font-weight: 850;
+  font-variation-settings: 'CASL' 1;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+.board.is-paused .lattice > g:not(.grid) { visibility: hidden; }
+.board.solved .lattice .loop line { animation: glow 0.7s ease both; }
+@keyframes glow { 50% { stroke-width: 22; } }

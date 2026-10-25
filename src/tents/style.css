@@ -1,0 +1,15 @@
+@import '../base.css';
+@import '../shared/grid.css';
+@import '../shared/logic.css';
+
+/* Tents prints in orange, with the logic puzzles. Tents are solid ink with a paper door; trees are mint, the
+   shared accent for growing things, so they never read as tents. */
+:root { --c: var(--orange); }
+
+.cell .tent { fill: var(--c); }
+.cell .door { fill: var(--sheet); }
+.cell.wrong .tent { fill: var(--wrong); }
+.cell .tree { fill: var(--mint); }
+.cell .trunk { fill: var(--ink-2); }
+.cell.tree-cell { cursor: default; }
+.cell.tree-cell:disabled { opacity: 1; }
