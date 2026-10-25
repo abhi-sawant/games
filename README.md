@@ -111,6 +111,11 @@ npm run preview   # serve dist/ (the service worker only runs in a build)
 
 Deploy `dist/` to any static host served over HTTPS.
 
+Pushes to `master` deploy automatically to cPanel through `.github/workflows/deploy.yml`, which bumps the patch version (committing `release: vX.Y.Z` and tagging it), builds the site and uploads
+`dist/` over FTPS. Add these repository secrets (Settings → Secrets and variables → Actions): `FTP_SERVER` (the host,
+e.g. `ftp.example.com`), `FTP_USERNAME`, `FTP_PASSWORD` (an FTP account from cPanel) and `FTP_SERVER_DIR` (the web root
+to upload into, ending in `/`, e.g. `public_html/`).
+
 ## Android
 
 Requires the Android SDK. Gradle 9.5 is pinned in `android/gradle/wrapper` so the build runs on Java 25
