@@ -1,0 +1,5 @@
+@import '../base.css';
+@import '../cards/cards.css';
+
+/* Yukon prints in olive, with the card games. */
+:root { --c: var(--olive); }

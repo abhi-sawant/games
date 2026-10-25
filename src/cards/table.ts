@@ -2,7 +2,7 @@
 // tableau columns to fit the screen, slides cards to their new places, and turns pointer input into
 // taps and drags. The game owns the rules; the table only asks it what may move and where.
 
-import { type Card, SUITS, cardName, isRed, rankLabel } from './deck';
+import { type Card, SUITS, cardName, isRed, rankLabel, suit } from './deck';
 
 export interface PileState {
   cards: Card[];
@@ -11,6 +11,8 @@ export interface PileState {
   /** stack: only the top shows; down: a fanned column; right: the last `show` cards fan sideways. */
   fan?: 'stack' | 'down' | 'right';
   show?: number;
+  /** A card picked as the first of a pair (Pyramid), drawn lifted. */
+  selected?: number;
 }
 
 export interface TableHooks {
@@ -75,8 +77,8 @@ export class Table {
       el = document.createElement('div');
       el.className = `card${isRed(c) ? ' red' : ''}`;
       el.dataset.card = String(c);
-      const label = `${rankLabel(c)}<i>${SUITS[Math.floor(c / 13)]}</i>`;
-      el.innerHTML = `<span class="idx">${label}</span><span class="pip">${SUITS[Math.floor(c / 13)]}</span>`;
+      const label = `${rankLabel(c)}<i>${SUITS[suit(c)]}</i>`;
+      el.innerHTML = `<span class="idx">${label}</span><span class="pip">${SUITS[suit(c)]}</span>`;
       this.cardEls.set(c, el);
     }
     return el;
@@ -112,6 +114,7 @@ export class Table {
         const faceDown = i < down;
         el.classList.toggle('down', faceDown);
         el.classList.toggle('grain', faceDown);
+        el.classList.toggle('selected', p.selected === i);
         el.dataset.at = `${id}:${i}`;
         el.setAttribute('aria-label', faceDown ? 'Face-down card' : cardName(c));
         el.style.zIndex = String(i + 1);

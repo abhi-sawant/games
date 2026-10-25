@@ -257,7 +257,7 @@
 .game-icon-checkers i.db::after { background: var(--coral); }
 
 /* Cards: three overlapping cards on the sheet, backs in olive, red suits in coral. */
-.game-icon-klondike, .game-icon-freecell { display: flex; align-items: center; justify-content: center; padding: 6px; gap: 0; }
+.game-icon-klondike, .game-icon-freecell, .game-icon-cards { display: flex; align-items: center; justify-content: center; padding: 6px; gap: 0; }
 .game-icon .card {
   flex: none;
   width: 24px;

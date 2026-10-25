@@ -27,6 +27,8 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
   Web Worker) or a friend on one screen, with tally, undo, history and stats.
 - **Klondike** (draw 1 or 3) and **FreeCell** (numbered Microsoft-compatible deals): drag or tap to move, undo, timer,
   history and stats.
+- **Spider** (1, 2 or 4 suits), **Yukon**, **Canfield**, **Forty Thieves**, **Pyramid**, **TriPeaks** and **Golf**: the
+  same table and controls, run by a shared solitaire loop (`src/cards/solitaire.ts`) that ends a deal when no move is left.
 - Works with no connection: the service worker installs with just the home page, caches each game when it's opened,
   then fetches the rest in the background, the open game first (see `src/sw.ts`).
 
@@ -47,11 +49,12 @@ tictactoe/index.html, src/tictactoe/     Tic-tac-toe
 dots/index.html, src/dots/               Dots and Boxes
 <game>/index.html, src/<game>/           the newer games: killer, kakuro, nonograms, takuzu, nurikabe, hitori,
                                          starbattle, lightsout, threes, fifteen, connect4, reversi, gomoku,
-                                         morris, checkers, klondike, freecell
+                                         morris, checkers, klondike, freecell, spider, yukon, canfield,
+                                         fortythieves, pyramid, tripeaks, golf
 src/shared/                              helpers the newer games share: screens, timer, storage, puzzle loading,
                                          grid.css for the grid puzzles, and the match runner, search and
                                          styles for the two-sided board games (vsmatch.ts, vs.ts, vs.css)
-src/cards/                               deck, card drawing and drag shared by Klondike and FreeCell
+src/cards/                               deck (one or two decks), card drawing and drag, and the solitaire loop
 scripts/gen-<game>.ts                    puzzle generators writing public/puzzles/<game>/<level>.txt
 src/tiles.css                            the number-tile colour scale shared by 2248 and 2048
 ```

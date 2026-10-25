@@ -1,0 +1,13 @@
+@import '../base.css';
+@import '../cards/cards.css';
+
+/* Pyramid prints in olive, with the card games. The rows overlap so every card shows its corner; a card
+   picked as the first of a pair lifts with an olive ring. */
+:root { --c: var(--olive); }
+
+.spread { --overlap: 0.36; margin-top: 4px; }
+/* A covered card shows only its corner, so its big suit doesn't stripe the gaps between the cards on it. */
+.slot.covered .pip { visibility: hidden; }
+.stock { cursor: pointer; }
+.stock .mark { opacity: 0; transition: opacity 0.15s ease; }
+.stock.can-recycle .mark { opacity: 1; }

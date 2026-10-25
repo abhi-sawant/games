@@ -1,0 +1,22 @@
+@import '../base.css';
+@import '../cards/cards.css';
+
+/* Spider prints in olive, with the card games. The stock shows how many rows are left to deal, and fades
+   while a column is empty, since a row can't be dealt then. */
+:root { --c: var(--olive); }
+
+.stock { cursor: pointer; }
+.stock .mark { opacity: 0; }
+.stock::after {
+  content: attr(data-deals);
+  position: absolute;
+  right: 8%;
+  bottom: 6%;
+  z-index: 60;
+  color: var(--on-ink);
+  font-size: calc(100cqi / var(--cols) * 0.3);
+  font-weight: 800;
+  pointer-events: none;
+}
+.stock[data-deals="0"]::after { content: none; }
+.stock.blocked .card { opacity: 0.55; }

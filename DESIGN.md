@@ -26,7 +26,7 @@ Every game belongs to exactly one **category**, shown as a section on the home p
 | Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out |
 | Number tiles | `--lilac` | 2248, 2048, Threes, 15-puzzle |
 | Play the computer | `--sky` | Tic-tac-toe, Dots and Boxes, Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers |
-| Cards | `--olive` | Klondike, FreeCell |
+| Cards | `--olive` | Klondike, FreeCell, Spider, Yukon, Canfield, Forty Thieves, Pyramid, TriPeaks, Golf |
 
 The inks. Each category ink belongs to one category; the other inks are accents shared by all.
 

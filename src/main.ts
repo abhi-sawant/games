@@ -39,6 +39,7 @@ const IN_PROGRESS: [id: string, started: (save: Save) => boolean][] = [
 for (const id of [
   'killer', 'kakuro', 'nonograms', 'takuzu', 'nurikabe', 'hitori', 'starbattle', 'lightsout',
   'threes', 'fifteen', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers', 'klondike', 'freecell',
+  'spider', 'yukon', 'canfield', 'fortythieves', 'pyramid', 'tripeaks', 'golf',
 ]) IN_PROGRESS.push([id, (s) => s?.status === 'playing' && !!s.started]);
 
 function renderStatus() {
