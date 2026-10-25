@@ -48,6 +48,18 @@
   color: var(--ink-2);
 }
 
+/* The Install button sits at the right of the wordmark; the stamps drop to the row below. */
+.mast { display: grid; grid-template-columns: 1fr auto; align-items: center; }
+.mast .stamps { grid-column: 1 / -1; }
+.install-btn { grid-row: 1; grid-column: 2; padding: 10px 20px; display: inline-flex; align-items: center; gap: 8px; }
+.install-btn svg { width: 20px; height: 20px; stroke-width: 2.4; }
+/* The arrow dips into the tray, then rests. */
+.install-btn .arrow { animation: install-dip 2.4s ease-in-out infinite; }
+@keyframes install-dip {
+  0%, 60%, 100% { transform: translateY(0); }
+  25% { transform: translateY(3px); }
+}
+
 /* ---------- Game cards ---------- */
 
 /* Each family is a grid of tiles: the icon over the name. The label spans the full row. */

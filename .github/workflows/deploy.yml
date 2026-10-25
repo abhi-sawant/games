@@ -1,0 +1,57 @@
+name: Deploy
+
+# Bumps the patch version, builds the site and uploads dist/ to the cPanel host over FTPS on every push to master.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# The version bump is committed and tagged back to master with the workflow's own token.
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Skip the bump commit this workflow pushes itself (a safeguard: pushes made with GITHUB_TOKEN don't re-trigger it).
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # 3.2.2 -> 3.2.3. For a minor or major release, bump package.json by hand in your PR first: this still adds a patch.
+      - name: Bump version
+        id: version
+        run: |
+          npm version patch --no-git-tag-version
+          echo "tag=v$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - run: npm ci
+      - run: npm run build
+
+      # Only changed files are uploaded; the action keeps its state in .ftp-deploy-sync-state.json on the server.
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+
+      - name: Commit and tag the new version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "release: ${{ steps.version.outputs.tag }} [skip ci]"
+          git tag "${{ steps.version.outputs.tag }}"
+          git push origin HEAD:master --follow-tags

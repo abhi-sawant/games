@@ -49,6 +49,40 @@ function renderStatus() {
   for (const [id, started] of IN_PROGRESS) showStatus(`${id}-status`, started(readSave(`${id}.current`)));
 }
 
+interface InstallPromptEvent extends Event {
+  prompt(): Promise<void>;
+}
+
+/**
+ * The Install button on the web home page: installs the PWA when the browser offers it, otherwise (Safari, Firefox,
+ * or no prompt available) sends the player to the latest release to download the Android app. Hidden once installed.
+ */
+function setupInstallButton() {
+  const btn = document.getElementById('install-btn') as HTMLButtonElement | null;
+  if (!btn || matchMedia('(display-mode: standalone)').matches) return;
+
+  let deferred: InstallPromptEvent | null = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferred = e as InstallPromptEvent;
+  });
+  window.addEventListener('appinstalled', () => {
+    btn.hidden = true;
+    deferred = null;
+  });
+
+  btn.addEventListener('click', async () => {
+    if (deferred) {
+      const prompt = deferred;
+      deferred = null;
+      await prompt.prompt();
+    } else {
+      window.open('https://github.com/abhi-sawant/games/releases/latest', '_blank', 'noopener');
+    }
+  });
+  btn.hidden = false;
+}
+
 renderStatus();
 // Coming back with the browser's back button can restore this page from the bfcache.
 window.addEventListener('pageshow', renderStatus);
@@ -57,7 +91,11 @@ if (Capacitor.isNativePlatform()) {
   CapApp.addListener('backButton', () => CapApp.exitApp());
   // The web version updates itself through its service worker; the Android app has to be reinstalled from GitHub.
   checkForUpdate(__APP_VERSION__);
-} else if (import.meta.env.DEV) {
+} else {
+  setupInstallButton();
+}
+
+if (!Capacitor.isNativePlatform() && import.meta.env.DEV) {
   // Preview the update dialog in the browser: ?update-check=1.0.0 pretends that version is installed.
   const pretend = new URLSearchParams(location.search).get('update-check');
   if (pretend) checkForUpdate(pretend, { force: true });
