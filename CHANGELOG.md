@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.2.1 — 2026-10-25
+
+### Changed
+
+- The home page shows the games as a grid of tiles, each with its little board and name, so every game fits in far
+  less scrolling: three across on a phone and up to seven on a wide screen. On a computer the page now uses the width
+  of the window instead of a narrow phone column. A game you've started is marked "In progress".
+
 ## 3.2.0 — 2026-10-25
 
 Thirty-six new games join Games, and two new families arrive on the home page: word games in berry and dice games in
