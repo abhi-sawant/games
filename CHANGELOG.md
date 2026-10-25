@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.2.2 — 2026-10-25
+
+A new family arrives on the home page: arcade games, in cocoa.
+
+### Added
+
+- Crazy Cat, an arcade runner. The cat runs by itself: tap, click or press Space to jump, and again in the air to
+  jump higher. Clear crates for a point and catch fish for two, at Kitten, Tabby or Crazy speed, until the cat runs
+  into something. It keeps your best score and a history of runs for each speed, and plays offline like every game.
+
 ## 3.2.1 — 2026-10-25
 
 ### Changed
