@@ -258,6 +258,9 @@ svg {
   color: var(--ink-2);
 }
 .history-link svg { width: 20px; height: 20px; }
+a.history-link { text-decoration: none; }
+/* The how-to link sits above History and stats, so the second one follows closely. */
+.history-link + .history-link { margin-top: 10px; }
 
 /* ---------- History ---------- */
 
