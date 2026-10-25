@@ -1,0 +1,27 @@
+@import '../base.css';
+@import '../shared/vs.css';
+@import '../dice/dice.css';
+
+/* Yacht prints in plum, with the dice games. The card lists the thirteen boxes with your column and the
+   computer's; an empty box of yours shows what these dice would score in it, faintly, until you pick one. */
+:root { --c: var(--plum); }
+
+.yacht { gap: 10px; }
+.actions { display: flex; }
+.actions .btn { min-width: 140px; }
+.actions .btn:disabled { opacity: 0.4; cursor: default; }
+.card { width: min(100%, 380px); border-radius: var(--r-tile); background: var(--sheet); box-shadow: var(--shadow); padding: 6px 10px; }
+.row { display: grid; grid-template-columns: 1fr 64px 64px; align-items: center; min-height: 30px; border-bottom: 1px solid var(--rule); font-size: 0.9rem; }
+.row:last-child { border-bottom: 0; }
+.row span { font-weight: 650; }
+.row b, .row .cell { text-align: center; font-weight: 800; font-variant-numeric: tabular-nums; }
+.row.head b { font-size: 0.75rem; color: var(--ink-2); }
+.row.bonus, .row.sum { font-weight: 800; }
+.row.bonus span, .row.bonus b { color: var(--ink-2); font-size: 0.8rem; }
+.row.sum b { color: var(--c); font-size: 1.05rem; }
+.cell { border: 0; background: none; padding: 4px 0; border-radius: 8px; color: var(--ink); font: inherit; font-weight: 800; }
+.cell.preview { color: var(--c); background: color-mix(in srgb, var(--c) 12%, transparent); opacity: 0.85; cursor: pointer; }
+.cell:disabled:not(.preview) { cursor: default; }
+.card.solo .cpu { display: none; }
+.card.solo .row { grid-template-columns: 1fr 64px; }
+@media (max-height: 760px) { .row { min-height: 26px; font-size: 0.82rem; } }

@@ -1,0 +1,28 @@
+@import '../base.css';
+@import '../shared/vs.css';
+
+/* Battleship prints in sky, with the board games. The sea is sunk paper; your ships are solid sky, the
+   computer's show only when hit (sky) or sunk (navy) or at the end (sky ring). Misses get a small dot;
+   hits on your fleet are coral, the shared accent for the other side. */
+
+.board-wrap { gap: 0; }
+.sea-label { margin: 10px 0 6px; font-size: 0.8rem; font-weight: 750; color: var(--ink-2); letter-spacing: 0.04em; text-transform: uppercase; }
+.board-frame { width: min(100%, 380px, calc((100dvh - 340px) * 0.62)); }
+.board-frame.small { width: min(62%, 230px, calc((100dvh - 340px) * 0.38)); padding: 5px; }
+.seas { display: grid; grid-template: repeat(10, 1fr) / repeat(10, 1fr); gap: 2px; aspect-ratio: 1; }
+.board-wrap .status { margin-top: 10px; }
+
+.sea { border: 0; padding: 0; min-width: 0; border-radius: 3px; background: var(--sunk); display: grid; place-items: center; }
+.sea:not(:disabled) { cursor: crosshair; }
+.sea:not(:disabled):hover { background: color-mix(in srgb, var(--sky) 20%, var(--sunk)); }
+.sea.miss::after { content: ''; width: 26%; height: 26%; border-radius: 50%; background: var(--ink-2); opacity: 0.6; }
+.sea.ship { background: var(--sky); }
+#target .sea.ship { background: var(--sheet); box-shadow: inset 0 0 0 2px var(--sky); }
+.sea.hit { background: var(--sky); }
+.sea.hit::after { content: ''; width: 46%; height: 46%; border-radius: 50%; background: var(--on-ink); }
+#fleet .sea.hit { background: var(--coral); }
+.sea.sunk { background: var(--ink) !important; }
+.sea.sunk::after { background: var(--paper); }
+
+#placing-tools[hidden] { display: none; }
+.next { margin: 12px auto 0; display: block; }

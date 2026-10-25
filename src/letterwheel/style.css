@@ -1,0 +1,57 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Letter Wheel prints in berry, with the word games. The crossword's squares are sunk paper until their word
+   is found, then berry; the wheel is a berry ring of letters with the swipe drawn in navy. */
+:root { --c: var(--berry); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.board.wheel-board { display: flex; flex-direction: column; align-items: center; gap: 10px; aspect-ratio: auto; padding: 12px; touch-action: none; }
+.cross {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  gap: 3px;
+  width: min(100%, calc(var(--cols) * 40px));
+  aspect-ratio: var(--cols) / var(--rows);
+  container-type: inline-size;
+}
+.square {
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--sunk);
+  font-weight: 850;
+  font-size: calc(100cqi / var(--cols) * 0.5);
+  color: var(--on-ink);
+}
+.square.filled { background: var(--c); }
+.square.hint { outline: 3px solid var(--yellow); outline-offset: -3px; }
+
+.spelling { min-height: 1.6em; font-size: 1.3rem; font-weight: 850; letter-spacing: 0.08em; color: var(--c); }
+.spelling[data-result='miss'] { color: var(--ink-2); }
+
+.wheel { position: relative; width: min(78%, 240px); aspect-ratio: 1; border-radius: 50%; background: color-mix(in srgb, var(--c) 14%, var(--sheet)); user-select: none; -webkit-user-select: none; }
+.trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.trail polyline { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0.6; }
+.wl {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  translate: -50% -50%;
+  width: 22%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 2px var(--c);
+  font-size: 1.4rem;
+  font-weight: 850;
+  color: var(--ink);
+  transition: left 0.2s ease, top 0.2s ease, background 0.1s ease;
+}
+.wl.on { background: var(--c); color: var(--on-ink); }
+.shuffle { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 22%; aspect-ratio: 1; border: 0; border-radius: 50%; background: none; color: var(--c); display: grid; place-items: center; }
+.board.is-paused .cross, .board.is-paused .wheel { visibility: hidden; }

@@ -25,7 +25,7 @@
         </header>
 
         <!-- Links name index.html explicitly: the Android app's local server sends extensionless paths to the root page. -->
-        <!-- Each card sets its family's ink with a class: ink-blue, ink-orange, ink-lilac, ink-sky or ink-olive.
+        <!-- Each card sets its family's ink with a class: ink-blue, ink-orange, ink-lilac, ink-sky, ink-olive, ink-berry or ink-plum.
              Cards sit in their family's section. -->
         <nav class="games" aria-label="Games">
           <section class="family">
@@ -56,6 +56,51 @@
               <span class="game-name">Kakuro</span>
               <span class="game-desc">A crossword of numbers: each run adds up to its clue.</span>
               <span class="game-status" id="kakuro-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-blue grain" href="/calcudoku/index.html">
+            <span class="game-icon game-icon-calcudoku" aria-hidden="true"><i class="c tl"><b>6×</b></i><i class="c tr"></i><i>1</i><i class="c bl">3</i><i class="c br"></i><i></i><i>2</i><i></i><i>4</i></span>
+            <span class="game-text">
+              <span class="game-name">Calcudoku</span>
+              <span class="game-desc">Every row and column once, and each cage makes its number with its sign.</span>
+              <span class="game-status" id="calcudoku-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-blue grain" href="/futoshiki/index.html">
+            <span class="game-icon game-icon-futoshiki" aria-hidden="true"><i>1</i><i class="s">&lt;</i><i>3</i><i class="s d">&gt;</i><i></i><i class="s d">&lt;</i><i>2</i><i class="s">&gt;</i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Futoshiki</span>
+              <span class="game-desc">A number grid where the greater-than and less-than signs must all hold.</span>
+              <span class="game-status" id="futoshiki-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-blue grain" href="/skyscrapers/index.html">
+            <span class="game-icon game-icon-skyscrapers" aria-hidden="true"><i class="k">3</i><i class="k">2</i><i class="k">1</i><i class="h1">1</i><i class="h2">2</i><i class="h3">3</i><i class="h2">2</i><i class="h3">3</i><i class="h1">1</i></span>
+            <span class="game-text">
+              <span class="game-name">Skyscrapers</span>
+              <span class="game-desc">Build every height once per row and column; the edge clues count what you see.</span>
+              <span class="game-status" id="skyscrapers-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-blue grain" href="/jigsaw/index.html">
+            <span class="game-icon game-icon-jigsaw" aria-hidden="true"><i class="r">4</i><i class="r"></i><i>7</i><i class="r">2</i><i></i><i></i><i class="r"></i><i>9</i><i>1</i></span>
+            <span class="game-text">
+              <span class="game-name">Jigsaw Sudoku</span>
+              <span class="game-desc">Sudoku with odd-shaped regions in place of the nine boxes.</span>
+              <span class="game-status" id="jigsaw-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-blue grain" href="/sudokux/index.html">
+            <span class="game-icon game-icon-sudokux" aria-hidden="true"><i>8</i><i></i><i>2</i><i></i><i>5</i><i></i><i>6</i><i></i><i>3</i></span>
+            <span class="game-text">
+              <span class="game-name">Sudoku X</span>
+              <span class="game-desc">Sudoku where both long diagonals hold 1 to 9 as well.</span>
+              <span class="game-status" id="sudokux-status" hidden></span>
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
@@ -127,6 +172,78 @@
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
+          <a class="game-card ink-orange grain" href="/tents/index.html">
+            <span class="game-icon game-icon-tents" aria-hidden="true"><i class="t">▲</i><i class="g">♣</i><i></i><i></i><i></i><i class="g">♣</i><i class="g">♣</i><i></i><i class="t">▲</i></span>
+            <span class="game-text">
+              <span class="game-name">Tents</span>
+              <span class="game-desc">A tent beside every tree, never touching, matching the counts.</span>
+              <span class="game-status" id="tents-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/lightup/index.html">
+            <span class="game-icon game-icon-lightup" aria-hidden="true"><i class="w">1</i><i class="l"></i><i class="l b">●</i><i class="l"></i><i class="w"></i><i class="l"></i><i class="l b">●</i><i class="l"></i><i class="w">2</i></span>
+            <span class="game-text">
+              <span class="game-name">Light Up</span>
+              <span class="game-desc">Place bulbs until every white cell is lit, without them seeing each other.</span>
+              <span class="game-status" id="lightup-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/heyawake/index.html">
+            <span class="game-icon game-icon-heyawake" aria-hidden="true"><i><b>1</b></i><i class="f"></i><i></i><i class="f"></i><i></i><i></i><i></i><i><b>2</b></i><i class="f"></i></span>
+            <span class="game-text">
+              <span class="game-name">Heyawake</span>
+              <span class="game-desc">Shade cells room by room; no white line may run through three rooms.</span>
+              <span class="game-status" id="heyawake-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/lits/index.html">
+            <span class="game-icon game-icon-lits" aria-hidden="true"><i class="f"></i><i></i><i></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">LITS</span>
+              <span class="game-desc">One tetromino in every region, all joined up, no square blocks.</span>
+              <span class="game-status" id="lits-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/slitherlink/index.html">
+            <span class="game-icon game-icon-slitherlink" aria-hidden="true"><i>3</i><i></i><i>2</i><i></i><i>0</i><i></i><i>2</i><i></i><i>3</i></span>
+            <span class="game-text">
+              <span class="game-name">Slitherlink</span>
+              <span class="game-desc">Draw one loop around the grid; each number counts its sides.</span>
+              <span class="game-status" id="slitherlink-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/masyu/index.html">
+            <span class="game-icon game-icon-masyu" aria-hidden="true"><i></i><i class="pw"></i><i></i><i class="pb"></i><i></i><i></i><i></i><i></i><i class="pw"></i></span>
+            <span class="game-text">
+              <span class="game-name">Masyu</span>
+              <span class="game-desc">One loop through every pearl: straight on white, turning on black.</span>
+              <span class="game-status" id="masyu-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/bridges/index.html">
+            <span class="game-icon game-icon-bridges" aria-hidden="true"><i class="is">2</i><i class="br"></i><i class="is">3</i><i></i><i></i><i class="bv"></i><i></i><i></i><i class="is">1</i></span>
+            <span class="game-text">
+              <span class="game-name">Bridges</span>
+              <span class="game-desc">Join the islands with bridges, as many as each number asks.</span>
+              <span class="game-status" id="bridges-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-orange grain" href="/flow/index.html">
+            <span class="game-icon game-icon-flow" aria-hidden="true"><i class="d1">1</i><i class="p1"></i><i class="d1">1</i><i class="d2">2</i><i class="p2"></i><i class="p2"></i><i class="p2"></i><i class="p2"></i><i class="d2">2</i></span>
+            <span class="game-text">
+              <span class="game-name">Flow</span>
+              <span class="game-desc">Join every pair of matching dots and fill the whole board.</span>
+              <span class="game-status" id="flow-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
           </section>
           <section class="family">
           <h2 class="section-label">Number tiles</h2>
@@ -167,6 +284,33 @@
               <span class="game-name">15-puzzle</span>
               <span class="game-desc">Slide the tiles back into order.</span>
               <span class="game-status" id="fifteen-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-lilac grain" href="/sokoban/index.html">
+            <span class="game-icon game-icon-sokoban" aria-hidden="true"><i class="w"></i><i class="w"></i><i class="w"></i><i class="p"></i><i class="b"></i><i class="t"></i><i class="w"></i><i></i><i class="w"></i></span>
+            <span class="game-text">
+              <span class="game-name">Sokoban</span>
+              <span class="game-desc">Push every box onto a target, never pulling, one at a time.</span>
+              <span class="game-status" id="sokoban-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-lilac grain" href="/rushhour/index.html">
+            <span class="game-icon game-icon-rushhour" aria-hidden="true"><i class="v"></i><i></i><i class="h"></i><i class="v"></i><i class="r"></i><i class="r"></i><i></i><i class="h2"></i><i class="h2"></i></span>
+            <span class="game-text">
+              <span class="game-name">Rush Hour</span>
+              <span class="game-desc">Slide the cars out of the way and get the red one to the exit.</span>
+              <span class="game-status" id="rushhour-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-lilac grain" href="/pegs/index.html">
+            <span class="game-icon game-icon-pegs" aria-hidden="true"><i></i><i class="g"></i><i></i><i class="g"></i><i class="g"></i><i></i><i></i><i class="g"></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Peg Solitaire</span>
+              <span class="game-desc">Jump pegs over each other until only one is left.</span>
+              <span class="game-status" id="pegs-status" hidden></span>
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
@@ -245,6 +389,69 @@
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>
+          <a class="game-card ink-sky grain" href="/mancala/index.html">
+            <span class="game-icon game-icon-mancala" aria-hidden="true"><i class="p">4</i><i class="p">4</i><i class="p">4</i><i class="p s">4</i><i class="p s">4</i><i class="p s">4</i><i></i><i></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Mancala</span>
+              <span class="game-desc">Sow seeds round the board and fill your store before the computer does.</span>
+              <span class="game-status" id="mancala-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/ultimate/index.html">
+            <span class="game-icon game-icon-ultimate" aria-hidden="true"><i class="a"></i><i></i><i class="b"></i><i></i><i class="a"></i><i></i><i class="b"></i><i></i><i class="a"></i></span>
+            <span class="game-text">
+              <span class="game-name">Ultimate Tic-tac-toe</span>
+              <span class="game-desc">Nine games in one: where you play sends your opponent there.</span>
+              <span class="game-status" id="ultimate-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/hex/index.html">
+            <span class="game-icon game-icon-hex" aria-hidden="true"><i class="a"></i><i class="b"></i><i></i><i></i><i class="a"></i><i class="b"></i><i class="b"></i><i class="a"></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Hex</span>
+              <span class="game-desc">Join your two sides of the board. It can never end in a draw.</span>
+              <span class="game-status" id="hex-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/go/index.html">
+            <span class="game-icon game-icon-go" aria-hidden="true"><i class="a"></i><i class="b"></i><i></i><i class="a"></i><i class="a"></i><i class="b"></i><i></i><i class="b"></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Go</span>
+              <span class="game-desc">Surround more of the 9×9 board than the computer.</span>
+              <span class="game-status" id="go-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/chess/index.html">
+            <span class="game-icon game-icon-chess" aria-hidden="true"><i class="d">♜︎</i><i>♞︎</i><i class="d">♚︎</i><i></i><i class="d"></i><i></i><i class="d s">♟︎</i><i class="s">♛︎</i><i class="d s">♔︎</i></span>
+            <span class="game-text">
+              <span class="game-name">Chess</span>
+              <span class="game-desc">The classic, against three levels of computer or a friend.</span>
+              <span class="game-status" id="chess-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/backgammon/index.html">
+            <span class="game-icon game-icon-backgammon" aria-hidden="true"><i class="t a"></i><i class="t"></i><i class="t b"></i><i></i><i class="die">5</i><i class="die">3</i><i class="u b"></i><i class="u"></i><i class="u a"></i></span>
+            <span class="game-text">
+              <span class="game-name">Backgammon</span>
+              <span class="game-desc">Race your checkers home and off, one roll of the dice at a time.</span>
+              <span class="game-status" id="backgammon-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-sky grain" href="/battleship/index.html">
+            <span class="game-icon game-icon-battleship" aria-hidden="true"><i></i><i class="h"></i><i class="h"></i><i class="m"></i><i></i><i></i><i></i><i class="m"></i><i class="h"></i></span>
+            <span class="game-text">
+              <span class="game-name">Battleship</span>
+              <span class="game-desc">Find and sink the computer's fleet before it sinks yours.</span>
+              <span class="game-status" id="battleship-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
           </section>
           <section class="family">
           <h2 class="section-label">Cards</h2>
@@ -263,6 +470,129 @@
               <span class="game-name">FreeCell</span>
               <span class="game-desc">Every card face up, four free cells, and nearly every deal can be won.</span>
               <span class="game-status" id="freecell-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-olive grain" href="/spider/index.html">
+            <span class="game-icon game-icon-cards" aria-hidden="true"><b class="card">K<small>♠</small></b><b class="card">Q<small>♠</small></b><b class="card">J<small>♠</small></b></span>
+            <span class="game-text">
+              <span class="game-name">Spider</span>
+              <span class="game-desc">Two decks in ten columns: build each suit from king down to ace.</span>
+              <span class="game-status" id="spider-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-olive grain" href="/yukon/index.html">
+            <span class="game-icon game-icon-cards" aria-hidden="true"><b class="card back"></b><b class="card">5<small>♣</small></b><b class="card red">9<small>♥</small></b></span>
+            <span class="game-text">
+              <span class="game-name">Yukon</span>
+              <span class="game-desc">Klondike with no stock, where any face-up card moves with the cards on it.</span>
+              <span class="game-status" id="yukon-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-olive grain" href="/canfield/index.html">
+            <span class="game-icon game-icon-cards" aria-hidden="true"><b class="card red">8<small>♦</small></b><b class="card back"></b><b class="card">7<small>♣</small></b></span>
+            <span class="game-text">
+              <span class="game-name">Canfield</span>
+              <span class="game-desc">A reserve to empty and foundations that start wherever the deal says.</span>
+              <span class="game-status" id="canfield-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-olive grain" href="/fortythieves/index.html">
+            <span class="game-icon game-icon-cards" aria-hidden="true"><b class="card red">6<small>♥</small></b><b class="card red">5<small>♥</small></b><b class="card red">4<small>♥</small></b></span>
+            <span class="game-text">
+              <span class="game-name">Forty Thieves</span>
+              <span class="game-desc">Two decks, ten columns, one card at a time. Hard, and worth it.</span>
+              <span class="game-status" id="fortythieves-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-olive grain" href="/pyramid/index.html">
+            <span class="game-icon game-icon-cards" aria-hidden="true"><b class="card red">6<small>♦</small></b><b class="card">7<small>♠</small></b><b class="card">K<small>♣</small></b></span>
+            <span class="game-text">
+              <span class="game-name">Pyramid</span>
+              <span class="game-desc">Pair up cards that add to 13 until the pyramid is gone.</span>
+              <span class="game-status" id="pyramid-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-olive grain" href="/tripeaks/index.html">
+            <span class="game-icon game-icon-cards" aria-hidden="true"><b class="card back"></b><b class="card red">J<small>♥</small></b><b class="card">Q<small>♠</small></b></span>
+            <span class="game-text">
+              <span class="game-name">TriPeaks</span>
+              <span class="game-desc">Clear three peaks, playing one card higher or lower each time.</span>
+              <span class="game-status" id="tripeaks-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-olive grain" href="/golf/index.html">
+            <span class="game-icon game-icon-cards" aria-hidden="true"><b class="card">3<small>♣</small></b><b class="card red">4<small>♦</small></b><b class="card">5<small>♠</small></b></span>
+            <span class="game-text">
+              <span class="game-name">Golf</span>
+              <span class="game-desc">Seven columns to clear onto one pile, a rank up or down.</span>
+              <span class="game-status" id="golf-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          </section>
+          <section class="family">
+          <h2 class="section-label">Word games</h2>
+          <a class="game-card ink-berry grain" href="/wordguess/index.html">
+            <span class="game-icon game-icon-wordguess" aria-hidden="true"><i class="h">W</i><i class="n">O</i><i class="m">R</i><i class="m">D</i><i class="h">S</i><i></i><i></i><i></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Word Guess</span>
+              <span class="game-desc">Find the five-letter word in six tries. A new one every day.</span>
+              <span class="game-status" id="wordguess-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-berry grain" href="/wordsearch/index.html">
+            <span class="game-icon game-icon-wordsearch" aria-hidden="true"><i class="f">C</i><i>Q</i><i>T</i><i>L</i><i class="f">A</i><i>K</i><i>E</i><i>P</i><i class="f">T</i></span>
+            <span class="game-text">
+              <span class="game-name">Word Search</span>
+              <span class="game-desc">Find every word in the theme hidden in the grid.</span>
+              <span class="game-status" id="wordsearch-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-berry grain" href="/letterwheel/index.html">
+            <span class="game-icon game-icon-letterwheel" aria-hidden="true"><i></i><i class="w">A</i><i></i><i class="w">T</i><i class="c"></i><i class="w">E</i><i></i><i class="w">S</i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Letter Wheel</span>
+              <span class="game-desc">Spell words from a wheel of letters to fill a little crossword.</span>
+              <span class="game-status" id="letterwheel-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          </section>
+          <section class="family">
+          <h2 class="section-label">Dice games</h2>
+          <a class="game-card ink-plum grain" href="/yacht/index.html">
+            <span class="game-icon game-icon-dice game-icon-yacht" aria-hidden="true"><i class="d p5"></i><i class="d p5"></i><i class="d p5"></i><i></i><i class="d p2"></i><i class="d p2"></i><i></i><i></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Yacht</span>
+              <span class="game-desc">Five dice, three rolls, thirteen boxes: alone for a high score or against the computer.</span>
+              <span class="game-status" id="yacht-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-plum grain" href="/farkle/index.html">
+            <span class="game-icon game-icon-dice game-icon-farkle" aria-hidden="true"><i class="d p1"></i><i class="d p5"></i><i class="d p3"></i><i class="d p1 k"></i><i class="d p5 k"></i><i class="d p6"></i><i></i><i></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Farkle</span>
+              <span class="game-desc">Push your luck with six dice and race to 5,000.</span>
+              <span class="game-status" id="farkle-status" hidden></span>
+            </span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <a class="game-card ink-plum grain" href="/pig/index.html">
+            <span class="game-icon game-icon-dice game-icon-pig" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="d p6"></i><i></i><i></i><i></i><i></i></span>
+            <span class="game-text">
+              <span class="game-name">Pig</span>
+              <span class="game-desc">One die, a race to 100, and a 1 that loses the turn.</span>
+              <span class="game-status" id="pig-status" hidden></span>
             </span>
             <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </a>

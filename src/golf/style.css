@@ -1,0 +1,8 @@
+@import '../base.css';
+@import '../cards/cards.css';
+
+/* Golf prints in olive, with the card games. The stock goes through once, so it never shows a recycle mark. */
+:root { --c: var(--olive); }
+
+.stock { cursor: pointer; }
+.stock .mark { display: none; }

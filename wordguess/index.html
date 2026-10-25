@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Free offline word guessing game: find the five-letter word in six tries." />
+    <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <link rel="preload" href="/src/fonts/recursive-latin-full.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="color-scheme" content="light dark" />
+    <!-- The paper colour from base.css, so the page never shows the browser's white canvas while the stylesheet loads. -->
+    <style>html { background: #eef0f3; } @media (prefers-color-scheme: dark) { html { background: #141927; } }</style>
+    <link rel="stylesheet" href="/src/wordguess/style.css" />
+    <title>Word Guess</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Home -->
+      <section id="home" class="screen">
+        <div class="home-inner">
+          <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <span>All games</span>
+          </a>
+          <h1 class="logo">Word Guess</h1>
+          <p class="tagline">Find the five-letter word in six tries. Each guess shows which letters are right, which are in the word but elsewhere, and which aren't in it.</p>
+
+          <button id="continue-btn" class="btn btn-primary continue" hidden>
+            <span>Continue</span>
+            <small id="continue-meta"></small>
+          </button>
+
+          <h2 class="section-label">Play</h2>
+          <div class="levels">
+            <button class="btn level" data-mode="daily"><span>Daily word</span><small id="daily-note">The same word for everyone today</small></button>
+            <button class="btn level" data-mode="unlimited"><span>Unlimited</span><small>A new word every game</small></button>
+          </div>
+
+          <button id="history-btn" class="btn history-link">
+            <span>History &amp; stats</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen" hidden>
+        <header class="topbar">
+          <button id="history-back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <h1 class="topbar-title">History</h1>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <table class="summary">
+          <thead>
+            <tr><th></th><th scope="col">Played</th><th scope="col">Won</th><th scope="col">Streak</th><th scope="col">Best</th></tr>
+          </thead>
+          <tbody id="history-summary"></tbody>
+        </table>
+
+        <h2 class="section-label">Guesses to win</h2>
+        <div id="dist" class="dist"></div>
+
+        <h2 class="section-label">Recent games</h2>
+        <p id="history-empty" class="history-empty">No finished games yet. Play a round and it will show up here.</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+
+      <!-- Game -->
+      <section id="game" class="screen" hidden>
+        <header class="topbar">
+          <button id="back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <div class="meta">
+            <b id="level-label"></b>
+            <span><span id="round-label"></span></span>
+          </div>
+          <div class="tally" id="tally" aria-label="Current streak and games won">
+            <span><b id="tally-a"></b><small>Streak</small></span>
+            <span><b id="tally-b"></b><small>Won</small></span>
+          </div>
+        </header>
+
+        <div class="board-wrap">
+          <div id="rows" class="rows" aria-label="Your guesses"></div>
+          <p id="status" class="status" aria-live="polite"></p>
+          <button id="next-btn" class="btn btn-primary next" hidden>Play another</button>
+        </div>
+        <div id="keyboard" class="keyboard" aria-label="Keyboard"></div>
+
+      </section>
+    </div>
+    <script type="module" src="/src/wordguess/main.ts"></script>
+  </body>
+</html>

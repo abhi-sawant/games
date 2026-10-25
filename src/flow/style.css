@@ -1,0 +1,26 @@
+@import '../base.css';
+@import '../shared/grid.css';
+@import '../shared/logic.css';
+
+/* Flow prints in orange, with the logic puzzles. Each pair takes an ink from the shared set, the way
+   Minesweeper's numbers do, and carries its number, so colour is never the only cue. Filled cells take a
+   light screen of their path's ink. */
+:root { --c: var(--orange); }
+
+.lattice .k1 { --k: var(--orange); }
+.lattice .k2 { --k: var(--blue); }
+.lattice .k3 { --k: var(--teal); }
+.lattice .k4 { --k: var(--coral); }
+.lattice .k5 { --k: var(--lilac); }
+.lattice .k6 { --k: var(--mint); }
+.lattice .k7 { --k: var(--sky); }
+.lattice .k8 { --k: var(--olive); }
+.lattice .k9 { --k: var(--yellow); }
+.lattice .fills rect { fill: transparent; }
+.lattice .fills rect[class] { fill: color-mix(in srgb, var(--k) 22%, transparent); }
+.lattice .paths line { stroke: var(--k); stroke-width: 30; stroke-linecap: round; }
+.lattice .dot circle { fill: var(--k); }
+.lattice .dot text { fill: var(--on-ink); font-size: 40px; }
+.lattice .dot.k9 text { fill: var(--ink); } /* navy on sunflower, both themes */
+@media (prefers-color-scheme: dark) { .lattice .dot.k9 text { fill: var(--on-ink); } }
+.board.solved .lattice .paths line { animation: glow 0.7s ease both; }

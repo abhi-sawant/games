@@ -34,6 +34,22 @@
   background: var(--sunk);
 }
 .tableau .pile { aspect-ratio: auto; height: calc((100cqi - (var(--cols) - 1) * var(--gap)) / var(--cols) * 1.4); }
+/* Layouts of single-card slots (Pyramid, TriPeaks): each slot sits at column --x of a --cols grid, row --r,
+   and the rows overlap by --overlap of a card's height. Empty slots leave no outline. */
+.spread {
+  --w: calc((100cqi - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  --overlap: 0.5;
+  position: relative;
+  height: calc(var(--w) * 1.4 * ((var(--rows) - 1) * var(--overlap) + 1));
+}
+.spread .slot {
+  position: absolute;
+  width: var(--w);
+  left: calc(var(--x) * (var(--w) + var(--gap)));
+  top: calc(var(--r) * var(--w) * 1.4 * var(--overlap));
+  background: none;
+}
+
 .pile .mark {
   position: absolute;
   inset: 0;
@@ -88,6 +104,8 @@
 
 .card.down { background: var(--olive); box-shadow: inset 0 0 0 calc(100cqi / var(--cols) * 0.05) var(--sheet), 0 1px 3px -1px rgb(20 25 50 / 0.35); cursor: default; }
 .card.down > span { visibility: hidden; }
+
+.card.selected { translate: 0 -6%; box-shadow: inset 0 0 0 2px var(--c), var(--shadow); }
 
 .card.dragging { z-index: 100 !important; box-shadow: inset 0 0 0 1px var(--rule), var(--shadow); cursor: grabbing; }
 

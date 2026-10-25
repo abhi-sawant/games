@@ -1,0 +1,65 @@
+@import '../base.css';
+@import '../shared/vs.css';
+
+/* Chess prints in sky, with the board games. Dark squares are a sky field on the sheet, as in Checkers;
+   Sky's pieces are solid sky, Ring's are outlined in sky. The last move is overprinted, a king in check
+   gets a coral ring, and the promotion picker sits under the board. */
+
+.board {
+  display: grid;
+  grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.sq {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+  background: var(--sheet);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.sq.dark { background: color-mix(in srgb, var(--sky) 26%, var(--sheet)); }
+.sq.last { background: color-mix(in srgb, var(--yellow) 40%, var(--sheet)); }
+.sq.dark.last { background: color-mix(in srgb, var(--yellow) 40%, color-mix(in srgb, var(--sky) 26%, var(--sheet))); }
+.sq:disabled { cursor: default; }
+.sq.selected { box-shadow: inset 0 0 0 3px var(--yellow); }
+.sq.check { box-shadow: inset 0 0 0 3px var(--coral); }
+.sq.target::after {
+  content: '';
+  position: absolute;
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: var(--sky);
+  opacity: 0.55;
+}
+.sq.target:has(.piece-glyph)::after { width: 86%; height: 86%; background: none; box-shadow: inset 0 0 0 3px var(--sky); opacity: 0.7; }
+
+.piece-glyph {
+  font-family: 'Apple Symbols', 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', serif;
+  font-size: calc(100cqi / 8 * 0.78);
+  line-height: 1;
+  font-variant-emoji: text;
+  user-select: none;
+}
+.piece-glyph.s0 { color: var(--sky); }
+.piece-glyph.s1 { color: var(--sheet); -webkit-text-stroke: 1.6px var(--sky); paint-order: stroke fill; }
+
+.promote { display: flex; gap: 10px; margin-top: 14px; container-type: inline-size; width: min(100%, 300px); }
+.promote[hidden] { display: none; }
+.promo {
+  flex: 1;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: var(--r-key);
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 2px var(--sky);
+  display: grid;
+  place-items: center;
+}
+.promo .piece-glyph { font-size: 2rem; }

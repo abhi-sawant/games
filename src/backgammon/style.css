@@ -1,0 +1,76 @@
+@import '../base.css';
+@import '../shared/vs.css';
+
+/* Backgammon prints in sky, with the board games. Points are long triangles alternating a sky field and the
+   sunk paper; Sky's checkers are solid sky, Ring's paper ringed in sky. The dice sit above the board in the
+   colour of the side rolling, and fade as they're used. */
+
+.board-frame { width: min(100%, 560px); }
+.board {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr) 0.8fr repeat(6, 1fr) 0.9fr;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 14%;
+  column-gap: 2px;
+  aspect-ratio: 1.25;
+  container-type: inline-size;
+}
+
+.point, .bar, .tray {
+  position: relative;
+  border: 0;
+  padding: 0;
+  min-width: 0;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+.point { flex-direction: column; isolation: isolate; }
+.point.bottom { flex-direction: column-reverse; }
+.point::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--sunk);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.point.bottom::before { clip-path: polygon(0 100%, 100% 100%, 50% 0); }
+.point:nth-child(odd)::before { background: color-mix(in srgb, var(--sky) 35%, var(--sheet)); }
+.point.target::before { background: color-mix(in srgb, var(--yellow) 60%, var(--sheet)); }
+.point.last::before { box-shadow: none; }
+.point:disabled, .bar:disabled, .tray:disabled { cursor: default; }
+
+.bar { flex-direction: column; justify-content: center; border-radius: 8px; background: var(--sunk); }
+.bar .gap { flex: 0 0 18%; }
+.tray { flex-direction: column; justify-content: space-between; border-radius: 8px; background: var(--sunk); padding: 6px 0; }
+.tray.target, .bar.target { box-shadow: inset 0 0 0 3px var(--yellow); }
+.off { font-weight: 850; font-size: clamp(0.8rem, 3.6cqi, 1.1rem); color: var(--sky); }
+
+.chk {
+  flex: none;
+  width: 92%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--s0);
+}
+.chk.s1 { background: var(--s1); box-shadow: inset 0 0 0 2.5px var(--s1-ring); }
+.point.lifting .chk:last-of-type, .bar.lifting .chk:last-of-type { box-shadow: 0 0 0 3px var(--yellow); }
+.count { font-size: clamp(0.65rem, 2.6cqi, 0.85rem); font-weight: 850; color: var(--ink); }
+
+.dice { display: flex; gap: 8px; min-height: 40px; margin-bottom: 10px; }
+.die {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  font-weight: 850;
+  font-size: 1.2rem;
+  background: var(--s0);
+  color: var(--on-ink);
+  transition: opacity 0.15s ease;
+}
+.die.s1 { background: var(--s1); color: var(--sky); box-shadow: inset 0 0 0 2.5px var(--s1-ring); }
+.die.used { opacity: 0.3; }

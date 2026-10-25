@@ -1,0 +1,5 @@
+@import '../base.css';
+@import '../shared/latin.css';
+
+/* Calcudoku prints in blue, with the number puzzles. Its cages are the shared dashed outlines. */
+:root { --c: var(--blue); }

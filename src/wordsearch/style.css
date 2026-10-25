@@ -1,0 +1,34 @@
+@import '../base.css';
+@import '../shared/grid.css';
+
+/* Word Search prints in berry, with the word games. Letters sit on the sheet; the line being dragged is
+   overprinted in navy, found words in a berry screen, and the word list strikes them off. */
+:root { --c: var(--berry); }
+
+.summary th, .summary td { padding: 12px 8px; }
+
+.board.wordsearch { display: block; aspect-ratio: auto; padding: 8px; touch-action: none; }
+.letters {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  aspect-ratio: 1;
+  container-type: inline-size;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.letter {
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: calc(100cqi / var(--cols) * 0.55);
+  font-weight: 800;
+  font-variation-settings: 'CASL' 1;
+  color: var(--ink);
+}
+.letter.found { background: color-mix(in srgb, var(--c) 30%, var(--sheet)); }
+.letter.picking { background: color-mix(in srgb, var(--ink) 30%, var(--sheet)); color: var(--ink); }
+.letter.hint { outline: 3px solid var(--yellow); outline-offset: -3px; animation: hint 1s ease-in-out infinite alternate; }
+.wordlist { display: flex; flex-wrap: wrap; gap: 6px 12px; padding: 10px 4px 2px; font-weight: 750; font-size: 0.95rem; }
+.wordlist b { width: 100%; color: var(--c); }
+.wordlist span.done { text-decoration: line-through; color: var(--ink-2); opacity: 0.6; }
+.board.is-paused .letters { visibility: hidden; }

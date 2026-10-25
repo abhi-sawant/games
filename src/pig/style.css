@@ -1,0 +1,6 @@
+@import '../base.css';
+@import '../shared/vs.css';
+@import '../dice/race.css';
+
+/* Pig prints in plum, with the dice games: one die, and the race to 100. */
+:root { --c: var(--plum); --s0: var(--plum); --s1-ring: var(--plum); }

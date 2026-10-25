@@ -1,0 +1,9 @@
+@import '../base.css';
+@import '../cards/cards.css';
+
+/* TriPeaks prints in olive, with the card games. Three peaks over a base row of ten. */
+:root { --c: var(--olive); }
+
+.spread { margin-top: 4px; }
+.stock { cursor: pointer; }
+.stock .mark { display: none; }

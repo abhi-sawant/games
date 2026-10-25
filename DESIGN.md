@@ -22,11 +22,13 @@ Every game belongs to exactly one **category**, shown as a section on the home p
 
 | Category | Ink | Games |
 |---|---|---|
-| Number puzzles | `--blue` | Sudoku, Killer Sudoku, Kakuro |
-| Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out |
-| Number tiles | `--lilac` | 2248, 2048, Threes, 15-puzzle |
-| Play the computer | `--sky` | Tic-tac-toe, Dots and Boxes, Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers |
-| Cards | `--olive` | Klondike, FreeCell |
+| Number puzzles | `--blue` | Sudoku, Killer Sudoku, Kakuro, Calcudoku, Futoshiki, Skyscrapers, Jigsaw Sudoku, Sudoku X |
+| Logic puzzles | `--orange` | Minesweeper, Nonograms, Takuzu, Nurikabe, Hitori, Star Battle, Lights Out, Tents, Light Up, Heyawake, LITS, Slitherlink, Masyu, Bridges, Flow |
+| Number tiles | `--lilac` | 2248, 2048, Threes, 15-puzzle, Sokoban, Rush Hour, Peg Solitaire |
+| Play the computer | `--sky` | Tic-tac-toe, Dots and Boxes, Connect Four, Reversi, Gomoku, Nine Men's Morris, Checkers, Mancala, Ultimate Tic-tac-toe, Hex, Go, Chess, Backgammon, Battleship |
+| Cards | `--olive` | Klondike, FreeCell, Spider, Yukon, Canfield, Forty Thieves, Pyramid, TriPeaks, Golf |
+| Word games | `--berry` | Word Guess, Word Search, Letter Wheel |
+| Dice games | `--plum` | Yacht, Farkle, Pig |
 
 The inks. Each category ink belongs to one category; the other inks are accents shared by all.
 
@@ -41,6 +43,8 @@ The inks. Each category ink belongs to one category; the other inks are accents 
 | `--mint` | `#2f7a5f` | `#86d1b4` | Accent: the tile scale |
 | `--sky` | `#1d6a8f` | `#6cc4ea` | Play the computer category |
 | `--olive` | `#62661c` | `#c3c86f` | Cards category (card backs; red suits print in coral, black suits in `--ink`) |
+| `--berry` | `#a3376f` | `#f19ac5` | Word games category (6.0:1 with white text, 8.5:1 with navy) |
+| `--plum` | `#7e3f96` | `#d6a0ea` | Dice games category (6.6:1 with white text, 8.4:1 with navy) |
 
 Two-sided games print you (or player one) in the category ink and the other side in coral. Where pieces read as black and white (Reversi, Checkers, Morris), one side is solid ink and the other is `--sheet` with an ink ring.
 
@@ -93,7 +97,7 @@ Boards sit on `--sheet` with `--r-board` corners and `--shadow`. Use paper as th
 
 - Something you can still act on (an unopened cell) is **solid ink**.
 - Something finished or empty is **`--sunk` paper**.
-- Numbers that carry meaning take inks from the set (Minesweeper counts: 1 blue, 2 teal, 3 coral, 4 lilac). Keep accents clear of the category ink: on Minesweeper's orange cells, flags are pale and a hit mine is navy, not coral.
+- Numbers that carry meaning take inks from the set (Minesweeper counts: 1 blue, 2 teal, 3 coral, 4 lilac). Flow's pairs do the same, starting from the category's orange, and every pair carries its number too. Keep accents clear of the category ink: on Minesweeper's orange cells, flags are pale and a hit mine is navy, not coral.
 - Value scales (2248 and 2048 tiles, shared in `src/tiles.css`) step through the inks as a 40% screen, then solid: sunflower, coral, teal, blue, lilac, mint. At night the screen steps lighten towards `--ink` rather than darken towards paper, which goes muddy.
 - Paths and selections over a board are navy ink overprinted at about 45%.
 

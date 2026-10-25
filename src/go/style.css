@@ -1,0 +1,20 @@
+@import '../base.css';
+@import '../shared/vs.css';
+
+/* Go prints in sky, with the board games. Navy lines on a sky field; Sky's stones are solid sky, Ring's are
+   paper ringed in sky. At the end each side's territory gets a small square of its colour. */
+
+.board { display: block; }
+.tools { grid-template-columns: repeat(3, 88px); }
+.goban { display: block; width: 100%; height: auto; border-radius: 12px; background: color-mix(in srgb, var(--sky) 18%, var(--sheet)); stroke: none; fill: none; }
+.goban .lines line { stroke: var(--ink-2); stroke-width: 0.35; }
+.goban .lines circle { fill: var(--ink-2); }
+.goban .hit { fill: transparent; }
+.goban .point.open { cursor: pointer; }
+.goban .stone { fill: transparent; }
+.goban .point.s0 .stone { fill: var(--s0); }
+.goban .point.s1 .stone { fill: var(--s1); stroke: var(--s1-ring); stroke-width: 0.9; }
+.goban .point.last .stone { stroke: var(--yellow); stroke-width: 1.1; }
+.goban .area { fill: transparent; }
+.goban .point.area0 .area { fill: var(--s0); }
+.goban .point.area1 .area { fill: var(--s1); stroke: var(--s1-ring); stroke-width: 0.5; }
