@@ -19,7 +19,7 @@ function readSave(key: string): Save {
 function showStatus(id: string, inProgress: boolean) {
   const el = document.getElementById(id)!;
   el.hidden = !inProgress;
-  el.textContent = 'Game in progress';
+  el.textContent = 'In progress';
 }
 
 /** When each game's saved state counts as a game in progress, without importing the game itself. */
