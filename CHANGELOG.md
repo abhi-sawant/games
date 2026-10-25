@@ -1,5 +1,25 @@
 # Changelog
 
+## 3.2.7 — 2026-10-25
+
+A new puzzle, a game picked for you each day, and a guide for every game.
+
+### Added
+
+- Water Sort, a logic puzzle in orange. Pour the top colour of a tube onto another until every tube holds one colour.
+  Easy, Medium and Hard deal a fresh shuffle each game, and every one can be solved.
+- Game of the day at the top of the home page: one game a day, never the same as last time, chosen from games you
+  haven't tried yet until you've tried them all.
+- How to play, for all 60 games. Each game's menu links to a guide with the goal, how it works, the controls, tips
+  and a small drawn example.
+- An Install button on the home page in your browser. It installs Games as an app where the browser offers it, and
+  otherwise takes you to the Android app download.
+- Crazy Cat has a big Jump button under the board, so your thumb never covers the game.
+
+### Changed
+
+- The home page footer shows which version of Games you're playing.
+
 ## 3.2.2 — 2026-10-25
 
 A new family arrives on the home page: arcade games, in cocoa.
