@@ -67,6 +67,7 @@
 .ink-olive { --c: var(--olive); }
 .ink-berry { --c: var(--berry); }
 .ink-plum { --c: var(--plum); }
+.ink-cocoa { --c: var(--cocoa); }
 
 .game-card {
   --tint: color-mix(in srgb, var(--c) var(--field), var(--paper));
@@ -435,6 +436,15 @@
 .game-icon-pig { grid-template: 1fr / 1fr; padding: 14px; }
 .game-icon-pig i:not(.d) { display: none; }
 .game-icon-pig i.d { border-radius: 10px; background-size: 33% 50%; box-shadow: inset 0 0 0 2.5px var(--plum); }
+
+/* Arcade in cocoa: a cat on the ground row, a crate to jump and a fish above it. */
+.game-icon-crazycat { padding: 8px; }
+.game-icon-crazycat i { background: none; }
+.game-icon-crazycat i:not(.c, .o, .f, .g) { display: none; }
+.game-icon-crazycat i.g { grid-area: 3 / 1 / 4 / 4; margin: 0 -2px -2px; background: var(--sunk); border-radius: 4px; }
+.game-icon-crazycat i.c { grid-area: 2 / 1 / 3 / 2; align-self: end; height: 78%; background: var(--cocoa); border-radius: 10px 10px 3px 3px; }
+.game-icon-crazycat i.o { grid-area: 2 / 3 / 3 / 4; align-self: end; height: 62%; background: var(--coral); border-radius: 4px; }
+.game-icon-crazycat i.f { grid-area: 1 / 2 / 2 / 3; margin: 25% 0; background: var(--teal); border-radius: 50%; }
 
 /* Cards: three overlapping cards on the sheet, backs in olive, red suits in coral. */
 .game-icon-klondike, .game-icon-freecell, .game-icon-cards { display: flex; align-items: center; justify-content: center; padding: 6px; gap: 0; }

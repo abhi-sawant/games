@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Free offline Crazy Cat: tap to jump over the obstacles and catch the fish." />
+    <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141927" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <link rel="preload" href="/src/fonts/recursive-latin-full.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="color-scheme" content="light dark" />
+    <!-- The paper colour from base.css, so the page never shows the browser's white canvas while the stylesheet loads. -->
+    <style>html { background: #eef0f3; } @media (prefers-color-scheme: dark) { html { background: #141927; } }</style>
+    <link rel="stylesheet" href="/src/crazycat/style.css" />
+    <title>Crazy Cat</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Home -->
+      <section id="home" class="screen">
+        <div class="home-inner">
+          <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <span>All games</span>
+          </a>
+          <h1 class="logo">Crazy Cat</h1>
+          <p class="tagline">The cat runs by itself. Tap to jump the obstacles, tap again in the air to jump higher, and catch the fish.</p>
+
+          <h2 class="section-label">Run</h2>
+          <div class="levels">
+            <button class="btn level" data-level="easy"><span>Kitten</span><small>Slow and steady</small></button>
+            <button class="btn level" data-level="medium"><span>Tabby</span><small>A brisk trot</small></button>
+            <button class="btn level" data-level="hard"><span>Crazy</span><small>Flat out from the start</small></button>
+          </div>
+
+          <button id="history-btn" class="btn history-link">
+            <span>History &amp; stats</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen" hidden>
+        <header class="topbar">
+          <button id="history-back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <h1 class="topbar-title">History</h1>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <table class="summary">
+          <thead>
+            <tr><th></th><th scope="col">Runs</th><th scope="col">Best</th><th scope="col">Fish</th></tr>
+          </thead>
+          <tbody id="history-summary"></tbody>
+        </table>
+
+        <h2 class="section-label">Recent runs</h2>
+        <p id="history-empty" class="history-empty">No runs yet. Play one and it will show up here.</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+
+      <!-- Game -->
+      <section id="game" class="screen" hidden>
+        <header class="topbar">
+          <button id="back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <div class="meta">
+            <b id="level-label"></b>
+            <span>Best <span id="best"></span></span>
+          </div>
+          <div class="score"><b id="score" aria-label="Score">0</b><span>Score</span></div>
+        </header>
+
+        <div class="board-wrap">
+          <div class="board-frame">
+            <canvas id="stage" role="img" aria-label="Crazy Cat: tap, click, or press Space to jump"></canvas>
+            <p id="status" class="stage-status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Run over -->
+      <dialog id="end-dialog" class="dialog">
+        <h2>Ouch!</h2>
+        <p id="end-summary"></p>
+        <div class="dialog-actions">
+          <button id="end-menu" class="btn">Menu</button>
+          <button id="end-again" class="btn btn-primary">Run again</button>
+        </div>
+      </dialog>
+    </div>
+    <script type="module" src="/src/crazycat/main.ts"></script>
+  </body>
+</html>
