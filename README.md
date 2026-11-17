@@ -69,6 +69,9 @@ Offline puzzle, board and card games: a PWA that also ships as an Android app th
   (or press the arrow keys) to change lane and dodge the traffic as the road speeds up. Four levels (Country Road, Highway,
   City Rush, Night Rally) add lanes, traffic and speed. Best score and history per level; the rules are in
   `src/racer/engine.ts`, free of any drawing.
+- **Dirt Bike**: a side-view motocross racer in cocoa. Hold the gas (add turbo, but watch the engine heat), switch between three lanes,
+  jump the ramps and lean in the air to land flat, and avoid hay bales, mud and rivals. Riders can fall off (on a bale, a bad landing or a collision, rivals included) and climb back on to carry on. Every race starts from a line with a 3-2-1 countdown and the rivals beside you. Three difficulties (Easy, Medium, Hard) change the track length, the number and speed of rivals, and how fast the engine heats; the score is the finish time.
+  Sound is generated with Web Audio (no files). Best time and history per track; the rules are in `src/dirtbike/engine.ts`.
 - Themes: Mist (default), Linen, Sage, Graph Paper, Block Party, Pocket, Midnight, Neo-brutalist, Terminal, Blueprint, Claymorphism, Felt & Wood and Newsprint, picked from the palette button on the home
   page and kept on the device. Each is a whole design (layout, borders, type and boards, from `design-candidates/`) in `src/themes/`; `src/theme.ts` applies and remembers the choice.
 - Works with no connection: the service worker installs with just the home page, caches each game when it's opened,
@@ -97,7 +100,7 @@ dots/index.html, src/dots/               Dots and Boxes
                                          sokoban, rushhour, pegs, connect4, reversi, gomoku, morris, checkers,
                                          mancala, ultimate, hex, go, chess, backgammon, battleship, klondike,
                                          freecell, spider, yukon, canfield, fortythieves, pyramid, tripeaks, golf,
-                                         wordguess, wordsearch, letterwheel, yacht, farkle, pig, crazycat, qubo, racer
+                                         wordguess, wordsearch, letterwheel, yacht, farkle, pig, crazycat, qubo, racer, dirtbike
 src/dice/                                dice drawing and rolling, and the race layout, for the dice games
 src/shared/                              helpers the newer games share: screens, timer, storage, puzzle loading,
                                          grid.css for the grid puzzles, the match runner, search and styles for

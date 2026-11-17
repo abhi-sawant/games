@@ -47,6 +47,29 @@ export const arcade: Record<string, Guide> = {
       caption: 'Tap left or right to slip into a free lane.',
     },
   },
+  dirtbike: {
+    name: 'Dirt Bike',
+    ink: 'cocoa',
+    goal: 'Race to the finish line as fast as you can, staying ahead of the rivals.',
+    steps: [
+      'Every race starts from the line: you and the rivals wait on the grid for 3, 2, 1, then go. Hold the gas to ride, and add turbo to go faster. The engine heats up and stalls for a moment if it gets too hot.',
+      'Ride up a <b>ramp</b> in your lane to jump. The bike leaves the lip nose-up and the nose drifts, so lean to bring it level before you land: a flat landing even gives a little speed, a sloppy one costs speed, and a bad one throws you off.',
+      'Riders can fall. A <b>hay bale</b>, a bad landing or running into another rider throws you off the bike: you get up, climb back on and carry on from a standstill, but the clock keeps running. <b>Mud</b> slows you down. The rivals fall too, on bales or when they run into each other, so a fallen rider on the track is in your way.',
+      'Teal arrows on the track cool the engine. Your finish time is your score, and your best time is saved for each difficulty. Easy has a short track and a couple of slower rivals; Medium and Hard have longer tracks, more and faster rivals, and an engine that overheats sooner.',
+    ],
+    controls: [
+      'Hold <b>→</b> (or <b>D</b>) for gas and <b>Space</b> for turbo. Press <b>↑</b> / <b>↓</b> (or <b>W</b> / <b>S</b>) to change lane.',
+      'In the air, <b>←</b> leans back (nose up) and <b>→</b> leans forward (nose down). On a touch screen, use the buttons under the board.',
+    ],
+    tips: [
+      'Use turbo in short bursts and let the engine cool between them.',
+      'Aim to be level just before the wheels touch down. Short taps of → or ← work better than holding them.',
+    ],
+    example: {
+      html: grid(3, ['', '', '', 'bike|on small', '', 'bale|yellow small', '', '', ''], 44),
+      caption: 'Stay in your lane for the ramp, or move over to dodge the bale.',
+    },
+  },
   crazycat: {
     name: 'Crazy Cat',
     ink: 'cocoa',

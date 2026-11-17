@@ -458,6 +458,12 @@
 .game-icon-racer i:not(.r, .p, .o) { display: none; }
 .game-icon-racer i.r { grid-area: 1 / 1 / 4 / 4; margin: -8px 14%; border-inline: 2px solid var(--ink); border-radius: 0; }
 .game-icon-racer i.p { grid-area: 3 / 2 / 4 / 3; margin: 6% 22%; background: linear-gradient(color-mix(in srgb, var(--cocoa) 42%, transparent), color-mix(in srgb, var(--cocoa) 42%, transparent)), var(--sheet); box-shadow: inset 0 0 0 2px var(--cocoa); border-radius: 4px; }
+.game-icon-dirtbike { padding: 8px; }
+.game-icon-dirtbike i { background: none; box-shadow: none; }
+.game-icon-dirtbike i:not(.r, .p, .o) { display: none; }
+.game-icon-dirtbike i.r { grid-area: 3 / 1 / 4 / 4; margin: 6% -8px; border-top: 2px solid var(--ink); border-radius: 0; }
+.game-icon-dirtbike i.p { grid-area: 2 / 1 / 3 / 2; margin: 6% 12%; background: linear-gradient(color-mix(in srgb, var(--cocoa) 42%, transparent), color-mix(in srgb, var(--cocoa) 42%, transparent)), var(--sheet); box-shadow: inset 0 0 0 2px var(--cocoa); border-radius: 4px; }
+.game-icon-dirtbike i.o { grid-area: 2 / 3 / 3 / 4; margin: 6% 12%; background: linear-gradient(color-mix(in srgb, var(--coral) 42%, transparent), color-mix(in srgb, var(--coral) 42%, transparent)), var(--sheet); box-shadow: inset 0 0 0 2px var(--coral); border-radius: 4px; }
 .game-icon-racer i.o { grid-area: 1 / 2 / 2 / 3; margin: 6% 22%; background: linear-gradient(color-mix(in srgb, var(--coral) 42%, transparent), color-mix(in srgb, var(--coral) 42%, transparent)), var(--sheet); box-shadow: inset 0 0 0 2px var(--coral); border-radius: 4px; }
 
 /* Arcade in cocoa: a hatched cat on the ground line, a red-pen crate to jump and a fish above it. */

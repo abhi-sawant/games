@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "node --test tests/*.test.ts",
+    "test": "vitest run && node --test tests/current.test.ts tests/leaderboard.test.ts tests/merge.test.ts tests/seal.test.ts tests/titles.test.ts",
+    "test:e2e": "playwright test",
     "pack-puzzles": "node scripts/pack-puzzles.mjs",
     "gen-puzzles": "for g in nonograms killer kakuro calcudoku futoshiki skyscrapers jigsaw sudokux takuzu nurikabe hitori starbattle tents lightup heyawake lits slitherlink masyu bridges flow sokoban rushhour words; do node scripts/gen-$g.ts || exit 1; done",
     "android:sync": "npm run build && npx cap sync android",
@@ -18,11 +19,13 @@
     "@capacitor/android": "^8.5.3",
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^8.5.3",
+    "@playwright/test": "^1.65.0",
     "@vite-pwa/assets-generator": "^2.0.0",
     "playwright-core": "^1.65.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.5",
-    "vite-plugin-pwa": "^2.0.0"
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.1.0"
   },
   "dependencies": {
     "@capacitor/app": "^8.1.2",

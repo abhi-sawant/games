@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" data-family="cocoa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Free offline Dirt Bike: race a motocross track, jump the ramps, dodge the hay bales and keep your engine cool." />
+    <meta name="theme-color" content="#eef2f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121825" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <link rel="preload" href="/src/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Sets the theme the player picked before the first paint; see src/theme.ts. -->
+    <script>try{var t=localStorage.getItem('games.theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+    <!-- The paper colour from base.css, so the page never shows the browser's white canvas while the stylesheet loads. -->
+    <style>html { background: #eef2f7; } @media (prefers-color-scheme: dark) { html { background: #121825; } }</style>
+    <link rel="stylesheet" href="/src/dirtbike/style.css" />
+    <title>Dirt Bike</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Home -->
+      <section id="home" class="screen">
+        <div class="home-inner">
+          <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <span>All games</span>
+          </a>
+          <h1 class="logo">Dirt Bike</h1>
+          <p class="tagline">Race down a dirt track. Jump the ramps, dodge the hay bales, overtake the rivals and keep your engine from overheating.</p>
+
+          <h2 class="section-label">Difficulty</h2>
+          <div class="levels">
+            <button class="btn level" data-level="easy"><span>1 · Easy</span><small>Short track, 2 slower rivals, cool engine</small></button>
+            <button class="btn level" data-level="medium"><span>2 · Medium</span><small>Longer track, 3 rivals, engine heats faster</small></button>
+            <button class="btn level" data-level="hard"><span>3 · Hard</span><small>Long track, 5 fast rivals, runs hot</small></button>
+          </div>
+
+          <a class="btn history-link" href="/howto/index.html?g=dirtbike">
+            <span>How to play</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+          <button id="history-btn" class="btn history-link">
+            <span>History &amp; stats</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen" hidden>
+        <header class="topbar">
+          <button id="history-back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <h1 class="topbar-title">History</h1>
+          <span class="icon-btn" aria-hidden="true"></span>
+        </header>
+
+        <table class="summary">
+          <thead>
+            <tr><th></th><th scope="col">Finishes</th><th scope="col">Best time</th></tr>
+          </thead>
+          <tbody id="history-summary"></tbody>
+        </table>
+
+        <h2 class="section-label">Recent races</h2>
+        <p id="history-empty" class="history-empty">No races yet. Finish one and it will show up here.</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+
+      <!-- Game -->
+      <section id="game" class="screen" hidden>
+        <header class="topbar">
+          <button id="back-btn" class="icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <div class="meta">
+            <b id="level-label"></b>
+            <span>Best <span id="best"></span></span>
+          </div>
+          <div class="score"><b id="score" aria-label="Time">0:00.0</b><span>Time</span></div>
+        </header>
+
+        <div class="board-wrap">
+          <div class="board-frame">
+            <canvas id="stage" role="img" aria-label="Dirt Bike: hold the gas to race, press up or down to change lane and lean in the air to land flat"></canvas>
+            <button id="sound-btn" class="icon-btn" aria-label="Turn sound off" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9z" />
+                <path class="sound-on" d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11" />
+                <path class="sound-off" d="M16 9l5 6M21 9l-5 6" />
+              </svg>
+            </button>
+            <p id="status" class="stage-status" aria-live="polite"></p>
+          </div>
+          <div class="pad">
+            <div class="pad-group">
+              <button id="up-btn" class="btn pad-btn" aria-label="Lane up">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 15l7-7 7 7" /></svg>
+              </button>
+              <button id="down-btn" class="btn pad-btn" aria-label="Lane down">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" /></svg>
+              </button>
+              <button id="back-lean-btn" class="btn pad-btn" aria-label="Lean back">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+              </button>
+              <button id="fwd-lean-btn" class="btn pad-btn" aria-label="Lean forward">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+              </button>
+            </div>
+            <div class="pad-group">
+              <button id="turbo-btn" class="btn pad-btn" aria-label="Turbo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z" /></svg>
+              </button>
+              <button id="gas-btn" class="btn pad-btn pad-gas" aria-label="Gas">Gas</button>
+            </div>
+          </div>
+          <p class="keys">Right: gas · Space: turbo · Up / Down: lane · Left / Right in the air: lean</p>
+        </div>
+      </section>
+
+      <!-- Run over -->
+      <dialog id="end-dialog" class="dialog">
+        <h2 id="end-title">Finished!</h2>
+        <p id="end-summary"></p>
+        <div class="dialog-actions">
+          <button id="end-menu" class="btn">Menu</button>
+          <button id="end-again" class="btn btn-primary">Race again</button>
+        </div>
+      </dialog>
+    </div>
+    <script type="module" src="/src/dirtbike/main.ts"></script>
+  </body>
+</html>

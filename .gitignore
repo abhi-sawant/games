@@ -6,6 +6,8 @@ android/keystore.properties
 *.jks
 android/keystore/
 *.keystore
+test-results
+playwright-report
 .env*.local
 
 .impeccable/
