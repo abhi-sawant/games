@@ -12,7 +12,7 @@ const games = [
   'tictactoe', 'dots', 'connect4', 'reversi', 'gomoku', 'morris', 'checkers', 'mancala', 'ultimate', 'hex', 'go',
   'chess', 'backgammon', 'battleship', 'klondike', 'freecell', 'spider', 'yukon', 'canfield', 'fortythieves',
   'pyramid', 'tripeaks', 'golf', 'wordguess', 'wordsearch', 'letterwheel', 'yacht', 'farkle', 'pig',
-  'crazycat', 'qubo', 'racer', 'howto', 'stats', 'badges', 'leaderboard', 'signin', 'signup', 'forgot', 'account', 'profile',
+  'crazycat', 'qubo', 'racer', 'dirtbike', 'howto', 'stats', 'badges', 'leaderboard', 'signin', 'signup', 'forgot', 'account', 'profile',
 ];
 
 // The built files each game needs that the home page doesn't, in home page order, so the service worker can

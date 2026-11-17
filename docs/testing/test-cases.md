@@ -71,6 +71,11 @@ Runs on Chromium against the local Vite dev server, with faked time and `Math.ra
 | TC-RACER-SYS-002 | Steer with ArrowLeft, A key, left button (3 runs) | Steered car survives 8 s where an unsteered one crashes (SYS-001) | P1 | Pass (3) |
 | TC-RACER-SYS-003 | Best score persists and is per level | Same best after reload; another level shows 0 | P1 | Pass |
 | TC-RACER-SYS-004 | Rules dialog pauses the run | "Paused"; score frozen 5 s; Space resumes | P2 | Pass |
+| TC-DIRT-SYS-001 | Dirt Bike: hold the gas to the finish | Result dialog; stats and history saved | P1 | Pass |
+| TC-DIRT-SYS-002 | Dirt Bike: no gas, no movement | Race not ended; clock runs | P2 | Pass |
+| TC-DIRT-SYS-003 | Dirt Bike: best time per track, kept after reload | Best shown; other tracks separate | P2 | Pass |
+| TC-DIRT-SYS-004 | Dirt Bike: rules dialog pauses the race | "Paused"; time frozen 5 s; Space resumes | P2 | Pass |
+| TC-DIRT-SYS-005 | Dirt Bike: falling off a hay bale | "Hay bale!", then "Back on!"; race goes on, clock keeps running | P1 | Pass |
 | TC-CAT-SYS-001 | Start with Space, crash, Run again | Dialog with points; restart gives score 0 and "Tap to start" | P1 | Pass |
 | TC-CAT-SYS-002 | Finished run saved, existing best kept | runs 3->4, best stays 42, history 1 entry | P1 | Pass |
 | TC-QUBO-SYS-001 | Never tapping loses | "towers crossed" dialog | P1 | Pass |

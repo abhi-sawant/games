@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 
-// End-to-end cases for the arcade games (Road Racer, Crazy Cat, Qubo). Each title starts with its case ID from
+// End-to-end cases for the arcade games (Road Racer, Dirt Bike, Crazy Cat, Qubo). Each title starts with its case ID from
 // docs/testing/test-cases.md. Time is faked (page.clock) so runs are fast, and Math.random is fixed to 0 so the
 // traffic, obstacles and towers are the same every run.
 
@@ -81,6 +81,89 @@ test.describe('Road Racer', () => {
     const score = await page.locator('#score').textContent();
     await page.clock.runFor(5000); // nothing moves while paused
     await expect(page.locator('#score')).toHaveText(score!);
+    await page.keyboard.press('Space');
+    await expect(page.locator('#status')).toHaveText('');
+  });
+});
+
+test.describe('Dirt Bike', () => {
+  test('TC-DIRT-SYS-001 hold the gas to the finish, see the result and saved history', async ({ page }) => {
+    await prepare(page);
+    await page.goto('/dirtbike/index.html');
+    await page.locator('[data-level="easy"]').click();
+    await expect(page.locator('#status')).toContainText('Ready?');
+    await page.keyboard.down('ArrowRight'); // the first press starts the countdown, and the key stays held for the gas
+    await page.clock.runFor(100);
+    await expect(page.locator('#status')).toHaveText('3'); // everyone waits on the line while 3, 2, 1 counts down
+    await page.clock.runFor(120000);
+    expect(await dialogOpen(page)).toBe(true);
+    await expect(page.locator('#end-title')).toHaveText(/You won!|Finished!/);
+    await expect(page.locator('#end-summary')).toContainText('Easy');
+    const stats = await readJSON(page, 'dirtbike.stats');
+    expect(stats.easy.runs).toBe(1);
+    expect(stats.easy.best).toBeGreaterThan(0);
+    const hist = await readJSON(page, 'dirtbike.history');
+    expect(hist).toHaveLength(1);
+    expect(hist[0].level).toBe('easy');
+  });
+
+  test('TC-DIRT-SYS-002 without the gas the bike does not move, and nothing ends the race', async ({ page }) => {
+    await prepare(page);
+    await page.goto('/dirtbike/index.html');
+    await page.locator('[data-level="easy"]').click();
+    await page.keyboard.press('Space');
+    await page.clock.runFor(10000);
+    expect(await dialogOpen(page)).toBe(false);
+    await expect(page.locator('#score')).not.toHaveText('0:00.0'); // the clock runs while you wait
+  });
+
+  test('TC-DIRT-SYS-003 best time is saved per track and survives a reload', async ({ page }) => {
+    await prepare(page);
+    await page.goto('/dirtbike/index.html');
+    await page.locator('[data-level="easy"]').click();
+    await page.keyboard.down('ArrowRight');
+    await page.clock.runFor(120000);
+    expect(await dialogOpen(page)).toBe(true);
+    const best = (await readJSON(page, 'dirtbike.stats')).easy.best;
+    await page.reload();
+    await page.locator('[data-level="easy"]').click();
+    await expect(page.locator('#best')).not.toHaveText('–');
+    expect(best).toBeGreaterThan(0);
+    await page.locator('#back-btn').click();
+    await page.locator('[data-level="medium"]').click();
+    await expect(page.locator('#best')).toHaveText('–'); // other tracks are separate
+  });
+
+  test('TC-DIRT-SYS-005 falling off does not end the race: the rider gets back on and rides on', async ({ page }) => {
+    await prepare(page);
+    await page.addInitScript(() => { Math.random = () => 0.2; }); // a track of hay bales, the first in the top lane
+    await page.goto('/dirtbike/index.html');
+    await page.locator('[data-level="easy"]').click();
+    await page.keyboard.press('ArrowUp');
+    await page.keyboard.down('ArrowRight');
+    for (let t = 0; t < 20000 && !(await page.locator('#status').innerText()).includes('Hay bale'); t += 50) await page.clock.runFor(50);
+    await expect(page.locator('#status')).toContainText('Getting back on the bike');
+    expect(await dialogOpen(page)).toBe(false);
+    const timeDown = await page.locator('#score').innerText();
+    await page.clock.runFor(2400); // thrown, up on their feet and back on
+    await expect(page.locator('#status')).toHaveText('Back on!');
+    await page.clock.runFor(3000);
+    expect(await dialogOpen(page)).toBe(false); // the race goes on
+    await expect(page.locator('#score')).not.toHaveText(timeDown); // and the clock never stopped
+  });
+
+  test('TC-DIRT-SYS-004 opening the rules pauses the race and a press carries on', async ({ page }) => {
+    await prepare(page);
+    await page.goto('/dirtbike/index.html');
+    await page.locator('[data-level="easy"]').click();
+    await page.keyboard.press('Space');
+    await page.clock.runFor(4000); // the 3, 2, 1 and a second of racing
+    await page.evaluate(() => document.dispatchEvent(new Event('guide:open')));
+    await expect(page.locator('#status')).toContainText('Paused');
+    const time = await page.locator('#score').textContent();
+    expect(time).not.toBe('0:00.0');
+    await page.clock.runFor(5000); // nothing moves while paused
+    await expect(page.locator('#score')).toHaveText(time!);
     await page.keyboard.press('Space');
     await expect(page.locator('#status')).toHaveText('');
   });
