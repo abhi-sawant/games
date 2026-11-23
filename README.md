@@ -134,9 +134,30 @@ backend/                                 the PHP + MySQL API for accounts and sy
                                          api.games.slowatcoding.com; read backend/SETUP-GUIDE.md
 ```
 
+## Usage statistics
+
+`src/analytics/` sends anonymous, aggregate usage events (page opened, game opened, game finished with its result and
+time, time on the page) to the API's `/events` endpoint, so the admin dashboard can show which games people play. It is
+built to never be felt: `src/pwa.ts` loads it after the page has loaded and the browser is idle, events are queued and
+sent in the background in batches (`sendBeacon` as the page closes), every failure is swallowed, and an offline device
+keeps a small capped queue for later. There is no name, email, IP address or location in an event, and events carry no
+token. Accounts stay with the PHP API in `backend/`; signed in, a device tells the analytics server once ("this device is
+that account", proved with the PHP access token, which the server checks against the PHP API), so one person on several
+devices counts once. Signing out tells it to forget that link.
+
+It is on by default and can be switched off on the Profile page (signed in, for every device of the account, which also
+deletes what was stored; other devices pick the choice up at their next start). Do Not Track and Global Privacy Control
+turn it off automatically. The analytics server is `VITE_ANALYTICS_URL` (a base such as
+`https://api.gameplatform.darpanvadher.me/v1`; that is the production default). Builds with no address send nothing:
+development builds are silent unless `.env.development.local` sets it, and an empty value builds without analytics. The
+server and dashboard live in the separate, open-source [games-platform](../GamesPlatform) repo (run in its `external`
+auth mode next to this API), which also documents exactly what is stored.
+
 ## Accounts and sync
 
-Accounts are optional: with no account the site is fully offline and nothing leaves the device. Signed in, history,
+Accounts are optional: with no account the site is fully offline, and playing never needs the network. The only thing
+that leaves the device without an account is anonymous usage statistics (see "Usage statistics" below), which
+players can turn off. Signed in, history,
 stats, badges, best scores and the game in progress sync across devices through the API in `backend/`. The app finds
 the API at `VITE_API_BASE` (default `https://api.games.slowatcoding.com/v1`); set it in `.env.development.local` to try
 a local or test API. `backend/` is deployed by hand (see its SETUP-GUIDE.md), not by the GitHub Action, which only
