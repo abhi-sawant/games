@@ -114,6 +114,18 @@ export async function setLeaderboardOptOut(leaderboardOptOut: boolean) {
   if (s) saveSession({ ...s, user: r.user });
   return r.user;
 }
+/**
+ * A currently valid access token for this account (refreshed first if it is about to expire), or null when signed out or
+ * offline. For other services that accept this API's tokens, such as the analytics server (src/analytics/).
+ */
+export async function validAccessToken(): Promise<string | null> {
+  let s = loadSession();
+  if (!s) return null;
+  if (s.accessExpiresAt - Date.now() < 30_000) {
+    try { s = (await refresh()) ?? loadSession(); } catch { return null; }
+  }
+  return s?.accessToken ?? null;
+}
 export const changePassword = (currentPassword: string, newPassword: string) =>
   authed<{ ok: true }>('POST', '/account/change-password', { currentPassword, newPassword });
 export const deleteAccount = (password: string) => authed<{ ok: true }>('DELETE', '/account', { password });

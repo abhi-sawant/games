@@ -10,6 +10,7 @@ import type { TitleInput } from '../shared/titles';
 import { duration, nf, renderCalendar, renderHighlights, renderHours, renderTop } from './overview';
 import { initTitle, showStoredTitle } from './title';
 import { initSettings } from './settings';
+import { initAnalyticsSwitch } from './analytics';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const wide = matchMedia('(min-width: 640px)');
@@ -63,6 +64,7 @@ function render() {
 
 async function main() {
   initSettings();
+  initAnalyticsSwitch();
   let catalog;
   try {
     catalog = await loadCatalog();

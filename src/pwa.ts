@@ -28,6 +28,14 @@ try {
   }, { once: true });
 } catch { /* storage unavailable */ }
 
+// Anonymous usage statistics (src/analytics/). Loaded only after the page has loaded and the browser is idle, so it
+// can never slow a game down; the module does nothing if the player turned it off (Profile) or this build has no
+// analytics address.
+addEventListener('load', () => {
+  const start = () => { void import('./analytics').then((m) => m.initAnalytics()).catch(() => { /* never matters to play */ }); };
+  'requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 5000 }) : setTimeout(start, 2000);
+}, { once: true });
+
 if (!Capacitor.isNativePlatform() && 'serviceWorker' in navigator) {
   registerSW({ immediate: true });
 
