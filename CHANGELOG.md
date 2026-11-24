@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 5.0.1 — 2026-11-24
 
 ### Fixed
 
@@ -23,6 +23,14 @@
 
 ### Added
 
+- **Dirt Bike**: a side-view motocross racer in the arcade section. Hold the gas (add turbo, but watch the engine heat),
+  switch between three lanes, jump the ramps and lean in the air to land flat, and steer clear of hay bales, mud and
+  rivals. You can fall off and climb back on. Every race starts with a 3-2-1 countdown; Easy, Medium and Hard change the
+  track length, the rivals and how fast the engine heats. Your finish time is the score, with best time and history per
+  track, and the sounds are made on the fly, so it still works offline.
+- **Anonymous usage statistics**: the app now sends anonymous, aggregate counts (which games are opened and finished,
+  and for how long) so we can see what people play. No name, email, IP address or location is sent. Turn it off on your
+  profile (signed in, that applies to all your devices); Do Not Track and Global Privacy Control turn it off for you.
 - **Profile page**: the person icon on the home page now opens your profile, signed in or not. It shows your name,
   a personality title, your games, time played, streak and badges, the activity calendar, time of day, top games and
   highlights (moved here from the stats page), and a badges strip. On a wide screen it uses the width instead of a
