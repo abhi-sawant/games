@@ -1,0 +1,258 @@
+name: Release
+
+# Publishes a GitHub Release whenever a push to master carries a package.json version that has no tag yet.
+# The /release skill bumps the version in package.json and writes the CHANGELOG section; this workflow
+# builds the web zip and the signed APK, and creates the release from them.
+#
+# - Tag: the bare version (`5.0.0`), matching every earlier tag. It is created by `gh release create`
+#   on the pushed commit, so no manual tagging.
+# - Notes: the `## X.Y.Z — date` section of CHANGELOG.md, plus a downloads table and the APK certificate.
+# - Idempotent: if the tag already exists the run does nothing, so re-runs, unrelated pushes and several
+#   pushes in a row can never release a version twice.
+#
+# Secrets: ANDROID_KEYSTORE_BASE64 (base64 of android/keystore/games.jks), ANDROID_KEYSTORE_PASSWORD,
+# ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD.
+# Variables (optional): VITE_API_BASE (unset: the app's built-in default). Analytics always uses its built-in
+# production address: an empty VITE_ANALYTICS_URL would build without analytics, so it is not passed.
+on:
+  push:
+    branches: [master]
+    paths: [package.json]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  # Every release must be signed by this certificate, or Android refuses to install it as an
+  # update. Change it only if the signing key is deliberately replaced.
+  EXPECTED_CERT_SHA256: 'b1:94:3d:de:71:46:d3:ea:98:71:71:44:96:0b:89:e4:cc:35:b8:b9:e6:60:9c:55:32:e6:14:41:54:ff:e3:63'
+
+jobs:
+  check:
+    # A manual run from another branch must not publish a release.
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      release: ${{ steps.tag.outputs.release }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: version
+        name: Read version
+        run: |
+          version="$(jq -r .version package.json)"
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error file=package.json::'$version' is not X.Y.Z"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - id: tag
+        name: Skip if already released
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" "refs/tags/v$VERSION" > /dev/null; then
+            echo "Tag $VERSION already exists; nothing to release."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Extract CHANGELOG section
+        if: steps.tag.outputs.release == 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          # Everything between `## X.Y.Z …` and the next `## ` heading, blank edges trimmed.
+          awk -v v="$VERSION" '
+            /^## / { if (found) exit; if ($2 == v) { found = 1; next } }
+            found
+          ' CHANGELOG.md | sed -e '/./,$!d' | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' > changelog-section.md
+          if [[ ! -s changelog-section.md ]]; then
+            echo "::error file=CHANGELOG.md::no '## $VERSION — YYYY-MM-DD' section (or it is empty)"
+            exit 1
+          fi
+          cat changelog-section.md
+
+      - if: steps.tag.outputs.release == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: changelog-section
+          path: changelog-section.md
+
+  web:
+    needs: check
+    if: needs.check.outputs.release == 'true'
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node 24: the test script runs .ts files with Node's built-in type stripping.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm test
+
+      - run: npm run build
+        env:
+          VITE_API_BASE: ${{ vars.VITE_API_BASE }}
+
+      # Files at the zip root, ready to upload to the web root of any static host.
+      - name: Zip dist
+        run: |
+          cd dist
+          zip -qr "$GITHUB_WORKSPACE/games-web-$VERSION.zip" . -x '*.DS_Store'
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: games-web-${{ needs.check.outputs.version }}.zip
+          if-no-files-found: error
+
+  android:
+    needs: check
+    if: needs.check.outputs.release == 'true'
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      # Same major as Android Studio's bundled JBR, which builds the app locally.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platforms;android-36 build-tools;36.0.0'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: npm ci
+
+      # Builds the web app and copies it into android/ (the Capacitor wrapper).
+      - name: Build web and sync into Android
+        run: npm run build && npx cap sync android
+        env:
+          VITE_API_BASE: ${{ vars.VITE_API_BASE }}
+
+      - name: Install signing key
+        working-directory: android
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [[ -z "$KEYSTORE_BASE64" || -z "$STORE_PASSWORD" || -z "$KEY_ALIAS" || -z "$KEY_PASSWORD" ]]; then
+            echo "::error::Signing secrets are missing; an unsigned APK cannot be released."
+            exit 1
+          fi
+          mkdir -p keystore
+          echo "$KEYSTORE_BASE64" | base64 --decode > keystore/games.jks
+          {
+            echo "storeFile=keystore/games.jks"
+            echo "storePassword=$STORE_PASSWORD"
+            echo "keyAlias=$KEY_ALIAS"
+            echo "keyPassword=$KEY_PASSWORD"
+          } > keystore.properties
+
+      - name: Build APK
+        working-directory: android
+        run: ./gradlew :app:assembleRelease
+
+      - name: Verify signing certificate
+        working-directory: android
+        run: |
+          apk=app/build/outputs/apk/release/app-release.apk
+          apksigner="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)/apksigner"
+          out="$("$apksigner" verify --print-certs "$apk" 2>&1)" || { echo "$out"; echo "::error::apksigner could not verify the APK"; exit 1; }
+          echo "$out" | grep -v '^WARNING:'
+          # The line's prefix varies by build-tools version ("Signer #1", "V2 Signer", …), so match on the tail.
+          digest="$(echo "$out" | sed -n 's/^.*certificate SHA-256 digest: //p' | head -1 \
+            | tr 'A-F' 'a-f' | sed 's/../&:/g; s/:$//')"
+          echo "APK certificate: $digest"
+          if [[ "$digest" != "$EXPECTED_CERT_SHA256" ]]; then
+            echo "::error::APK is signed by $digest, expected $EXPECTED_CERT_SHA256. Android would refuse it as an update."
+            exit 1
+          fi
+          cp "$apk" "$GITHUB_WORKSPACE/games-$VERSION.apk"
+
+      - name: Remove signing key
+        if: always()
+        run: rm -rf android/keystore android/keystore.properties
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android
+          path: games-${{ needs.check.outputs.version }}.apk
+          if-no-files-found: error
+
+  release:
+    needs: [check, web, android]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Checksums and notes
+        run: |
+          cd artifacts
+          apk="games-$VERSION.apk"
+          zip="games-web-$VERSION.zip"
+          sha256sum "$apk" "$zip" > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+          {
+            cat changelog-section.md
+            echo
+            echo "## Downloads"
+            echo
+            echo "| File | What |"
+            echo "| --- | --- |"
+            echo "| \`$apk\` | Android app. Install it over an earlier version and your data stays. |"
+            echo "| \`$zip\` | Production build of the web app, ready to unzip into the web root of a static host. |"
+            echo "| \`SHA256SUMS.txt\` | Checksums for both files. |"
+            echo
+            echo "**APK signing certificate (SHA-256):**"
+            echo "\`$EXPECTED_CERT_SHA256\`"
+            echo
+            echo "Full details are in [CHANGELOG.md]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/$VERSION/CHANGELOG.md)."
+          } > notes.md
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd artifacts
+          gh release create "$VERSION" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Games $VERSION" \
+            --notes-file notes.md \
+            "games-$VERSION.apk" "games-web-$VERSION.zip" SHA256SUMS.txt

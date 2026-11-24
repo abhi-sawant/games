@@ -228,6 +228,12 @@ keyPassword=...
 In Claude Code, `/release X.Y.Z` bumps the version, updates `CHANGELOG.md`, builds, and assembles
 `releases/vX.Y.Z/` with the signed APK, the PWA zip for `https://games.slowatcoding.com`, checksums and release notes.
 
+Pushing to `master` a `package.json` version that has no tag yet makes `.github/workflows/release.yml` publish the release
+by itself: it tests and builds the PWA zip, builds the APK signed with the keystore, checks the APK's certificate against
+the one pinned in the workflow, and creates the GitHub Release (tag `X.Y.Z`) with the `## X.Y.Z` section of `CHANGELOG.md`
+as its notes. The workflow needs the repository secrets `ANDROID_KEYSTORE_BASE64` (base64 of `android/keystore/games.jks`),
+`ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD`. A version that is already tagged is skipped.
+
 ## Puzzles
 
 `public/puzzles/<level>.txt` holds one puzzle per line (81 digits, `0` = empty). To regenerate them,
