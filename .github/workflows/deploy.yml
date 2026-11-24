@@ -18,11 +18,18 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
 
       - run: npm ci
+
+      # A failing test blocks the deploy. Node 24 runs the .ts tests with its built-in type stripping.
+      - run: npm test
+
+      # `tsc && vite build`. VITE_API_BASE is optional: unset, the app falls back to its built-in default.
       - run: npm run build
+        env:
+          VITE_API_BASE: ${{ vars.VITE_API_BASE }}
 
       # Only changed files are uploaded; the action keeps its state in .ftp-deploy-sync-state.json on the server.
       - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
