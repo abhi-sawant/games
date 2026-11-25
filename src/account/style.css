@@ -1,5 +1,5 @@
 /* The sign in, sign up, forgot password and account pages. Built from the shared Mist pieces (base.css); only the
-   form fields and the account cards are its own, drawn from the same tokens. */
+   account cards are its own (the form fields are shared, in base.css), drawn from the same tokens. */
 @import '../base.css';
 
 .account { padding-bottom: 40px; }
@@ -11,28 +11,7 @@
 .account-form { display: grid; gap: 14px; margin: 0; }
 .dialog .account-form { text-align: left; }
 
-.field { display: grid; gap: 6px; }
-.field span { font-size: 0.85rem; font-weight: 800; color: var(--ink-2); padding: 0 4px; }
-.field input {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  border-radius: var(--r-key);
-  background: var(--sheet);
-  box-shadow: var(--shadow), inset 0 0 0 1.5px var(--rule);
-  color: var(--ink);
-  font: inherit;
-  font-weight: 600;
-  padding: 14px 16px;
-}
-.field input:focus-visible { outline: none; box-shadow: var(--shadow), inset 0 0 0 2px var(--c); }
-.code-input { font-size: 1.6rem; letter-spacing: 0.4em; text-align: center; font-variant-numeric: tabular-nums; }
-
-.form-error { margin: 0 4px; color: var(--wrong); font-weight: 700; font-size: 0.95rem; line-height: 1.4; }
-.form-note { margin: 0 4px; color: var(--ink-2); font-weight: 600; font-size: 0.9rem; line-height: 1.4; }
-
 .account-form .btn { width: 100%; }
-.btn:disabled { opacity: 0.55; pointer-events: none; }
 .btn-danger { color: var(--wrong); }
 
 .account-links { display: flex; justify-content: space-between; gap: 12px; margin: 22px 4px 0; font-weight: 800; }

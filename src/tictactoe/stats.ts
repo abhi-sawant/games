@@ -1,6 +1,9 @@
-// Per-level tic-tac-toe stats against the computer, kept in localStorage. Two-player games aren't counted.
+// Per-level tic-tac-toe stats against the computer, and online, kept in localStorage. Games on one screen aren't counted.
 
 import type { Level } from './board';
+
+/** Online games count under their own row. */
+export type StatsKey = Level | 'online';
 
 export interface LevelStats {
   played: number;
@@ -9,7 +12,7 @@ export interface LevelStats {
   lost: number;
 }
 
-export type Stats = Partial<Record<Level, LevelStats>>;
+export type Stats = Partial<Record<StatsKey, LevelStats>>;
 export type Outcome = 'won' | 'drawn' | 'lost';
 
 const STATS_KEY = 'tictactoe.stats';
@@ -22,7 +25,7 @@ export function loadStats(): Stats {
   }
 }
 
-export function recordResult(level: Level, outcome: Outcome) {
+export function recordResult(level: StatsKey, outcome: Outcome) {
   const stats = loadStats();
   const s = (stats[level] ??= { played: 0, won: 0, drawn: 0, lost: 0 });
   s.played++;

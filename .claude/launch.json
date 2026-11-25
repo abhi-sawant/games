@@ -23,6 +23,35 @@
         "--strictPort"
       ],
       "port": 5174
+    },
+    {
+      "name": "mp-worker",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "../GamesPlatform/api",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "8787",
+        "--var",
+        "ALLOWED_ORIGINS:http://localhost:5175"
+      ],
+      "port": 8787
+    },
+    {
+      "name": "dev-online",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "vite",
+        "--mode",
+        "mponline",
+        "--port",
+        "5175",
+        "--strictPort"
+      ],
+      "port": 5175
     }
   ]
 }

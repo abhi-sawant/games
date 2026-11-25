@@ -488,6 +488,30 @@ span.icon-btn { background: none; box-shadow: none; }
 .dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .dialog-actions.one { grid-template-columns: 1fr; margin-top: 10px; }
 
+/* ---------- Form fields (the account pages and the online-play dialog) ---------- */
+
+.field { display: grid; gap: 6px; }
+.field span { font-size: 0.85rem; font-weight: 800; color: var(--ink-2); padding: 0 4px; }
+.field input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  border-radius: var(--r-key);
+  background: var(--sheet);
+  box-shadow: var(--shadow), inset 0 0 0 1.5px var(--rule);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  padding: 14px 16px;
+}
+.field input:focus-visible { outline: none; box-shadow: var(--shadow), inset 0 0 0 2px var(--c); }
+.code-input { font-size: 1.6rem; letter-spacing: 0.4em; text-align: center; font-variant-numeric: tabular-nums; }
+
+.form-error { margin: 0 4px; color: var(--wrong); font-weight: 700; font-size: 0.95rem; line-height: 1.4; }
+.form-note { margin: 0 4px; color: var(--ink-2); font-weight: 600; font-size: 0.9rem; line-height: 1.4; }
+
+.btn:disabled { opacity: 0.55; pointer-events: none; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
   @view-transition { navigation: none; }
@@ -552,6 +576,30 @@ span.icon-btn { background: none; box-shadow: none; }
 
 .confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; margin: 0; padding: 0; border: 0; background: none; pointer-events: none; z-index: 999; }
 
+
+/* ---------- Online play dialog (src/shared/online/lobby.ts) ---------- */
+/* Invite, join by code, quick match and friends, from the shared level buttons, fields and tokens. */
+.mp-dialog { width: min(420px, calc(100vw - 32px)); max-height: calc(100dvh - 24px); overflow-y: auto; text-align: left; }
+.mp-dialog h2 { display: block; text-align: center; }
+.mp-view { display: grid; gap: 14px; }
+.mp-actions { display: grid; gap: 10px; }
+.mp-actions .level { flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; }
+.mp-join { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; margin: 0; }
+.mp-join .btn { padding: 14px 18px; }
+.field input.mp-code-input { text-transform: uppercase; letter-spacing: 0.18em; font-variant-numeric: tabular-nums; }
+.mp-wait, .mp-me { margin: 8px 4px; font-weight: 700; text-align: center; line-height: 1.6; }
+.mp-me b { letter-spacing: 0.08em; }
+.mp-error { margin-top: 14px; }
+.mp-error.is-note { color: var(--ink-2); }
+.mp-lists { display: grid; gap: 6px; }
+.mp-lists .section-label { font-size: 1rem; margin: 8px 0 6px; }
+.mp-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.mp-list li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--r-key); box-shadow: inset 0 0 0 1.5px var(--rule); }
+.mp-who { flex: 1; min-width: 0; display: grid; gap: 2px; overflow-wrap: anywhere; }
+.mp-who small { color: var(--ink-2); font-weight: 600; font-size: 0.85rem; }
+.mp-row-actions { display: flex; gap: 6px; flex: none; }
+.btn.mp-small { padding: 8px 12px; font-size: 0.9rem; }
+.mp-close { margin-top: 6px; }
 
 /* ---------- Leaderboard dialog (src/shared/leaderboard/board.ts) ---------- */
 /* A game's board on its own page: level chips, the .summary table and the player's row, from the shared tokens. */

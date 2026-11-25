@@ -112,6 +112,8 @@ The sign-in pages keep their own stylesheet (`src/account/style.css`, the same f
 
 Signed-in players get a `button.btn.history-link.lb-btn` ("Leaderboard") after History & stats on every game with a board (after How to play where there's no history screen), added by `src/shared/leaderboard/button.ts`. It opens `dialog.lb-dialog`: level chips (`.lb-variants`), the `.summary.lb-table` with the player's row on `--tint`, and a status line for loading, errors and empty boards. No game page adds anything for it.
 
+Online play (Tic-tac-toe for now) adds a `button.btn.level#online-btn` ("Play online") under Two players and a second `.continue` for a game in progress. Both open or resume through `dialog.mp-dialog`, built by `src/shared/online/lobby.ts`: the shared `.level` buttons (invite, quick match, friends), `.field` inputs (now in `base.css`, shared with the account pages), `.mp-list` rows for friends and challenges, and a plain `.dialog` for yes/no questions such as Resign. In an online game Undo and Restart give way to one `.tool` (Resign, then Leave), and a `.btn-primary.next` sends the invite while the room waits.
+
 When a signed-in player has a different game in progress on another device, the game's menu gets a second `button.btn.continue.other-game` ("Continue from other device", with "Replaces this device's game" in its `small`) right under its own Continue, added by `src/shared/sync/othergame.ts`. It's the same Continue card; no game page adds anything for it.
 
 ## Adding a new game
