@@ -130,5 +130,8 @@
 }
 .status .turn-x { color: var(--x); }
 .status .turn-o { color: var(--o); }
+/* A second line under the status: an online game's code, or why it ended. */
+.status small { display: block; margin-top: 6px; font-size: 1.1rem; font-weight: 500; color: var(--ink-2); }
+.status small b { color: var(--ink); letter-spacing: 0.08em; }
 
 .next { margin-top: 14px; min-width: 180px; }

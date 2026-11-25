@@ -5,12 +5,14 @@ import { capHistory, stampActive } from '../shared/archive';
 
 export interface HistoryEntry {
   endedAt: number;
-  mode: Mode;
-  /** Against the computer, the mark you played. */
+  mode: Mode | 'online';
+  /** Against the computer or online, the mark you played. */
   you?: Mark;
   /** The winning mark, or null for a draw. */
   winner: Mark | null;
   moves: number;
+  /** Online: the other player's name. */
+  opponent?: string;
 }
 
 const HISTORY_KEY = 'tictactoe.history';

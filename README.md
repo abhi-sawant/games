@@ -134,6 +134,18 @@ backend/                                 the PHP + MySQL API for accounts and sy
                                          api.games.slowatcoding.com; read backend/SETUP-GUIDE.md
 ```
 
+## Online play
+
+Tic-tac-toe can be played online against a friend on another device: invite with a six-letter code or link
+(`/tictactoe/index.html?join=CODE`), quick match with whoever is waiting, or (signed in) challenge a friend added by
+friend code. The shared client and dialog are in `src/shared/online/` (`client.ts` talks to the server and keeps a
+WebSocket alive, `lobby.ts` is the "Play online" dialog), so another two-player game can use them. The server is the
+games-platform Worker (`../GamesPlatform/api/src/mp/`): one Durable Object per match checks every move with the game's
+rules, keeps the score over rematches, and forfeits a player who stays away from a live game for a minute. The app
+finds it at `VITE_MP_URL`, falling back to `VITE_ANALYTICS_URL` (the same Worker); an empty value hides online play.
+A seat in a game is kept under `<game>.online` on the device only (not synced). For local testing, run the Worker
+(`npm run dev` in `GamesPlatform/api`) and the app with `VITE_MP_URL=http://localhost:8787/v1`.
+
 ## Usage statistics
 
 `src/analytics/` sends anonymous, aggregate usage events (page opened, game opened, game finished with its result and

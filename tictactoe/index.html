@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Free offline tic-tac-toe against the computer or a friend." />
+    <meta name="description" content="Free tic-tac-toe against the computer, a friend on one screen, or a friend online." />
     <meta name="theme-color" content="#eef2f7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#121825" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -34,6 +34,10 @@
             <span>Continue</span>
             <small id="continue-meta"></small>
           </button>
+          <button id="online-continue-btn" class="btn btn-primary continue" hidden>
+            <span>Back to your online game</span>
+            <small id="online-continue-meta"></small>
+          </button>
 
           <h2 class="section-label">Play the computer</h2>
           <div class="levels">
@@ -45,6 +49,7 @@
           <h2 class="section-label">Play a friend</h2>
           <div class="levels">
             <button class="btn level" data-mode="two"><span>Two players</span><small>Take turns on one screen</small></button>
+            <button id="online-btn" class="btn level" hidden><span>Play online</span><small>A friend on another device</small></button>
           </div>
 
           <a class="btn history-link" href="/howto/index.html?g=tictactoe">
@@ -105,6 +110,7 @@
           </div>
           <p id="status" class="status" aria-live="polite"></p>
           <button id="next-btn" class="btn btn-primary next" hidden>Next round</button>
+          <button id="share-btn" class="btn btn-primary next" hidden>Send the invite</button>
         </div>
 
         <div class="tools">
@@ -115,6 +121,10 @@
           <button class="tool" id="restart-btn" aria-label="Restart round">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7" /><path d="M4 4v4h4" /></svg>
             <span>Restart</span>
+          </button>
+          <button class="tool" id="quit-btn" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4" /><path d="M5 4h11l-2 4 2 4H5" /></svg>
+            <span id="quit-label">Resign</span>
           </button>
         </div>
       </section>
